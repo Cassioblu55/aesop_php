@@ -1,0 +1,30 @@
+{
+  "name": "Aesop",
+  "version": "2.0.0",
+  "homepage": "https://github.com/Cassioblu55/aesop_php",
+  "authors": [
+    "Cassio Hudson <cassioblubyrd@gmail.com>"
+  ],
+  "description": "Web application using php",
+  "keywords": [
+    "DND",
+    "rock",
+    "Cassio",
+    "is",
+    "cool"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-ui-grid": "~3.0.6",
+    "bootstrap": "~3.3.5"
+  }
+}
