@@ -1,10 +1,10 @@
 <?php 
-require_once '../src/utils/connect.php';
+require_once '../../src/utils/connect.php';
 if (! empty ( $_GET['id'] )){
 	
 	$db=connect();
 	
-	$delete = "DELETE FROM character WHERE id=".$_GET['id'].";";
+	$delete = "DELETE FROM dungeon_traits WHERE id=".$_GET['id'].";";
 	echo $delete;
 	
 	try{

@@ -1,6 +1,5 @@
-
-<?php include_once '../resources/templates/head.php'; ?>
-<div ng-controller="CharacterIndexController">
+<?php include_once '../../resources/templates/head.php'; ?>
+<div ng-controller="SettelementTraitsIndexController">
 
 	<div class="container-fluid">
 		<div class="row">
@@ -16,7 +15,7 @@
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3>Characters</h3>
+							<h3>Settelement Traits</h3>
 						</div>
 						<div class="panel-body">
 							<div ui-grid="gridModel" external-scopes="$scope"
@@ -28,9 +27,8 @@
 		</div>
 	</div>
 
-
 	<script>
-app.controller("CharacterIndexController", ['$scope', "$http" , function($scope, $http){
+app.controller("SettelementTraitsIndexController", ['$scope', "$http" , function($scope, $http){
 
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
 	$scope.gridModel.columnDefs = [	{field: 'edit', enableColumnMenu: false, enableFiltering: false, width: 53, cellTemplate: '<a class="btn btn-primary" role="button" ng-href="edit.php?id={{row.entity.id}}">Edit</a>'},
@@ -38,11 +36,10 @@ app.controller("CharacterIndexController", ['$scope', "$http" , function($scope,
 	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67, cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteTrait(row.entity.id,row.entity.trait);">Delete</button>'}
 	                               ];
 
-	
 	$scope.reloadGrid = function(){
 		$http.get('data.php').
 			then(function(response){
-				$scope.gridModel.data = response.data.traits;
+				$scope.gridModel.data = response.data;
 				
 			});
 	}
@@ -62,4 +59,4 @@ app.controller("CharacterIndexController", ['$scope', "$http" , function($scope,
 	
 }]);
 </script>
-<?php include_once '../resources/templates/footer.php';?>
+<?php include_once '../../resources/templates/footer.php';?>

@@ -1,16 +1,17 @@
 <?php 
-require_once '../../src/utils/connection.php';
+require_once '../../src/utils/connect.php';
 if (! empty ( $_GET['id'] )){
 	
 	$db=connect();
 	
-	$delete = "DELETE FROM character_traits WHERE id=".$_GET['id'];
+	$delete = "DELETE FROM character_traits WHERE id=".$_GET['id'].";";
+	echo $delete;
 	
 	try{
 		$db->query($delete);
 	}catch(Execption $e){
 		echo $e;
-		die("Count not delete song.");
+		die("Count not delete trait.");
 	}
 	
 }

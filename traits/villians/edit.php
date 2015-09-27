@@ -1,33 +1,54 @@
 <?php
 require_once '../../src/utils/connect.php';
-$table = "character_traits";
+
 $added = false;
 if (! empty ( $_POST )) {
 	
-	validateRequired($table);
-	
-	if (empty ( $_GET ['id'] )) {
-		insert($table);
-	} 
-	else {
-		update($table);
-		//header ( "Location: index.php" );
-		//die ( "Redirecting to index.php" );
+	if (empty ( $_POST ['kind'] )) {
+		die ( "Please enter kind." );
 	}
+	if (empty ( $_POST ['type'] )) {
+		die ( "Please enter type." );
+	}
+	if (empty ( $_POST ['description'] )) {
+		die ( "Please enter a description." );
+	}
+	
+	$db = connect ();
+	$insert = '';
+	if (empty ( $_GET ['id'] )) {
+		$insert = "INSERT INTO villain_trait (kind, type, description) VALUES ('" . $_POST ['kind'] . "','" . $_POST ['type'] . "','" . $_POST ['description'] . "');";
+	} 
 
+	else {
+		$insert = "UPDATE villain_trait SET kind='" . $_POST ['kind'] . "', description='" . $_POST ['description'] . "' WHERE id=" . $_GET ['id'] . ";";
+	}
+	try {
+		$db->query ( $insert );
+		$added = true;
+	} catch ( Execption $e ) {
+		echo $e;
+		die ( "Count not insert trait." );
+	}
+	$db->close ();
+	if (! empty ( $_GET ['id'] )) {
+		header ( "Location: index.php" );
+		die ( "Redirecting to index.php" );
+	}
 } else {
 	if (empty ( $_GET ['id'] )) {
-		$trait = '';
+		$kind = '';
+		$description = '';
 		$type = '';
-	} 
-	else {
+	} else {
 		$db = connect ();
-		$query = "SELECT * FROM character_traits WHERE id='" . $_GET ['id'] . "';";
+		$query = "SELECT * FROM villain_trait WHERE id='" . $_GET ['id'] . "';";
 		try {
 			$result = $db->query ( $query );
 			if ($result->num_rows > 0) {
 				$row = $result->fetch_assoc ();
-				$trait = $row ['trait'];
+				$kind = $row ['kind'];
+				$description = $row ['description'];
 				$type = $row ['type'];
 			}
 		} catch ( Execption $e ) {
@@ -51,14 +72,19 @@ include_once '../../resources/templates/head.php';
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<label for="trait">Trait</label> <input type="text"
-						class="form-control" required="required" name="trait"
-						value="<?php echo $trait;?>" placeholder="Trait" />
+					<label for="kind">Kind</label> <input type="text"
+						class="form-control" required="required" name="kind"
+						value="<?php echo $kind;?>" placeholder="Kind" />
 				</div>
 				<div class="form-group">
 					<label for="type">Type</label> <input type="text"
 						class="form-control" required="required" name="type"
 						value="<?php echo $type;?>" placeholder="Type" />
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<textarea class="form-control" rows="5" name="description"
+						placeholder="Description"><?php echo $description;?></textarea>
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">Save</button>

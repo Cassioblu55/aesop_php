@@ -11,31 +11,30 @@
 			</div>
 		</div>
 
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3>Character Traits</h3>
-						</div>
-						<div class="panel-body">
-							<div ui-grid="gridModel" external-scopes="$scope"
-								style="height: 400px;"></div>
-						</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3>Villain Traits</h3>
+					</div>
+					<div class="panel-body">
+						<div ui-grid="gridModel" external-scopes="$scope"
+							style="height: 400px;"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 
-	<script>
+<script>
 app.controller("CharacterTraitIndexController", ['$scope', "$http" , function($scope, $http){
 
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
 	$scope.gridModel.columnDefs = [	{field: 'edit', enableColumnMenu: false, enableFiltering: false, width: 53, cellTemplate: '<a class="btn btn-primary" role="button" ng-href="edit.php?id={{row.entity.id}}">Edit</a>'},
-	                               	{field: 'trait',  enableColumnMenu: false}, {field: 'type', enableColumnMenu: false},
-	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67, cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteTrait(row.entity.id,row.entity.trait);">Delete</button>'}
+	                               	{field: 'type',  enableColumnMenu: false}, {field: 'kind', enableColumnMenu: false},{field: 'description', enableColumnMenu: false},
+	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67, cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteTrait(row.entity.id,row.entity.kind);">Delete</button>'}
 	                               ];
 
 	
@@ -47,8 +46,8 @@ app.controller("CharacterTraitIndexController", ['$scope', "$http" , function($s
 			});
 	}
 
-	$scope.deleteTrait =function(id,trait){
-		if(window.confirm("Are you sure you want to delete "+trait+"?")){
+	$scope.deleteTrait =function(id,kind){
+		if(window.confirm("Are you sure you want to delete "+kind+"?")){
 			$http.post('delete.php?id='+id).
 				then(function(response){
 					$scope.reloadGrid();

@@ -1,20 +1,37 @@
 <?php
 require_once '../../src/utils/connect.php';
-$table = "character_traits";
+
 $added = false;
 if (! empty ( $_POST )) {
 	
-	validateRequired($table);
-	
-	if (empty ( $_GET ['id'] )) {
-		insert($table);
-	} 
-	else {
-		update($table);
-		//header ( "Location: index.php" );
-		//die ( "Redirecting to index.php" );
+	if (empty ( $_POST ['trait'] )) {
+		die ( "Please trait." );
 	}
+	if (empty ( $_POST ['type'] )) {
+		die ( "Please enter type." );
+	}
+	
+	$db = connect ();
+	$insert = '';
+	if (empty ( $_GET ['id'] )) {
+		$insert = "INSERT INTO settelement_traits (trait, type) VALUES ('" . $_POST ['trait'] . "','" . $_POST ['type'] . "');";
+	} 
 
+	else {
+		$insert = "UPDATE settelement_traits SET trait='" . $_POST ['trait'] . "', type='" . $_POST ['type'] . "' WHERE id=" . $_GET ['id'] . ";";
+	}
+	try {
+		$db->query ( $insert );
+		$added = true;
+	} catch ( Execption $e ) {
+		echo $e;
+		die ( "Count not insert trait." );
+	}
+	$db->close ();
+	if(!empty($_GET['id'])){
+		header ( "Location: index.php" );
+		die ( "Redirecting to index.php" );
+	}
 } else {
 	if (empty ( $_GET ['id'] )) {
 		$trait = '';
@@ -22,7 +39,7 @@ if (! empty ( $_POST )) {
 	} 
 	else {
 		$db = connect ();
-		$query = "SELECT * FROM character_traits WHERE id='" . $_GET ['id'] . "';";
+		$query = "SELECT * FROM settelement_traits WHERE id='" . $_GET ['id'] . "';";
 		try {
 			$result = $db->query ( $query );
 			if ($result->num_rows > 0) {
@@ -47,7 +64,7 @@ include_once '../../resources/templates/head.php';
 		<div
 			class="panel <?php if($added){echo "panel-success";} else{echo "panel-default";} ?>">
 			<div class="panel-heading">
-				<div class="panel-title">Edit Character Trait</div>
+				<div class="panel-title">Edit Settelement Trait</div>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
@@ -65,7 +82,7 @@ include_once '../../resources/templates/head.php';
 					<a class="btn btn-danger" href="index.php">Cancel</a>
 				</div>
 				<div style='<?php if($added){echo "color:#5cb85c";}else{echo "display:none";}?>'>Recorded
-					Updated</div>
+					Added</div>
 			</div>
 		</div>
 	</div>

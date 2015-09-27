@@ -23,6 +23,7 @@
 						<li><a href="/aesop/settlements/">Settlements</a></li>
 						<li><a href="/aesop/taverns/">Taverns</a></li>
 						<li><a href="/aesop/villians/">Villians</a></li>
+						<li><a href="/aesop/dungeon/">Dungeons</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -34,6 +35,19 @@
 						<li><a href="/aesop/settlements/create.php">Settlements</a></li>
 						<li><a href="/aesop/taverns/create.php">Taverns</a></li>
 						<li><a href="/aesop/villians/create.php">Villians</a></li>
+						<li><a href="/aesop/dungeon/create.php">Dungeon</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Traits<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/aesop/traits/characters/">Characters</a></li>
+						<li><a href="/aesop/traits/settlements/">Settlements</a></li>
+						<li><a href="/aesop/traits/taverns/">Taverns</a></li>
+						<li><a href="/aesop/traits/villians/">Villians</a></li>
+						<li><a href="/aesop/traits/dungeon/">Dungeon</a></li>
 					</ul></li>
 			</ul>
 		</div>
