@@ -1,18 +1,7 @@
 <?php 
-require_once '../src/utils/connect.php';
+require_once '/home4/cassio/public_html/aesop/src/utils/connect.php';
 if (! empty ( $_GET['id'] )){
-	
-	$db=connect();
-	
-	$delete = "DELETE FROM character WHERE id=".$_GET['id'].";";
-	echo $delete;
-	
-	try{
-		$db->query($delete);
-	}catch(Execption $e){
-		echo $e;
-		die("Count not delete trait.");
-	}
-	
+	$table  = "character";	
+	deletFrom($table, $_GET['id']);
 }
 ?>

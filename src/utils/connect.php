@@ -19,6 +19,11 @@ function connectSpecific($dbHost, $dbUser, $dbPassword, $dbName) {
 	return $db;
 }
 
+function findById($table, $id){
+	$query = "SELECT * FROM `".$table."` WHERE id=".$id;
+	return runQuery($query)[0];
+}
+
 //will return all column data for a given table
 function getColumns($table){
 	$query = "SHOW COLUMNS FROM `".$table."`";
@@ -72,14 +77,14 @@ function insert($table){
 	if(! empty($_POST)){
 		$columns = columnsToString($table);
 		$values = valuesToString($table);
-		$insert = "INSERT INTO ".$table." ".$columns." VALUES ".$values.";";
+		$insert = "INSERT INTO `".$table."` ".$columns." VALUES ".$values.";";
 		runInsert($insert);
 	}
 }
 
 function update($table){
 	if(!empty($_POST)){
-		$update = "UPDATE ".$table." SET ";
+		$update = "UPDATE `".$table."` SET ";
 		$columns = getColumnNames($table);
 		foreach ($columns as $column){
 			$value = $_POST[$column];
@@ -119,16 +124,27 @@ function columnsToString($table){
 }
 
 function runInsert($insert){
-	echo $insert;
+	//echo $insert;
 	$db = connect();
 	try {
 		$db->query ( $insert );
 		$db->close();
 	} catch ( Execption $e ) {
+		echo "Could not complete request: ".$insert;
 		echo $e;
 		$db->close();
-		die ( "Count not insert trait." );
+		die ( "Could not complete request: ".$insert);
 	}
+}
+
+function deletFrom($table, $id){
+	$insert = "DELETE FROM `".$table."` WHERE id=".$id.";";
+	runInsert($insert);
+}
+
+function getAllData($table){
+	$query = "SELECT * FROM `".$table."`;";
+	return runQuery($query);
 }
 
 //Will run query and return results as array

@@ -1,15 +1,4 @@
 <?php 
-	require_once '../../src/utils/connect.php';
-	$db = connect ();
-	$query = "SELECT * FROM character_traits;";
-	$result = $db->query ( $query );
-
-	while ( $row = $result->fetch_assoc () ) {
-		$trait [] = $row;
-	}
-
-	$struct = array (
-			"traits" => $trait
-	);
-	print json_encode ( $struct );
+	require_once '/home4/cassio/public_html/aesop/src/utils/connect.php';
+	print json_encode(getAllData("character"));
 ?>
