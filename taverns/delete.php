@@ -1,1 +1,7 @@
-<h2>This page will not be show it will be used to delete a chaacter</h2>
+<?php 
+require_once '/home4/cassio/public_html/aesop/src/utils/connect.php';
+if (! empty ( $_GET['id'] )){
+	$table  = "tavern";	
+	deletFrom($table, $_GET['id']);
+}
+?>
