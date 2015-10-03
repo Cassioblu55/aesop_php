@@ -1,6 +1,5 @@
 <?php include_once '../../resources/templates/head.php'; ?>
-<div ng-controller="SettelementTraitsIndexController">
-
+<div ng-controller="SettlementTraitsIndexController">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-1">
@@ -15,7 +14,7 @@
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3>Settelement Traits</h3>
+							<h3>Settlement Traits</h3>
 						</div>
 						<div class="panel-body">
 							<div ui-grid="gridModel" external-scopes="$scope"
@@ -28,7 +27,7 @@
 	</div>
 
 	<script>
-app.controller("SettelementTraitsIndexController", ['$scope', "$http" , function($scope, $http){
+app.controller("SettlementTraitsIndexController", ['$scope', "$http" , function($scope, $http){
 
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
 	$scope.gridModel.columnDefs = [	{field: 'edit', enableColumnMenu: false, enableFiltering: false, width: 53, cellTemplate: '<a class="btn btn-primary" role="button" ng-href="edit.php?id={{row.entity.id}}">Edit</a>'},
@@ -59,4 +58,3 @@ app.controller("SettelementTraitsIndexController", ['$scope', "$http" , function
 	
 }]);
 </script>
-<?php include_once '../../resources/templates/footer.php';?>

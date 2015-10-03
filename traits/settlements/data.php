@@ -1,6 +1,5 @@
 <?php 
-	require_once '../../src/utils/connect.php';
-	$query = "SELECT * FROM settelement_traits;";
-	$result = runQuery($query);
-	print json_encode ( $result );
+	require_once '/home4/cassio/public_html/aesop/src/utils/connect.php';
+	$table = "settlement_traits";
+	print json_encode (getAllData( $table) );
 ?>

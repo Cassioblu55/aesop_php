@@ -1,35 +1,29 @@
 
 <?php include_once '/home4/cassio/public_html/aesop/resources/templates/head.php'; ?>
 <div ng-controller="CharacterIndexController">
-
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-12">
 				<div class="panel panel-default">
-					<a class="btn btn-primary" href="edit.php">Add</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3>Characters</h3>
-						</div>
-						<div class="panel-body">
-							<div ui-grid="gridModel" external-scopes="$scope"
-								style="height: 400px;"></div>
-						</div>
+					<div class="panel-heading clearfix">
+						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Characters</h4>
+						<a href="edit.php" class ="btn btn-primary pull-right">Add</a>
+					</div>
+					<div class="panel-body">
+						<div ui-grid="gridModel" external-scopes="$scope"
+							style="height: 400px;"></div>
+					</div>
+					<div class="panel-footer">
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 
-	<script>
+<script>
 app.controller("CharacterIndexController", ['$scope', "$http" , function($scope, $http){
 
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
@@ -41,7 +35,7 @@ app.controller("CharacterIndexController", ['$scope', "$http" , function($scope,
 
 	
 	$scope.reloadGrid = function(){
-		$http.get('data.php').
+		$http.get('data.php?column=stats').
 			then(function(response){
 				$scope.gridModel.data = response.data;
 				
@@ -63,4 +57,3 @@ app.controller("CharacterIndexController", ['$scope', "$http" , function($scope,
 	
 }]);
 </script>
-<?php include_once '/home4/cassio/public_html/aesop/resources/templates/footer.php';?>

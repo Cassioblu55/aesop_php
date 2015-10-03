@@ -14,11 +14,11 @@ if (! empty ( $_POST )) {
 	$db = connect ();
 	$insert = '';
 	if (empty ( $_GET ['id'] )) {
-		$insert = "INSERT INTO settelement_traits (trait, type) VALUES ('" . $_POST ['trait'] . "','" . $_POST ['type'] . "');";
+		$insert = "INSERT INTO settlement_traits (trait, type) VALUES ('" . $_POST ['trait'] . "','" . $_POST ['type'] . "');";
 	} 
 
 	else {
-		$insert = "UPDATE settelement_traits SET trait='" . $_POST ['trait'] . "', type='" . $_POST ['type'] . "' WHERE id=" . $_GET ['id'] . ";";
+		$insert = "UPDATE settlement_traits SET trait='" . $_POST ['trait'] . "', type='" . $_POST ['type'] . "' WHERE id=" . $_GET ['id'] . ";";
 	}
 	try {
 		$db->query ( $insert );
@@ -39,7 +39,7 @@ if (! empty ( $_POST )) {
 	} 
 	else {
 		$db = connect ();
-		$query = "SELECT * FROM settelement_traits WHERE id='" . $_GET ['id'] . "';";
+		$query = "SELECT * FROM settlement_traits WHERE id='" . $_GET ['id'] . "';";
 		try {
 			$result = $db->query ( $query );
 			if ($result->num_rows > 0) {

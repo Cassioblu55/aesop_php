@@ -37,7 +37,7 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 								Height: <b>{{displayHeight()}}</b>
 							</div>
 						</div>
-						
+
 						<div class="col-md-12">
 							<h4>Flaw</h4>
 							<div>{{character.flaw}}</div>
@@ -56,7 +56,7 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Appearance</h4>
-							<div>{{character.Appearance}}</div>
+							<div>{{character.appearance}}</div>
 						</div>
 						<div class="col-md-12">
 							<h4>Talent</h4>
@@ -70,9 +70,11 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 							<h4>Ability</h4>
 							<div>{{character.ability}}</div>
 						</div>
-						
-						
-						
+					</div>
+					<div class="panel-footer">
+						<a ng-href="/aesop/characters/" class="btn btn-info">Show All</a>
+						<a ng-href="/aesop/characters/edit.php?id={{character.id}}" class="btn btn-primary">Edit</a>
+						<button ng-click="deleteCharacter(character.id, full_name)" class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>
@@ -83,7 +85,7 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 
 <script type="text/javascript">
 var character = JSON.parse(document.getElementById("character").textContent);
-app.controller("CharacterController", ['$scope', "$http" , function($scope, $http){
+app.controller("CharacterController", ['$scope', "$http", "$window" , function($scope, $http, $window){
 	$scope.character = character;
 	$scope.full_name = $scope.character.first_name+" "+$scope.character.last_name;
 
@@ -98,8 +100,18 @@ app.controller("CharacterController", ['$scope', "$http" , function($scope, $htt
 		var height = $scope.character.height;
 		return Math.floor(height/12)+"' "+Math.floor(height%12)+'"';
 	}
-	
-	
+
+	$scope.deleteCharacter =function(id,name){
+		if(window.confirm("Are you sure you want to delete "+name+"?")){
+			$http.post('delete.php?id='+id).
+				then(function(response){
+					$window.location.href ="/aesop/characters/";
+					}).then(function(response){
+						console.log(response);
+					});
+		}
+	}
+		
 }]);
 
 </script>

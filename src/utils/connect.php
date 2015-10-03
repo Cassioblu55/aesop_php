@@ -20,13 +20,40 @@ function connectSpecific($dbHost, $dbUser, $dbPassword, $dbName) {
 }
 
 function findById($table, $id){
-	$query = "SELECT * FROM `".$table."` WHERE id=".$id;
+	$query = "SELECT * FROM ".getTableQuote($table)." WHERE id=".$id;
 	return runQuery($query)[0];
+}
+
+function insertAndReturnId($table){
+	if(! empty($_POST)){
+		$columns = columnsToString($table);
+		$values = valuesToString($table);
+		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
+		$db = runInsertWithDBReturn($insert);
+		$inserted = $db->insert_id; 
+		$db->close();
+		return $inserted;
+	}
+}
+
+function getSpecificData($table, $columns){
+	$columnsString = "id, ".arrayToString($columns)."";
+	$query = "SELECT ".$columnsString." FROM ".getTableQuote($table).";";
+	return runQuery($query);
+}
+
+//will take array of string and return comma seperated string of all values
+function arrayToString($array){
+	$string = "";
+	foreach($array as $item){
+		$string.=$item.", ";
+	}
+	return substr($string, 0,strlen($string)-2);
 }
 
 //will return all column data for a given table
 function getColumns($table){
-	$query = "SHOW COLUMNS FROM `".$table."`";
+	$query = "SHOW COLUMNS FROM ".getTableQuote($table);
 	return runQuery($query);
 }
 
@@ -77,25 +104,29 @@ function insert($table){
 	if(! empty($_POST)){
 		$columns = columnsToString($table);
 		$values = valuesToString($table);
-		$insert = "INSERT INTO `".$table."` ".$columns." VALUES ".$values.";";
+		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
 		runInsert($insert);
 	}
 }
 
 function update($table){
 	if(!empty($_POST)){
-		$update = "UPDATE `".$table."` SET ";
+		$update = "UPDATE ".getTableQuote($table)." SET ";
 		$columns = getColumnNames($table);
 		foreach ($columns as $column){
-			$value = $_POST[$column];
-			if(gettype($value)=="string"){
-				$value = "'".$value."'";
-			}
-			$update.= $column."=".$value.", ";
+			$update.= $column."=".getValueString($_POST[$column]).", ";
 		}
 		$update = substr($update, 0,strlen($update)-2)." WHERE id=".$_GET['id'].";";
 		runInsert($update);
 	}
+}
+
+//Adds correct quotes to table name for mysql
+function getTableQuote($table){return "`".$table."`";}
+
+//Will add quotes to string values and not to integer values
+function getValueString($value){
+	return (gettype($value)=="string")  ? "'".$value."'" : $value;
 }
 
 function valuesToString($table){
@@ -103,11 +134,7 @@ function valuesToString($table){
 		$columns = getColumnNames($table);
 		$string = "(";
 		foreach ($columns as $column){
-			$value = $_POST[$column];
-			if(gettype($value)=="string"){
-				$value = "'".$value."'";
-			}
-			$string .= $value.", ";
+			$string .= getValueString($_POST[$column]).", ";
 		}
 		return substr($string, 0,strlen($string)-2).")";
 	}
@@ -121,6 +148,19 @@ function columnsToString($table){
 		$string.=$column.", ";
 	}
 	return substr($string, 0,strlen($string)-2).")";
+}
+
+function runInsertWithDBReturn($insert){
+	$db = connect();
+	try {
+		$db->query ( $insert );
+		return $db;
+	} catch ( Execption $e ) {
+		echo "Could not complete request: ".$insert;
+		echo $e;
+		$db->close();
+		die ( "Could not complete request: ".$insert);
+	}
 }
 
 function runInsert($insert){
@@ -138,12 +178,12 @@ function runInsert($insert){
 }
 
 function deletFrom($table, $id){
-	$insert = "DELETE FROM `".$table."` WHERE id=".$id.";";
+	$insert = "DELETE FROM ".getTableQuote($table)." WHERE id=".$id.";";
 	runInsert($insert);
 }
 
 function getAllData($table){
-	$query = "SELECT * FROM `".$table."`;";
+	$query = "SELECT * FROM ".getTableQuote($table).";";
 	return runQuery($query);
 }
 

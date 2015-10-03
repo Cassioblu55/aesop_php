@@ -16,8 +16,12 @@
 			$_POST["weight"] = getWeight();
 		}
 		
-		if(empty($_POST["height"])){
+		if(empty($_POST["feet"]) || empty($_POST["inches"])){
 			$_POST["height"] = getHeight();
+		}
+		else{
+			$_POST["height"] = ($_POST["feet"]*12)+$_POST["inches"];
+			
 		}
 		
 		if(empty($_POST["age"])){

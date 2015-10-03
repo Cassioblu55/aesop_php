@@ -4,7 +4,7 @@ if (! empty ( $_GET['id'] )){
 	
 	$db=connect();
 	
-	$delete = "DELETE FROM settelement_traits WHERE id=".$_GET['id'].";";
+	$delete = "DELETE FROM settlement_traits WHERE id=".$_GET['id'].";";
 	echo $delete;
 	
 	try{
