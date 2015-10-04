@@ -65,11 +65,6 @@ app.controller("TavernAddEditController", ['$scope', "$http" , function($scope, 
 	if(tavern){
 		$scope.tavern = tavern;
 		$scope.tavern.owner_id = Number($scope.tavern.owner_id);
-		$scope.tavern.age = Number($scope.tavern.age);
-		$scope.tavern.population = Number($scope.tavern.population);
-		$scope.tavern.weight = Number($scope.tavern.weight);
-		$scope.tavern.feet = Math.floor(Number($scope.tavern.height)/12);
-		$scope.tavern.inches = Math.floor(Number($scope.tavern.height)%12);
 	}
 		$scope.addOrEdit = (!tavern) ? "Add" : "Edit";
 		$scope.saveOrUpdate = (!tavern) ? "Save" : "Update"
