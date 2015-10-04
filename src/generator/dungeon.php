@@ -8,11 +8,6 @@
 		$table = "dungeon";
 		$columns = getColumnNames($table);
 		
-		
-		if(empty($_POST['map'])){
-			$_POST['map'] = "test";
-		}
-		
 		foreach ($columns as $column){
 			if(empty($_POST[$column])){
 				$_POST[$column]=getTrait($trait_table, $column);

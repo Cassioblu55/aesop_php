@@ -32,7 +32,7 @@ include_once '../resources/templates/head.php';
 			<div class="panel-body">
 				<div class="form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control"  name="name" ng-model="dungeon.name" placeholder= "Dungeon Name" />
+					<input type="text" class="form-control"  name="name" ng-model="dungeon.name" placeholder="Dungeon Name" />
 				</div>
 				<div class="form-group">
 					<label for="purpose">Purpose</label>
@@ -50,7 +50,23 @@ include_once '../resources/templates/head.php';
 					<label for="creator">Creator</label>
 					<input type="text" class="form-control"  name="creator" ng-model="dungeon.creator" placeholder="Creator"/>
 				</div>
+				<div class="form-group">
+					<label for="size">Size</label>
+					<select class="form-control"  name="size">
+						<option value="">Any</option>
+						<option ng-selected={{dungeon.size=="S"}} value="S">Smalll</option>
+						<option ng-selected={{dungeon.size=="M"}} value="M">Medium</option>
+						<option ng-selected={{dungeon.size=="L"}} value="L">Large</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="map">Map</label>
+					<textarea class="form-control" rows="15" cols="15" name="map">{{dungeon.map}}</textarea>
 				
+				
+				</div>
+				
+								
 				<div class="form-group">
 					<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 					<a class="btn btn-danger" href="index.php">Cancel</a>
@@ -71,9 +87,36 @@ app.controller("DungeonAddEditController", ['$scope', "$http" , function($scope,
 	if(dungeon){
 		$scope.dungeon = dungeon;
 	}
-		$scope.addOrEdit = (!dungeon) ? "Add" : "Edit";
-		$scope.saveOrUpdate = (!dungeon) ? "Save" : "Update"
+	else{
+		$scope.dungeon = {};
+		generateMap();
+	}
+
+	 function generateMap(){
+		if($scope.dungeon.size==""){
+			var rand = Math.floor(Math.random() * 2);
+			$scope.dungeon.size = (rand==0) ? "S" : (rand==1) ? "M" : "L";
+		}
+		var map = getBlankMap($scope.dungeon.size);
+		$scope.dungeon.map = JSON.stringify(map, null, '');;
+		console.log($scope.dungeon.map);
+	}
+
+	$scope.addOrEdit = (!dungeon) ? "Add" : "Edit";
+	$scope.saveOrUpdate = (!dungeon) ? "Save" : "Update"
 	
+	function getBlankMap(size){
+		var count = (size=="S") ? 6 : (size=="M") ? 8 : 12;
+		var map = [];
+		for(var y=0; y<count; y++){
+			var mapRow = [];
+			for(var x=0; x<count; x++){
+				mapRow.push("-");
+			}
+			map.push(mapRow);
+		}
+		return map;
+	}
 }]);
 
 </script>
