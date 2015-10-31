@@ -17,7 +17,7 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">Assets <span class="caret"></span></a>
+					aria-expanded="false">View Assets <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/aesop/characters/">Characters</a></li>
 						<li><a href="/aesop/settlements/">Settlements</a></li>
@@ -38,6 +38,22 @@
 						<li><a href="/aesop/villians/create.php">Villians</a></li>
 					</ul></li>
 			</ul>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Custom Create<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/aesop/characters/edit.php">Characters</a></li>
+						<li><a href="/aesop/settlements/edit.php">Settlements</a></li>
+						<li><a href="/aesop/taverns/edit.php">Taverns</a></li>
+						<li><a href="/aesop/dungeons/edit.php">Dungeons</a></li>
+						<li><a href="/aesop/villians/edit.php">Villians</a></li>
+					</ul></li>
+			</ul>
+			
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
