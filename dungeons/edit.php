@@ -61,8 +61,8 @@ include_once '../resources/templates/head.php';
 				</div>
 				<div class="form-group">
 					<label for="map">Map</label>
-					<div class="dungeon_map">
-						<canvas id="mapDisplay" ng-class="dungeon.size=='S' ? 'small' : dungeon.size=='M' ? 'medium' : 'large'">
+					<div>
+						<canvas id="mapDisplay" class="dungeon_map" style="width: 384px; height: 384px;">
 						Your browser does not support the HTML5 canvas tag.
 						</canvas>
 					</div>
@@ -81,6 +81,7 @@ include_once '../resources/templates/head.php';
 <div id="dungeon" style="display: none"><?php if(!empty($_GET['id'])){echo json_encode(findById($table, $_GET['id']));}?></div>
 </div>
 
+<script src="/aesop/resources/mapGenerator.js"></script>
 <script type="text/javascript">
 var dungeonData =  document.getElementById("dungeon").textContent
 if(dungeonData){var dungeon =JSON.parse(dungeonData)};
@@ -89,158 +90,44 @@ app.controller("DungeonAddEditController", ['$scope', "$http" , function($scope,
 	$scope.getParsedMap = function(){return JSON.parse($scope.dungeon.map);}
 	$scope.stringifyMap = function(map){$scope.dungeon.map = JSON.stringify(map, null, '');}
 
-	//Set size hash
-	var sizeHash = {"S": 6, "M": 8, "L":12};
-	
-	var map = function(t){
-		var that = {};
-		var tiles = t;
-		var activeTiles =[];
-		var maxTiles = {"S": 30, "M": 60, "L": 90};
+	$scope.saveOrUpdate = dungeon ? "Update" : "Save"; 
 
-		function mapFull(){
-			return 
+	var firstLoad = true;
+	$scope.$watch('dungeon.size', function(val){
+		if(firstLoad && dungeon && dungeon.map){
+			drawMap($scope.getParsedMap());
 		}
-		
-		function getTiles(){
-			return tiles;
+		else if(val && val != ''){
+			$scope.stringifyMap(generateMap($scope.dungeon.size).getTiles());
+			drawMap($scope.getParsedMap());
 		}
-		that.getTiles = getTiles;
-		
-		function get(x,y){
-			return vaildTile(x,y) ? {"x" : x, "y" : y} : null;
-		}
-		that.get = get;
-
-		function vaildTile(x,y){
-			return (x>=0 && y>=0 && x<tiles[0].length && y<=tiles[0].length);
-		}
-
-		function set(t, value){
-			if(vaildTile(t.x,t.y)){
-				tiles[t.y][t.x]=value;
-				activeTiles.push(t);
-			}
-		}
-		that.set = set;
-
-		function active(t){
-			for(var i=0; i<activeTiles.length; i++){
-				var at = activeTiles[i];
-				if(at.x == t.x && at.y ==y){return true;}
-			}
-			return false;
-		}
-		that.active = active;
-		
-		function move(s, d){
-			if(d==0){return get(s.x, s.y+1);}
-			else if(d==1){return get(s.x, s.y-1);}
-			else if(d==2){return get(s.x+1, s.y);}
-			else{return get(s.x-1, s.y);}
-		}
-		that.move = move;
-		
-		return that;
-	}
-
-	function drawMap(tiles){
-		console.log(tiles);
-		var c = document.getElementById("mapDisplay");
-		var tileSize = 32; var mapSize = tiles[0].length
-		var colors = { 
-				"x" : "#FFFFF0", "s" : "#006400",
-				"t" : "#DC143C", "w" : "#A9A9A9"
-					}
-		
-		var ctx = c.getContext("2d");
-		var yStart=0;
-		for(var y=0; y<mapSize; y++){
-			var xStart = 0;
-			for(var x=0; x<mapSize; x++){
-				ctx.fillStyle = colors[tiles[y][x]];
-				ctx.fillRect(xStart,yStart,tileSize, tileSize/2);
-				xStart += tileSize;
-			}
-			yStart += (tileSize/2);
-		}
-		
-	}
-	
-	$scope.generateMap = function(){
-		//Start by finding the size if it dons't exist
-		if(!$scope.dungeon.size){
+		else{
 			$scope.dungeon.size = getRandomSize();
 		}
-		var t = getBlankMap($scope.dungeon.size);
-		var m = map(t);
-		var size = sizeHash[$scope.dungeon.size];
-		var start = m.get(getRandomNormal(size),0);
-		m.set(start,"s");
-
-		
-		
-		$scope.stringifyMap(m.getTiles());
-		drawMap(m.getTiles());
-	}
-
+		firstLoad = false;
+	});
 	
-
-	//Down = 0, Up = 1, Right = 2, Left = 4
-	function makeBranch(map, startY, startX, direction){
-		
-	}
-		
-	function getRandomDirection(){
-		return Math.floor(Math.random() * 4);
+	$scope.generateMap = function(){
+		$scope.stringifyMap(generateMap($scope.dungeon.size).getTiles());
+		drawMap($scope.getParsedMap());
 	}
 	
-	function getRandomSize(){
-		var rand = Math.floor(Math.random() * 2);
-		return (rand==0) ? "S" : (rand==1) ? "M" : "L";
-	}
-
-	function getRandomNormal(n){
-		return Math.floor(Math.random() * n);
-	}
-	
-	
-	$scope.addOrEdit = (!dungeon) ? "Add" : "Edit";
-	$scope.saveOrUpdate = (!dungeon) ? "Save" : "Update"
-	
-	function getBlankMap(size){
-		var count = sizeHash[size];
-		var map = [];
-		for(var y=0; y<count; y++){
-			var mapRow = [];
-			for(var x=0; x<count; x++){
-				mapRow.push("x");
-			}
-			map.push(mapRow);
-		}
-		return map;
-	}
-
-	$scope.showMap = function(){
-		var dispaly = "";
-		var map = $scope.getParsedMap();
-		for(var y=0; y<map.length; y++){
-			
-			dispaly += map[y].toString()+"<br>";
-		}
-		
-		//for(var y=0; y<
-			
-		return dispaly;
-		
-	}
-
+	//Set size hash
 	if(dungeon){
 		$scope.dungeon = dungeon;
+		if(dungeon.map){
+			drawMap($scope.getParsedMap());
+		}
+		else if(dungeon.size){
+			$scope.generateMap(dungeon.size);
+		}
+		else{
+			$scope.dungeon.size = getRandomSize();
+		}
 	}
 	else{
 		$scope.dungeon = {};
-		$scope.generateMap();
+		$scope.dungeon.size = getRandomSize();
 	}
 	
 	

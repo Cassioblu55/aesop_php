@@ -17,6 +17,10 @@ body {
   background-color: #f5f5f5;
 }
 
+.dungeon_map{
+	outline: 1px solid black;
+}
+
 .dungeon_map .small{
 	/* outline: 1px solid black; */
 	width: 192px;

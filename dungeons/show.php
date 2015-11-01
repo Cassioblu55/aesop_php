@@ -40,7 +40,11 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Map</h4>
-							<div>{{dungeon.map}}</div>
+							<div>
+								<canvas id="mapDisplay" class="dungeon_map" style="width: 384px; height: 384px;">
+									Your browser does not support the HTML5 canvas tag.
+								</canvas>
+					</div>
 						</div>
 						
 					</div>
@@ -56,10 +60,14 @@ include_once '/home4/cassio/public_html/aesop/resources/templates/head.php';
 	<div id="dungeon" style="display: none;"><?php echo $dungeon?></div>
 </div>
 
+<script src="/aesop/resources/mapGenerator.js"></script>
 <script type="text/javascript">
 var dungeon = JSON.parse(document.getElementById("dungeon").textContent);
 app.controller("DungeonController", ['$scope', "$http", "$window" , function($scope, $http, $window){
 	$scope.dungeon = dungeon;
+
+	$scope.getParsedMap = function(){return JSON.parse($scope.dungeon.map);}
+	drawMap($scope.getParsedMap());
 	
 	$scope.deletedungeon =function(id,name){
 		if(window.confirm("Are you sure you want to delete "+name+"?")){
@@ -71,6 +79,9 @@ app.controller("DungeonController", ['$scope', "$http", "$window" , function($sc
 					});
 		}
 	}
+
+	
+	
 		
 }]);
 
