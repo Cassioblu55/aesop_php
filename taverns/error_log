@@ -1,3 +1,0 @@
-[03-Oct-2015 13:42:20 America/Chicago] PHP Fatal error:  Call to undefined function createTavern() in /home4/cassio/public_html/aesop/taverns/edit.php on line 7
-[03-Oct-2015 13:43:48 America/Chicago] PHP Fatal error:  Call to undefined function createTavern() in /home4/cassio/public_html/aesop/taverns/edit.php on line 7
-[03-Oct-2015 14:00:26 America/Chicago] PHP Fatal error:  Call to undefined function getTrait() in /home4/cassio/public_html/aesop/src/generator/tavern.php on line 7

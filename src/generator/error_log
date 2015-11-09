@@ -1,5 +1,0 @@
-[26-Sep-2015 12:07:13 America/Chicago] PHP Warning:  array_values() expects parameter 1 to be array, null given in /home4/cassio/public_html/aesop/src/generator/character.php on line 6
-[26-Sep-2015 12:07:18 America/Chicago] PHP Warning:  array_values() expects parameter 1 to be array, null given in /home4/cassio/public_html/aesop/src/generator/character.php on line 6
-[26-Sep-2015 12:08:29 America/Chicago] PHP Warning:  array_values() expects parameter 1 to be array, null given in /home4/cassio/public_html/aesop/src/generator/character.php on line 6
-[27-Sep-2015 00:24:19 America/Chicago] PHP Fatal error:  Call to undefined function getTrait() in /home4/cassio/public_html/aesop/src/generator/character.php on line 5
-[27-Sep-2015 01:24:11 America/Chicago] PHP Parse error:  syntax error, unexpected '(' in /home4/cassio/public_html/aesop/src/generator/character.php on line 27

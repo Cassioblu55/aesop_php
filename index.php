@@ -1,4 +1,8 @@
-<?php include_once 'resources/templates/head.php';?>
+<?php 
+include_once 'config/config.php';
+include_once $serverPath.'resources/templates/head.php';
+
+?>
 <div class="col-md-6">
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -13,4 +17,4 @@
 </div>
 
 
-<?php include_once 'resources/templates/footer.php';?>
+<?php include_once $serverPath.'resources/templates/footer.php';?>

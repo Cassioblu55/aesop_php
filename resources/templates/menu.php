@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/aesop">Aesop</a>
+			<a class="navbar-brand" href="<?php echo $baseURL;?>">Aesop</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -19,11 +19,11 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">View Assets <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/aesop/characters/">Characters</a></li>
-						<li><a href="/aesop/settlements/">Settlements</a></li>
-						<li><a href="/aesop/taverns/">Taverns</a></li>
-						<li><a href="/aesop/dungeons/">Dungeons</a></li>
-						<li><a href="/aesop/villians/">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/characters/">Characters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/settlements/">Settlements</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/taverns/">Taverns</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villians/">Villians</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -31,11 +31,11 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Quick Create <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/aesop/characters/create.php">Characters</a></li>
-						<li><a href="/aesop/settlements/create.php">Settlements</a></li>
-						<li><a href="/aesop/taverns/create.php">Taverns</a></li>
-						<li><a href="/aesop/dungeons/create.php">Dungeon</a></li>
-						<li><a href="/aesop/villians/create.php">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/characters/create.php">Characters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/settlements/create.php">Settlements</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/taverns/create.php">Taverns</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/dungeons/create.php">Dungeon</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villians/create.php">Villians</a></li>
 					</ul></li>
 			</ul>
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,11 +46,11 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Custom Create<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/aesop/characters/edit.php">Characters</a></li>
-						<li><a href="/aesop/settlements/edit.php">Settlements</a></li>
-						<li><a href="/aesop/taverns/edit.php">Taverns</a></li>
-						<li><a href="/aesop/dungeons/edit.php">Dungeons</a></li>
-						<li><a href="/aesop/villians/edit.php">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/characters/edit.php">Characters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villians/edit.php">Villians</a></li>
 					</ul></li>
 			</ul>
 			
@@ -59,11 +59,11 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Traits<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/aesop/traits/characters/">Characters</a></li>
-						<li><a href="/aesop/traits/settlements/">Settlements</a></li>
-						<li><a href="/aesop/traits/taverns/">Taverns</a></li>
-						<li><a href="/aesop/traits/dungeons/">Dungeon</a></li>
-						<li><a href="/aesop/traits/villians/">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/characters/">Characters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/settlements/">Settlements</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/taverns/">Taverns</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/dungeons/">Dungeon</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/villians/">Villians</a></li>
 					</ul></li>
 			</ul>
 		</div>
