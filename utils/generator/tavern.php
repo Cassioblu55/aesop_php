@@ -1,7 +1,7 @@
 <?php 
 
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_post.php';
 require_once $serverPath.'utils/generator/utils.php';
 require_once $serverPath.'utils/generator/character.php';
 
@@ -23,7 +23,7 @@ require_once $serverPath.'utils/generator/character.php';
 		if(empty($_POST['owner_id'])){
 			createCharacter ();
 			$table = "character";
-			$_POST ['owner_id'] = insertAndReturnId ( $table );
+			$_POST ['owner_id'] = insertFromPostWithIdReturn( $table );
 		}
 		
 	}

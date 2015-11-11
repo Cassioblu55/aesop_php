@@ -1,6 +1,7 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
+include_once $serverPath.'utils/db_post.php';
 require_once $serverPath.'utils/generator/character.php';
 
 $table = "character";
@@ -8,13 +9,13 @@ if (! empty ( $_POST )) {
 		
 	if (empty ( $_GET ['id'] )) {
 		createCharacter();
-		insert($table);
+		insertFromPost($table);
 		$added = true;
 	} 
 
 	else {
 		createCharacter();
-		update($table);
+		updateFromPost($table);
 		header ( "Location: index.php" );
 		die ( "Redirecting to index.php" );
 	}
@@ -51,9 +52,9 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 					<label for="sex">Sex</label> 
 					<select class="form-control"  name="sex">
 						<option value="">Any</option>
-						<option ng-selected={{character.sex=="M"}} value="M">Male</option>
-						<option ng-selected={{character.sex=="F"}} value="F">Female</option>
-						<option ng-selected={{character.sex=="O"}} value="O">Other</option>
+						<option ng-selected="character.sex=='M'" value="M">Male</option>
+						<option ng-selected="character.sex=='F'" value="F">Female</option>
+						<option ng-selected="character.sex=='O'" value="O">Other</option>
 					</select>
 				</div>
 				

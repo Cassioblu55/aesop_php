@@ -18,28 +18,24 @@ function connectSpecific($dbHost, $dbUser, $dbPassword, $dbName) {
 	return $db;
 }
 
-function findById($table, $id){
-	$query = "SELECT * FROM ".getTableQuote($table)." WHERE id=".$id;
-	return runQuery($query)[0];
-}
+function cutString($string, $n){return substr ( $string, 0, strlen ( $string ) - $n );}
 
-function insertAndReturnId($table){
-	if(! empty($_POST)){
-		$columns = columnsToString($table);
-		$values = valuesToString($table);
-		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
-		$db = runInsertWithDBReturn($insert);
-		$inserted = $db->insert_id; 
-		$db->close();
-		return $inserted;
-	}
-}
+// function findById($table, $id){
+// 	$query = "SELECT * FROM ".getTableQuote($table)." WHERE id=".$id;
+// 	return runQuery($query)[0];
+// }
 
-function getSpecificData($table, $columns){
-	$columnsString = "id, ".arrayToString($columns)."";
-	$query = "SELECT ".$columnsString." FROM ".getTableQuote($table).";";
-	return runQuery($query);
-}
+// function insertAndReturnId($table){
+// 	if(! empty($_POST)){
+// 		$columns = columnsToString($table);
+// 		$values = valuesToString($table);
+// 		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
+// 		$db = runInsertWithDBReturn($insert);
+// 		$inserted = $db->insert_id; 
+// 		$db->close();
+// 		return $inserted;
+// 	}
+// }
 
 //will take array of string and return comma seperated string of all values
 function arrayToString($array){
@@ -48,6 +44,21 @@ function arrayToString($array){
 		$string.=$item.", ";
 	}
 	return substr($string, 0,strlen($string)-2);
+}
+
+function runQuery($query){
+	$db = connect();
+	$results = [];
+	$result = $db->query ( $query );
+	if (!$result) {
+		echo 'Could not run query: ' .$query;
+		exit;
+	}
+	while ( $row = $result->fetch_assoc () ) {
+		array_push($results,$row);
+	}
+	$db->close();
+	return $results;
 }
 
 //will return all column data for a given table
@@ -99,26 +110,26 @@ function validateRequired($table){
 	}
 }
 
-function insert($table){
-	if(! empty($_POST)){
-		$columns = columnsToString($table);
-		$values = valuesToString($table);
-		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
-		runInsert($insert);
-	}
-}
+// function insert($table){
+// 	if(! empty($_POST)){
+// 		$columns = columnsToString($table);
+// 		$values = valuesToString($table);
+// 		$insert = "INSERT INTO ".getTableQuote($table)." ".$columns." VALUES ".$values.";";
+// 		runInsert($insert);
+// 	}
+// }
 
-function update($table){
-	if(!empty($_POST)){
-		$update = "UPDATE ".getTableQuote($table)." SET ";
-		$columns = getColumnNames($table);
-		foreach ($columns as $column){
-			$update.= $column."=".getValueString($_POST[$column]).", ";
-		}
-		$update = substr($update, 0,strlen($update)-2)." WHERE id=".$_GET['id'].";";
-		runInsert($update);
-	}
-}
+// function update($table){
+// 	if(!empty($_POST)){
+// 		$update = "UPDATE ".getTableQuote($table)." SET ";
+// 		$columns = getColumnNames($table);
+// 		foreach ($columns as $column){
+// 			$update.= $column."=".getValueString($_POST[$column]).", ";
+// 		}
+// 		$update = substr($update, 0,strlen($update)-2)." WHERE id=".$_GET['id'].";";
+// 		runInsert($update);
+// 	}
+// }
 
 //Adds correct quotes to table name for mysql
 function getTableQuote($table){return "`".$table."`";}
@@ -149,58 +160,58 @@ function columnsToString($table){
 	return substr($string, 0,strlen($string)-2).")";
 }
 
-function runInsertWithDBReturn($insert){
-	$db = connect();
-	try {
-		$db->query ( $insert );
-		return $db;
-	} catch ( Execption $e ) {
-		echo "Could not complete request: ".$insert;
-		echo $e;
-		$db->close();
-		die ( "Could not complete request: ".$insert);
-	}
-}
+// function runInsertWithDBReturn($insert){
+// 	$db = connect();
+// 	try {
+// 		$db->query ( $insert );
+// 		return $db;
+// 	} catch ( Execption $e ) {
+// 		echo "Could not complete request: ".$insert;
+// 		echo $e;
+// 		$db->close();
+// 		die ( "Could not complete request: ".$insert);
+// 	}
+// }
 
-function runInsert($insert){
-	//echo $insert;
-	$db = connect();
-	try {
-		$db->query ( $insert );
-		$db->close();
-	} catch ( Execption $e ) {
-		echo "Could not complete request: ".$insert;
-		echo $e;
-		$db->close();
-		die ( "Could not complete request: ".$insert);
-	}
-}
+// function runInsert($insert){
+// 	//echo $insert;
+// 	$db = connect();
+// 	try {
+// 		$db->query ( $insert );
+// 		$db->close();
+// 	} catch ( Execption $e ) {
+// 		echo "Could not complete request: ".$insert;
+// 		echo $e;
+// 		$db->close();
+// 		die ( "Could not complete request: ".$insert);
+// 	}
+// }
 
-function deletFrom($table, $id){
-	$insert = "DELETE FROM ".getTableQuote($table)." WHERE id=".$id.";";
-	runInsert($insert);
-}
+// function deletFrom($table, $id){
+// 	$insert = "DELETE FROM ".getTableQuote($table)." WHERE id=".$id.";";
+// 	runInsert($insert);
+// }
 
-function getAllData($table){
-	$query = "SELECT * FROM ".getTableQuote($table).";";
-	return runQuery($query);
-}
+// function getAllData($table){
+// 	$query = "SELECT * FROM ".getTableQuote($table).";";
+// 	return runQuery($query);
+// }
 
 //Will run query and return results as array
-function runQuery($query){
-	$db = connect();
-	$results = [];
-	$result = $db->query ( $query );
-	if (!$result) {
-		echo 'Could not run query: ' .$query;
-		exit;
-	}
-	while ( $row = $result->fetch_assoc () ) {
-		array_push($results,$row);
-	}
-	$db->close();
-	return $results;
-}
+// function runQuery($query){
+// 	$db = connect();
+// 	$results = [];
+// 	$result = $db->query ( $query );
+// 	if (!$result) {
+// 		echo 'Could not run query: ' .$query;
+// 		exit;
+// 	}
+// 	while ( $row = $result->fetch_assoc () ) {
+// 		array_push($results,$row);
+// 	}
+// 	$db->close();
+// 	return $results;
+// }
 
 
 ?>

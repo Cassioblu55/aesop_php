@@ -1,19 +1,20 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
+include_once $serverPath.'utils/db_post.php';
 require_once $serverPath . 'utils/generator/settlement.php';
 
 $table = "settlement";
 if (! empty ( $_POST )) {
 	if (empty ( $_GET ['id'] )) {
 		createSettelment();
-		insert($table);
+		insertFromPost($table);
 		$added = true;
 	} 
 
 	else {
 		createSettelment();
-		update($table);
+		updateFromPost($table);
 		header ( "Location: show.php?id=".$_GET['id'] );
 		die ( "Redirecting to show.php" );
 	}

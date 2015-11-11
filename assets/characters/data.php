@@ -1,6 +1,6 @@
 <?php 
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
 	$table = "character";
 	if(empty($_GET['column'])){
 		print json_encode(getAllData($table));

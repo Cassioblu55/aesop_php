@@ -1,18 +1,19 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
+include_once $serverPath.'utils/db_post.php';
 require_once $serverPath.'utils/generator/dungeon.php';
 
 $table = "dungeon";
 if (! empty ( $_POST )) {
 	createDungeon();
 	if (empty ( $_GET ['id'] )) {
-		insert($table);
+		insertFromPost($table);
 		$added = true;
 	} 
 
 	else {
-		update($table);
+		updateFromPost($table);
 		header ( "Location: show.php?id=".$_GET['id'] );
 		die ( "Redirecting to show.php" );
 	}

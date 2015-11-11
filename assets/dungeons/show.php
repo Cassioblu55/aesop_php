@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "dungeon";

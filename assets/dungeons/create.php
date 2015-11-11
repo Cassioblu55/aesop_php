@@ -1,13 +1,13 @@
 <?php 
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath . 'utils/db_post.php';
 require_once $serverPath . 'utils/generator/dungeon.php';
 if(!empty($_GET['map']) && !empty($_GET['size'])){
 		createDungeon();
 		$_POST['map'] = $_GET['map'];
 		$_POST['size'] = $_GET['size'];
 		$table = "dungeon";
-		header("Location: ".$baseURL."assets/dungeons/show.php?id=".insertAndReturnId($table));
+		header("Location: ".$baseURL."assets/dungeons/show.php?id=".insertFromPostWithIdReturn($table));
 		
 	}
 	
@@ -15,9 +15,9 @@ if(!empty($_GET['map']) && !empty($_GET['size'])){
 <!-- Super weird and aweful but create works -->
 <html ng-app="app">
 <head>
-	<script src="<?php echo baseURL;?>resources/mapGenerator.js"></script>
-	<script src="<?php echo baseURL;?>resources/angular/angular.min.js"></script>
-		<script src="<?php echo baseURL;?>resources/underscore/underscore-min.js"></script>
+	<script src="<?php echo $baseURL;?>resources/mapGenerator.js"></script>
+	<script src="<?php echo $baseURL;?>resources/angular/angular.min.js"></script>
+		<script src="<?php echo $baseURL;?>resources/underscore/underscore-min.js"></script>
 	
 </head>
 	<div ng-controller='DungeonCreateController'></div>
@@ -34,6 +34,6 @@ var app = angular.module('app',[]);
 		$scope.stringifyMap(generateMap(size).getTiles());
 
 		//console.log('/aesop/dungeons/create.php?map='+$scope.map+"&size="+size);
-		$window.location.href = '<?php echo baseURL;?>assets/dungeons/create.php?map='+$scope.map+"&size="+size;
+		$window.location.href = '<?php echo $baseURL;?>assets/dungeons/create.php?map='+$scope.map+"&size="+size;
 	}]);
 </script>

@@ -1,18 +1,19 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
+include_once $serverPath.'utils/db_post.php';
 require_once $serverPath.'utils/generator/tavern.php';
 
 $table = "tavern";
 if (! empty ( $_POST )) {
 	createTavern();
 	if (empty ( $_GET ['id'] )) {
-		insert($table);
+		insertFromPost($table);
 		$added = true;
 	} 
 
 	else {
-		update($table);
+		updateFromPost($table);
 		header ( "Location: show.php?id=".$_GET['id'] );
 		die ( "Redirecting to show.php" );
 	}
@@ -71,7 +72,7 @@ app.controller("TavernAddEditController", ['$scope', "$http" , function($scope, 
 		$scope.saveOrUpdate = (!tavern) ? "Save" : "Update"
 
 			$scope.getCharacters = function(){
-			$http.get('/aesop/characters/data.php?column=name').
+			$http.get('<?php echo $baseURL;?>assets/characters/data.php?column=name').
 			then(function(response){
 				var characters = response.data
 				for(var i=0; i<characters.length; i++){

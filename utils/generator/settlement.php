@@ -1,7 +1,7 @@
 <?php
 
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
 require_once $serverPath.'utils/generator/utils.php';
 require_once $serverPath.'utils/generator/character.php';
 
@@ -39,7 +39,7 @@ function createSettelment() {
 	if (empty ( $_POST ['ruler_id'] )) {
 		createCharacter ();
 		$table = "character";
-		$_POST ['ruler_id'] = insertAndReturnId ( $table );
+		$_POST ['ruler_id'] = insertFromPostWithIdReturn ( $table );
 	}
 	
 	foreach ( $columns as $column ) {

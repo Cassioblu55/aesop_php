@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath . 'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "settlement"; $ruler_table = "character";
@@ -48,7 +48,7 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Ruler Status</h4>
-							<div><a ng-href="/aesop/characters/show.php?id={{ruler.id}}">{{ruler.name}}</a>: {{settlement.ruler_status}}</div>
+							<div><a ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{ruler.id}}">{{ruler.name}}</a>: {{settlement.ruler_status}}</div>
 						</div>
 						<div class="col-md-12">
 							<h4>Race Relations</h4>

@@ -1,2 +1,0 @@
-[03-Oct-2015 23:17:05 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home4/cassio/public_html/aesop/src/generator/dungeon.php on line 14
-[03-Oct-2015 23:17:05 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home4/cassio/public_html/aesop/src/generator/dungeon.php:14) in /home4/cassio/public_html/aesop/dungeon/create.php on line 6

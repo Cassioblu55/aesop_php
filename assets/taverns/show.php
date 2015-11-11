@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath.'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "tavern"; $owner_table = "character";
@@ -32,7 +32,7 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Owner</h4>
-							<div><a ng-href="<?php echo baseURL;?>assets/characters/show.php?id={{owner.id}}">{{owner.name}}</div>
+							<div><a ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{owner.id}}">{{owner.name}}</div>
 						</div>
 					</div>
 					<div class="panel-footer">
