@@ -23,7 +23,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/settlements/">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/taverns/">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/villians/">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villains/">Villains</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -35,7 +35,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/settlements/create.php">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/taverns/create.php">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/create.php">Dungeon</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/villians/create.php">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villains/create.php">Villains</a></li>
 					</ul></li>
 			</ul>
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,7 +50,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/villians/edit.php">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
 					</ul></li>
 			</ul>
 			
@@ -63,7 +63,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/traits/settlements/">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/traits/taverns/">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/traits/dungeons/">Dungeon</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traits/villians/">Villians</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traits/villains/">Villains</a></li>
 					</ul></li>
 			</ul>
 		</div>

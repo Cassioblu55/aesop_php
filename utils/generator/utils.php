@@ -3,8 +3,12 @@ include_once '../../config/config.php';
 include_once $serverPath.'/utils/connect.php';
 
 function getTrait($table, $type){
+	return  getFullTrait($table, $type)['trait'];
+}
+
+function getFullTrait($table, $type){
 	$query = "SELECT * FROM `".$table."` WHERE type='".$type."' ORDER BY RAND() LIMIT 1;";
-	return runQuery($query)[0]['trait'];
+	return runQuery($query)[0];
 }
 
 function purebell($min,$max,$std_deviation,$step=1) {

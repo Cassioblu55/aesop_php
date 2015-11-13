@@ -3,13 +3,13 @@ include_once '../../config/config.php';
 include_once $serverPath.'resources/templates/head.php'; 
 ?>
 
-<div ng-controller="VilliansIndexController">
+<div ng-controller="VillainIndexController">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
-						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Characters</h4>
+						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Villains</h4>
 						<a href="edit.php" class ="btn btn-primary pull-right">Add</a>
 					</div>
 					<div class="panel-body">
@@ -27,13 +27,13 @@ include_once $serverPath.'resources/templates/head.php';
 
 
 <script>
-app.controller("VilliansIndexController", ['$scope', "$http" , function($scope, $http){
+app.controller("VillainIndexController", ['$scope', "$http" , function($scope, $http){
 
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
 	$scope.gridModel.columnDefs = [	{field: 'show', enableColumnMenu: false, enableFiltering: false, width: 65, cellTemplate: '<a class="btn btn-info" role="button" ng-href="show.php?id={{row.entity.id}}">Show</a>'},
 	                           		{field: 'edit', enableColumnMenu: false, enableFiltering: false, width: 53, cellTemplate: '<a class="btn btn-primary" role="button" ng-href="edit.php?id={{row.entity.id}}">Edit</a>'},
 	                               	{field: 'first_name',  enableColumnMenu: false}, {field: 'last_name', enableColumnMenu: false},{field: 'scheme_type', name: "Scheme", enableColumnMenu: false},
-	                               	{field: 'method_type', name: "Method", enableColumnMenu: false}, {field: 'weekness_type', name: "Weekness", enableColumnMenu: false},
+	                               	{field: 'method_type', name: "Method", enableColumnMenu: false}, {field: 'weakness_type', name: "Weekness", enableColumnMenu: false},
 	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67, cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteTrait(row.entity.id,row.entity.first_name);">Delete</button>'}
 	                               ];
 
@@ -41,6 +41,7 @@ app.controller("VilliansIndexController", ['$scope', "$http" , function($scope, 
 	$scope.reloadGrid = function(){
 		$http.get('data.php?column=stats').
 			then(function(response){
+				console.log(response.data);
 				$scope.gridModel.data = response.data;
 				
 			});

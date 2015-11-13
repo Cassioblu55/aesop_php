@@ -1,10 +1,22 @@
 <?php 
 	include_once '../../config/config.php';
-	include_once $serverPath.'utils/db_get.php';
 	include_once $serverPath.'utils/db_post.php';
+	include_once $serverPath.'utils/generator/villain.php';
 	
 	
-	
+	if(!empty($_POST)){
+		$table = "villain";
+		createVillain();
+		if(!empty($_GET['id'])){
+			$id = $_GET['id'];
+			updateFromPost($table);
+		}
+		else{
+			$id = insertFromPostWithIdReturn($table);
+		}
+			header ( "Location: show.php?id=".$id);
+			die ( "Redirecting to show.php" );
+	}
 	
 	include_once $serverPath.'resources/templates/head.php';
 ?>
@@ -60,6 +72,30 @@
 						</div>
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="method_type">Method Type</label>
+					<input type="text" class="form-control"  name="method_type" ng-model="villian.method_type" placeholder="Method Type"/>
+				</div>
+				<div class="form-group">
+					<label for="method_description">Method Description</label>
+					<input type="text" class="form-control"  name="method_description" ng-model="villian.method_description" placeholder="Method Description"/>
+				</div>
+				<div class="form-group">
+					<label for="scheme_type">Scheme Type</label>
+					<input type="text" class="form-control"  name="scheme_type" ng-model="villian.scheme_type" placeholder="Scheme Type"/>
+				</div>
+				<div class="form-group">
+					<label for="scheme_description">Scheme Description</label>
+					<input type="text" class="form-control"  name="scheme_description" ng-model="villian.scheme_description" placeholder="Scheme Description"/>
+				</div>
+				<div class="form-group">
+					<label for="weakness_type">Weakness Type</label>
+					<input type="text" class="form-control"  name="weakness_type" ng-model="villian.weakness_type" placeholder="Weakness Type"/>
+				</div>
+				<div class="form-group">
+					<label for="weakness_description">Weakness Description</label>
+					<input type="text" class="form-control"  name="weakness_description" ng-model="villian.weakness_description" placeholder="Weakness Description"/>
+				</div>
 				<div class="row">
 					<div class="col-sm-6 form-group">
 						<label for="flaw">Flaw</label>
@@ -112,7 +148,7 @@
 </div>
 <script>
 app.controller("VillianEditController", ['$scope', "$http", "$location", function($scope, $http){
-	$scope.id = getUrlParam("id");
+	$scope.id = getID();
 	if($scope.id){
 		$http.get('data.php?id='+$scope.id).
 			then(function(response){
