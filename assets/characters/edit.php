@@ -9,27 +9,28 @@ if (! empty ( $_POST )) {
 		
 	if (empty ( $_GET ['id'] )) {
 		createCharacter();
-		insertFromPost($table);
-		$added = true;
+		$id = insertFromPostWithIdReturn($table);
+		
 	} 
 
 	else {
 		createCharacter();
 		updateFromPost($table);
-		header ( "Location: index.php" );
-		die ( "Redirecting to index.php" );
+		$id = $_GET['id'];
 	}
+		header ( "Location: show.php?id=".$id );
+		die ( "Redirecting to show.php" );
 	
 } 
 include_once $serverPath.'resources/templates/head.php'; ?>
 
 <div ng-controller="CharacterAddEditController">
 <form
-	action="edit.php<?php if(!empty($_GET['id'])){ echo "?id=".$_GET['id'];}?>"
+	action="{{action}}"
 	method="post">
 	<div class="col-md-6">
 		<div
-			class="panel <?php if($added){echo "panel-success";} else{echo "panel-default";} ?>">
+			class="panel panel-default ?>">
 			<div class="panel-heading">
 				<div class="panel-title">{{addOrEdit}} Character</div>
 			</div>
@@ -111,30 +112,37 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 					<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 					<a class="btn btn-danger" href="index.php">Cancel</a>
 				</div>
-				<div style='<?php if($added){echo "color:#5cb85c";}else{echo "display:none";}?>'>Added
-					Character</div>
 			</div>
 		</div>
 	</div>
 
 </form>
-<div id="character" style="display: none"><?php if(!empty($_GET['id'])){echo json_encode(findById($table, $_GET['id']));}?></div>
 </div>
 
 <script type="text/javascript">
-var characterData =  document.getElementById("character").textContent
-if(characterData){var character =JSON.parse(characterData)};
 app.controller("CharacterAddEditController", ['$scope', "$http" , function($scope, $http){
-	if(character){
-		$scope.character = character;
-		$scope.character.age = Number($scope.character.age);
-		$scope.character.weight = Number($scope.character.weight);
-		$scope.character.feet = Math.floor(Number($scope.character.height)/12);
-		$scope.character.inches = Math.floor(Number($scope.character.height)%12);
+	var id = getID();
+	$scope.action = "edit.php"
+	if(id){
+		$scope.action += "?id="+id;
+		$scope.addOrEdit = "Edit";
+		$scope.saveOrUpdate = "Update";
+		$http.get('data.php?id='+id).
+			then(function(response){
+				$scope.character = response.data;
+				$scope.character.age = Number($scope.character.age);
+				$scope.character.weight = Number($scope.character.weight);
+				$scope.character.feet = Math.floor(Number($scope.character.height)/12);
+				$scope.character.inches = Math.floor(Number($scope.character.height)%12);
+				
+			});
+	}else{
+		$scope.addOrEdit = "Add";
+		$scope.saveOrUpdate = "Save";
+			
+		
 	}
-		$scope.addOrEdit = (!character) ? "Add" : "Edit";
-		$scope.saveOrUpdate = (!character) ? "Save" : "Update"
-	
+
 }]);
 
 </script>

@@ -22,11 +22,11 @@
 ?>
 
 <div ng-controller="VillianEditController">
-	<form action="{{post_to}}" method="post">
+	<form action="{{::post_to}}" method="post">
 		<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">{{addOrEdit}} Villian</div>
+				<div class="panel-title">{{::addOrEdit}} Villian</div>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -137,7 +137,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
+					<button class="btn btn-primary" type="submit">{{::saveOrUpdate}}</button>
 					<a class="btn btn-danger" href="index.php">Cancel</a>
 				</div>
 			</div>
@@ -147,25 +147,22 @@
 
 </div>
 <script>
-app.controller("VillianEditController", ['$scope', "$http", "$location", function($scope, $http){
-	$scope.id = getID();
-	if($scope.id){
-		$http.get('data.php?id='+$scope.id).
-			then(function(response){
-				$scope.villian = response.data;
-				$scope.villian.age = Number($scope.villian.age);
-				$scope.villian.weight = Number($scope.villian.weight);
-				$scope.villian.feet = Math.floor(Number($scope.villian.height)/12);
-				$scope.villian.inches = Math.floor(Number($scope.villian.height)%12);
-		});
-		$scope.post_to = "edit.php?id="+$scope.id;
+app.controller("VillianEditController", ['$scope', "$controller", function($scope, $controller){
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+
+	$scope.setVillain = function(villain){
+		$scope.villian = villain;
+		$scope.villian.age = Number($scope.villian.age);
+		$scope.villian.weight = Number($scope.villian.weight);
+		$scope.villian.feet = getFeet(Number($scope.villian.height));
+		$scope.villian.inches = getInches(Number($scope.villian.height));
 		$scope.addOrEdit = "Edit";
 		$scope.saveOrUpdate = "Update";
-	}else{
-		$scope.post_to = "edit.php";
-		$scope.addOrEdit = "Add";
-		$scope.saveOrUpdate = "Save";
-		}
+	}
 
+	$scope.setById($scope.setVillain);
+	$scope.saveOrUpdate = "Save";
+	$scope.addOrEdit = "Add";
+	
 }]);
 </script>

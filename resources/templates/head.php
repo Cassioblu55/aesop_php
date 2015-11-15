@@ -13,6 +13,7 @@
 </head>
 <?php include_once $serverPath.'resources/templates/menu.php';?>
 
-<script> var app = angular.module('app',['ui.grid']);
+<script> 	
+var baseURL = "<?php echo $baseURL;?>";
 </script>
 

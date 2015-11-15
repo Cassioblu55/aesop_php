@@ -41,7 +41,6 @@ app.controller("VillainIndexController", ['$scope', "$http" , function($scope, $
 	$scope.reloadGrid = function(){
 		$http.get('data.php?column=stats').
 			then(function(response){
-				console.log(response.data);
 				$scope.gridModel.data = response.data;
 				
 			});

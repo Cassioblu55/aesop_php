@@ -17,4 +17,24 @@ function getSpecificData($table, $columns){
 	return runQuery($query);
 }
 
+function getRandomId($table){
+	$query = "SELECT id FROM ".getTableQuote($table)." ORDER BY RAND() LIMIT 1;";
+	return runQuery($query)[0]['id'];
+}
+
+function getJoin($table1, $table2, $joinOn, $t1_constraints, $t2_constraints){
+	$t1_q = getTableQuote($table1);
+	$t2_q = getTableQuote($table2);
+	$jo = getJoinOn($table1, $table2, $joinOn);
+	
+	$tables = [];
+	$tables[$table1] = $t1_constraints;
+	$tables[$table2] = $t2_constraints;
+	
+	$con = getConstraintsWithTables($tables);
+	$t2_columns = arrayToString(getColumnNamesWithTable($table2));
+	$query = "SELECT ".$t1_q.".*, ".$t2_columns." FROM ".$t1_q." INNER JOIN ".$t2_q." ON ".$jo." ".$con.";";
+	return $query;
+}
+
 ?>

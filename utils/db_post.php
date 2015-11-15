@@ -3,6 +3,7 @@ include_once $serverPath . 'utils/connect.php';
 
 function update($table, $data) {
 	$update = makeBaseUpdate($table, $data)." WHERE id=".$_GET['id'].";";
+	//echo $update;
 	runInsert($update);
 }
 
@@ -91,7 +92,7 @@ function insertFromPostWithIdReturn($table){
 }
 
 function deleteFrom($table, $id){
-	$insert = "DELETE FROM ".$table." WHERE id=".$id.";";
+	$insert = "DELETE FROM ".getTableQuote($table)." WHERE id=".$id.";";
 	runInsert($insert);
 }
 

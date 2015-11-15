@@ -3,7 +3,13 @@ include_once '../../config/config.php';
 include_once $serverPath.'utils/db_get.php';
 	$table = "villain";
 	if(!empty($_GET["id"])){
-		$query = "SELECT * FROM `villain` INNER JOIN `character` ON villain.character_id = character.id WHERE villain.id=".$_GET['id'];
+		$joinOn = ["character_id" => "id"];
+		
+		$t1_constraints = ["id"=> $_GET["id"]];
+		$t2_constraints = [];
+		
+		$query = getJoin("villain", "character", $joinOn, $t1_constraints, $t2_constraints);
+		
 		print json_encode(runQuery($query)[0]);
 	}
 	else if(!empty($_GET['column'])){

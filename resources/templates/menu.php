@@ -24,6 +24,8 @@
 						<li><a href="<?php echo $baseURL;?>assets/taverns/">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/">Villains</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/">Urban Encounters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest Encounters</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -38,6 +40,16 @@
 						<li><a href="<?php echo $baseURL;?>assets/villains/create.php">Villains</a></li>
 					</ul></li>
 			</ul>
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Enounters<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/getRandom.php">Urban</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/getRandom.php">Forest</a></li>
+					</ul></li>
+			</ul>
+			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
@@ -51,6 +63,8 @@
 						<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/edit.php">Urban Encounters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/edit.php">Forest Encounters</a></li>
 					</ul></li>
 			</ul>
 			

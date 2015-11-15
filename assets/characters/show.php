@@ -8,9 +8,6 @@ if (! empty ( $_GET ['id'] )) {
 	$character = json_encode ( findById ( $table, $_GET ['id'] ) );
 } else {
 	header ( "Location: index.php" );
-	
-	// Remember that this die statement is absolutely critical. Without it,
-	// people can view your members-only content without logging in.
 	die ( "Redirecting to index" );
 }
 
@@ -76,7 +73,7 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 					<div class="panel-footer">
 						<a ng-href="index.php" class="btn btn-info">Show All</a>
 						<a ng-href="edit.php?id={{character.id}}" class="btn btn-primary">Edit</a>
-						<button ng-click="deleteCharacter(character.id, full_name)" class="btn btn-danger">Delete</button>
+						<button ng-click="deleteWithRedirect(character.id, full_name)" class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>
@@ -87,7 +84,10 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 
 <script type="text/javascript">
 var character = JSON.parse(document.getElementById("character").textContent);
-app.controller("CharacterController", ['$scope', "$http", "$window" , function($scope, $http, $window){
+app.controller("CharacterController", ['$scope',"$http","$controller", function($scope, $http, $controller){
+
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	
 	$scope.character = character;
 	$scope.full_name = $scope.character.first_name+" "+$scope.character.last_name;
 
@@ -101,17 +101,6 @@ app.controller("CharacterController", ['$scope', "$http", "$window" , function($
 	$scope.displayHeight = function(){
 		var height = $scope.character.height;
 		return Math.floor(height/12)+"' "+Math.floor(height%12)+'"';
-	}
-
-	$scope.deleteCharacter =function(id,name){
-		if(window.confirm("Are you sure you want to delete "+name+"?")){
-			$http.post('delete.php?id='+id).
-				then(function(response){
-					$window.location.href ="/aesop/characters/";
-					}).then(function(response){
-						console.log(response);
-					});
-		}
 	}
 		
 }]);
