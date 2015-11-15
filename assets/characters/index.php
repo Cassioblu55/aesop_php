@@ -41,7 +41,7 @@ app.controller("CharacterIndexController", ['$scope', "$controller", function($s
 	$scope.setGrid = function(data){$scope.gridModel.data = data;}
 	
 	$scope.reloadGrid = function(){
-		var get = 'data.php?column=stats';
+		var get = 'data.php?column=grid';
 		$scope.setFromGet(get, $scope.setGrid);
 	}
 	

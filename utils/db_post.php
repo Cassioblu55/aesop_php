@@ -16,7 +16,7 @@ function updateWithConstratints($table, $data, $constraints){
 	foreach ($constraints as $columnName => $value){
 		$update .= "WHERE ".$columnName."='".$value."' AND ";
 	}
-	$update = cutStrin($update, 4).";";
+	$update = cutString($update, 4).";";
 	runInsert($update);
 }
 

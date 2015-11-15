@@ -22,6 +22,18 @@ function getRandomId($table){
 	return runQuery($query)[0]['id'];
 }
 
+function getSingleColumnData($table, $column){
+	$query = "SELECT ".$column." FROM ".getTableQuote($table);
+	$results = runQuery($query);
+	$data = [];
+	foreach ($results as $row){
+		array_push($data, $row[$column]);
+	}
+	return $data;
+	
+}
+
+
 function getJoin($table1, $table2, $joinOn, $t1_constraints, $t2_constraints){
 	$t1_q = getTableQuote($table1);
 	$t2_q = getTableQuote($table2);

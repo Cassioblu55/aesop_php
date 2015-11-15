@@ -3,19 +3,27 @@
 	include_once $serverPath.'utils/db_post.php';
 	include_once $serverPath.'utils/generator/villain.php';
 	
-	
 	if(!empty($_POST)){
 		$table = "villain";
+		$c_table = 'character';
 		createVillain();
+		
+		//If updating existing villain
 		if(!empty($_GET['id'])){
 			$id = $_GET['id'];
+			$c_data = createDataFromPost($c_table);
+			$constraints =  ['id' => $_POST['character_id']];
+			updateWithConstratints($c_table, $c_data, $constraints);
 			updateFromPost($table);
 		}
+		//Create new villain
 		else{
+			//Will insert new villain and return the id of the one created 
 			$id = insertFromPostWithIdReturn($table);
 		}
-			header ( "Location: show.php?id=".$id);
-			die ( "Redirecting to show.php" );
+		//Redirect to show.php
+		header ( "Location: show.php?id=".$id);
+		die ( "Redirecting to show.php" );
 	}
 	
 	include_once $serverPath.'resources/templates/head.php';
@@ -26,7 +34,7 @@
 		<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">{{::addOrEdit}} Villian</div>
+				<div class="panel-title">{{addOrEdit}} Villian</div>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -136,8 +144,9 @@
 						<input type="text" class="form-control"  name="ability" ng-model="villian.ability" placeholder="Ability"/>
 					</div>
 				</div>
+				<input style="display: none;" name="character_id" ng-model="villian.character_id"></input>
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">{{::saveOrUpdate}}</button>
+					<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 					<a class="btn btn-danger" href="index.php">Cancel</a>
 				</div>
 			</div>
