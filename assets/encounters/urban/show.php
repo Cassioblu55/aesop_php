@@ -28,6 +28,7 @@ include_once $serverPath.'resources/templates/head.php';
 	</div>
 	</div>
 
+<script src="<?php echo $baseURL;?>resources/roll.js"></script>
 <script>
 app.controller("urban_encounterShowController", ['$scope', "$controller", function($scope, $controller){
 
@@ -35,6 +36,7 @@ app.controller("urban_encounterShowController", ['$scope', "$controller", functi
 
 	$scope.setUrban_encounter = function(urban_encounter){
 		$scope.urban_encounter = urban_encounter;
+		$scope.urban_encounter.description = getRolls($scope.urban_encounter.description, $scope.urban_encounter.roll);
 	}
 
 	$scope.setById($scope.setUrban_encounter);
