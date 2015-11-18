@@ -14,6 +14,10 @@ function isNumeric(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function cutString(string, n){
+	return string.substring(0, (string.length-n));
+}
+
 //Will run function if one is passed
 function run(funt){
 	if(funt){funt();}
