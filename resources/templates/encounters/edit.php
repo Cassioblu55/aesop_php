@@ -151,6 +151,7 @@ app.controller("encounterEditController", ['$scope', "$controller", function($sc
 		newDice.id = $.guid++;
 		$scope.rollValues.push(newDice);
 		$('#addRollModal').modal('hide')
+		$scope.newDice = {};
 	}
 
 	$scope.deleteRoll = function(id){
