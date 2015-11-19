@@ -8,7 +8,12 @@ function getAllData($table){
 
 function findById($table, $id){
 	$query = "SELECT * FROM ".getTableQuote($table)." WHERE id=".$id;
-	return runQuery($query)[0];
+	$result = runQuery($query);
+	if($result[0]){
+		return $result[0];
+	}else{
+		return null;
+	}
 }
 
 function getSpecificData($table, $columns){

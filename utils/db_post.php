@@ -28,8 +28,9 @@ function makeBaseUpdate($table, $data){
 	return cutString($update, 2);
 }
 
-function insertAndReturnId($table, $data){		
-	return runInsertWithIdReturn(getInsertStatement($table,$data));
+function insertAndReturnId($table, $data){
+	$insert = getInsertStatement($table,$data);
+	return runInsertWithIdReturn($insert);
 }
 
 function runInsertWithIdReturn($insert){

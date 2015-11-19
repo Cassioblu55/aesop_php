@@ -23,6 +23,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/settlements/">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/taverns/">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traps/">Traps</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/">Villains</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/">Urban Encounters</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest Encounters</a></li>
@@ -62,6 +63,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/traps/edit.php">Traps</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/edit.php">Urban Encounters</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/edit.php">Forest Encounters</a></li>

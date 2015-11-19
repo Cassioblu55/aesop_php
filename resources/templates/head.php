@@ -1,5 +1,6 @@
 <!doctype html>
 <html ng-app="app">
+<script type="text/javascript">var baseURL = "<?php echo $baseURL;?>";</script>
 <head>
 	<script src="<?php echo $baseURL;?>resources/jquery/dist/jquery.js"></script>
 	<script src="<?php echo $baseURL;?>resources/bootstrap/dist/js/bootstrap.min.js"></script>

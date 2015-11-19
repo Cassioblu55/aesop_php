@@ -8,7 +8,7 @@ function getRolls(d, r){
 	if(r){
 		var die = getDiceValues(r);
 		for(var i=0; i<die.length; i++){
-			description = description.replace(die[i].stringValue, rollDice(die[i]));
+			description = description.replace(die[i].stringValue, rollDice(die[i])+" ("+die[i].stringValue+")");
 		}
 	}
 	return description;
@@ -63,3 +63,32 @@ function rollDice(dice){
 	}
 	return total;
 }
+
+app.controller("rollDisplayController", ['$scope', "$controller", function($scope, $controller){
+	
+	$scope.newDice = {};
+	$scope.rollValues = [];
+	
+	$scope.$watch('[newDice,newDice.amount,newDice.kind,newDice.modifer]', function(){
+		$scope.newDice.displayText = getDiceDisplay($scope.newDice);
+		$scope.newDice.minRoll = getDiceMin($scope.newDice);
+		$scope.newDice.maxRoll = getDiceMax($scope.newDice);
+	}, true);
+	
+	$scope.addRoll = function(newDice){
+		newDice.id = $.guid++;
+		$scope.rollValues.push(newDice);
+		$('#addRollModal').modal('hide')
+		$scope.newDice = {};
+	}
+
+	$scope.deleteRoll = function(id){
+		for(var i=0; i<$scope.rollValues.length; i++){
+			if($scope.rollValues[i].id == id){
+				 $scope.rollValues.splice(i, 1);
+				}
+		}
+	}
+	
+}]);
+

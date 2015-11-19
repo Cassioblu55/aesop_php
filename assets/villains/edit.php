@@ -30,7 +30,7 @@
 ?>
 
 <div ng-controller="VillianEditController">
-	<form action="{{::post_to}}" method="post">
+	<form method="post">
 		<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
