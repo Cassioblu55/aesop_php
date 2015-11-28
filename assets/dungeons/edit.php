@@ -113,6 +113,10 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 						<button type="button" class="btn btn-primary" ng-click="generateMap()">New Map</button>
 						<button type="button" class="btn btn-primary" ng-click="setRandomTraps()">Set traps</button>
 					</div>
+					<div ng-repeat="trap in traps">
+						<label>{{getTrapDisplay(trap).title}}</label>
+						<p>{{getTrapDisplay(trap).description}}</p>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -125,20 +129,22 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 <script src="<?php echo $baseURL;?>resources/mapGenerator.js"></script>
 <script type="text/javascript">
 app.controller("DungeonAddEditController", ['$scope', "$controller", function($scope, $controller){
-	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
-
+	angular.extend(this, $controller('TrapShowController', {$scope: $scope}));
 	//Load in traps
 	function loadTraps(traps){$scope.trapOptions = traps;}
 	$scope.setFromGet("data.php?column=traps",loadTraps);
-	
+	$scope.letters = letters;
 	$scope.getParsedMap = function(){return JSON.parse($scope.dungeon.map);}
 	$scope.stringifyMap = function(map){$scope.dungeon.map = JSON.stringify(map);}
 	$scope.saveOrUpdate = "Add";
 	$scope.addOrEdit = "Save"; 
 
-	$scope.submit = function(){
-		$scope.dungeon.traps = "test";
+	$scope.trapById = function(id){
+		for(var i=0; i<$scope.trapOptions.length; i++){
+			if($scope.trapOptions[i].id == id){return $scope.trapOptions[i];}
+		}
 	}
+
 	
 	//Will loop through list of traps and and add values to any that are missing
 	$scope.setRandomTraps = function(){
@@ -215,7 +221,7 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 			//Remove all traps in map
 			$scope.map.removeTraps();
 			for(var i=0; i<val.length; i++){
-				//Set aviable options for each trap row
+				//Set aviable options for each trap row				
 				var trap = val[i];
 				val[i].rowOptions = $scope.map.activeRows(trap.column);
 				val[i].columnOptions = $scope.map.activeColumns(trap.row);
@@ -249,19 +255,6 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 		$scope.traps = stringToTraps(dungeon.traps);
 		$scope.trapNumber = $scope.traps.length;
 		
-	}
-
-	function stringToTraps(trapString){
-		var t = JSON.parse(trapString);
-		var traps = [];
-		for(var i=0; i<t.length; i++){
-			var trap = {};
-			trap.id = t[i][0];
-			trap.column = t[i][1];
-			trap.row = t[i][2];
-			traps.push(trap);
-		}
-		return traps;
 	}
 
 	//Will make http request if id url parameter is present

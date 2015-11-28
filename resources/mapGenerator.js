@@ -4,10 +4,27 @@ var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
 
 //Map object, has methods for interfacing with map of tiles
 
-app.controller("TrapDisplayController", ['$scope', "$controller", function($scope, $controller){
+app.controller("TrapShowController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 	
-	
+	$scope.getTrapDisplay = function(t){
+		var hash = {}; var name, location, description;
+		if(t.id){
+			var trap = $scope.trapById(t.id);
+			name = trap.name+" ";
+			description = trap.description;
+		}
+		else{
+			name = "Unknown ";
+			description = "None";
+		}
+		var row = (t.row) ? parseInt(t.row)+1 : "?"; 
+		var column = (t.column) ? letters[t.column] : "?";
+		location = "("+column+","+row+")";
+		hash.title = name+location;
+		hash.description = description;
+		return hash;
+	}
 	
 }]);
 
@@ -316,6 +333,19 @@ function getBlankMap(size){
 		map.push(mapRow);
 	}
 	return map;
+}
+
+function stringToTraps(trapString){
+	var t = JSON.parse(trapString);
+	var traps = [];
+	for(var i=0; i<t.length; i++){
+		var trap = {};
+		trap.id = t[i][0];
+		trap.column = t[i][1];
+		trap.row = t[i][2];
+		traps.push(trap);
+	}
+	return traps;
 }
 
 function getRandomDirection(){
