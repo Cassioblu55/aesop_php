@@ -10,6 +10,14 @@ function getID(){
 	return (id && isNumeric(id)) ? id : null;
 }
 
+function keyFromValue(hash, value){
+	for ( key in hash){
+		if(hash[key] == value){
+			return key;
+		}
+	}
+}
+
 function isNumeric(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -51,6 +59,19 @@ function displaySex(sex){
 	if(sex=="M"){return "Male";}
 	else if(sex=="F"){return "Female";}
 	return "Other";
+}
+
+function randomKeyFromHash(hash){
+	return randomFromArray(Object.keys(hash));
+}
+
+//Will take an array and return a value at a random interval
+function randomFromArray(array){
+	return array[Math.floor((Math.random() * array.length))];
+}
+
+function isEdit(){
+	return getID() != null;
 }
 
 

@@ -1,16 +1,86 @@
 var sizeHash = {"S": 6, "M": 8, "L":12};
+var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
+       		   "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 //Map object, has methods for interfacing with map of tiles
+
+app.controller("TrapDisplayController", ['$scope', "$controller", function($scope, $controller){
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	
+	
+	
+}]);
+
 var map = function(t){
 	var that = {};
 	var tiles = t;
+	var start = {};
 	var activeTiles =[];
 	var maxTiles = {"S": 20, "M": 40, "L": 80};
 
+	function setActiveTiles(){
+		for(var y=0; y<tiles.length; y++){
+			var row = tiles[y];
+			for(var x=0; x<row.length; x++){
+				if(row[x] != "x"){
+					var t = {};
+					t.x = x;
+					t.y = y;
+					activeTiles.push(t);
+				}
+			}
+		}
+	}
+	that.setActiveTiles = setActiveTiles;
 	//finds the map size based on the number of rows
 	function getSize(){
 		return (_.invert(sizeHash))[tiles[0].length];
 		} 
+	
+	function isStart(x, y){
+		return (x == start.x && y == start.y);
+	}
+	
+	function notStart(x,y){
+		return !isStart(x,y);
+	}
+	
+	function activeRows(column){
+		var array = [];
+		for(var i=0; i<activeTiles.length; i++){
+			var y = activeTiles[i].y; var x = activeTiles[i].x;
+			if(array.indexOf(y)== -1 && (!column || (column && column == x && notStart(x,y)))){
+				array.push(activeTiles[i].y);
+			}
+		}
+		array = sortAsc(array);
+		var a={};
+		for(var i=0; i<array.length; i++){
+			var r = array[i];
+			a[r] = (r+1)+"";
+		}
+		return a;
+	}
+	that.activeRows = activeRows;
+	
+	function activeColumns(row){
+		var array = [];
+		for(var i=0; i<activeTiles.length; i++){
+			var y = activeTiles[i].y; var x = activeTiles[i].x;
+			if(array.indexOf(x)== -1 && (!row || (row && row == y && notStart(x,y)))){
+				array.push(activeTiles[i].x);
+			}
+		}
+		array = sortAsc(array);
+		a = {};
+		//Convert the number values to letter values with they key being the number value
+		for(var i=0; i<array.length; i++){
+			var l = array[i];
+			a[l] = letters[l];
+		}
+		return a;
+	}
+	that.activeColumns = activeColumns;
 	
 	//will return true if the map has the specifed number active tiles based on size
 	function mapFull(){
@@ -18,6 +88,10 @@ var map = function(t){
 	}
 	that.mapFull = mapFull;
 
+	function getActiveTiles(){
+		return activeTiles;
+	}
+	that.getActiveTiles = getActiveTiles;
 	//Returns a random active tile
 	function getRandomActive(){
 		return activeTiles[getRandomNormal(activeTiles.length)];
@@ -69,6 +143,14 @@ var map = function(t){
 		return false;
 	}
 	that.set = set;
+	
+	function setStart(t){
+		if(vaildTile(t.x,t.y)){
+			set(t, "s")
+			start = t;
+		}
+	}
+	that.setStart = setStart;
 
 	//Will check to see if specifed tile already has a value
 	function active(t){
@@ -80,6 +162,26 @@ var map = function(t){
 	}
 	that.active = active;
 
+	function removeTraps(){
+		for(var y=0; y< tiles.length; y++){
+			for(var x=0; x<tiles.length; x++){
+				if(tiles[y][x]=="t"){
+					if(start.y == y && start.x==x){tiles[y][x]="s";}
+					else{tiles[y][x]="w";}
+					
+				}
+			}
+		}
+	}
+	that.removeTraps = removeTraps;
+	
+	function setTrap(x,y){
+		if(vaildTile(x,y) && (start.y != y || start.x != x)){
+			tiles[y][x] = "t";
+		}
+	}
+	that.setTrap = setTrap;
+	
 	//Will return the tile in the direction specified
 	//0 == down, 1 == up, 2 == left, 3 == right
 	//Will return null if tile doesn't exist
@@ -90,13 +192,35 @@ var map = function(t){
 		else{return get(s.x-1, s.y);}
 	}
 	that.move = move;
-	
 	return that;
 }
 
+function sortAsc(array){
+	array.sort(function(a, b) {
+		  return a - b;
+		});
+	return array;
+}
+
+function sortDsc(array){
+	array.sort(function(a, b) {
+		  return b - a;
+		});
+	return array;
+}
+
+var textOffSet ={"S": {font: "18px Arial", Yoffset: 16, Xoffset: 8, numXOff: 5, numYOff: 2},
+		 		 "M": {font: "18px Arial", Yoffset: 15, Xoffset: 4, numXOff: 5, numYOff: 2},
+		 		 "L": {font: "13px Arial", Yoffset: 10, Xoffset: 4, numXOff: 5, numYOff: 2}
+				};	
+
 function drawMap(tiles){
 		var c = document.getElementById("mapDisplay");
-		var tileSize = 16; var mapSize = tiles[0].length
+		var width = c.width;
+		var height = c.hight;
+		var mapSize = tiles[0].length
+		var tileSize = width/(mapSize+1); 
+		var textOptions = textOffSet[keyFromValue(sizeHash, mapSize)];
 		var colors = { 
 				"x" : "#FFFFFF", "s" : "#006400",
 				"t" : "#DC143C", "w" : "#A9A9A9"
@@ -104,11 +228,33 @@ function drawMap(tiles){
 		
 		var ctx = c.getContext("2d");
 		//Clear canvas
-		ctx.clearRect (0, 0, 384, 384);
+		ctx.font = textOptions.font;
+		ctx.fillStyle = "black";
+		ctx.clearRect(0, 0, c.width, c.height);
+		ctx.fillRect(0,0,tileSize,tileSize/2);
 		
-		var yStart=0;
+		//Draw coordiantes
+		var coordYStart= (tileSize/2)-textOptions.numYOff;
+		for(var y=0; y<mapSize+1; y++){
+			var xStart = (tileSize/2)-textOptions.Xoffset;
+			//draw x coords
+			if(y==0){
+				for(var x=0; x<mapSize+1; x++){
+					if(x != 0){
+						ctx.fillText(letters[x-1],xStart,textOptions.Yoffset);
+					}
+					xStart += tileSize;
+				}
+			}else{
+				ctx.fillText(y,((tileSize/2)-textOptions.numXOff), coordYStart);
+			}
+			coordYStart += tileSize/2;
+		}
+		
+		//Draw map
+		var yStart=tileSize/2;
 		for(var y=0; y<mapSize; y++){
-			var xStart = 0;
+			var xStart = tileSize;
 			for(var x=0; x<mapSize; x++){
 				ctx.fillStyle = colors[tiles[y][x]];
 				ctx.fillRect(xStart,yStart,tileSize, tileSize/2);
@@ -127,10 +273,11 @@ function generateMap(size){
 	var m = map(t);
 	//Sets map start
 	var tile = m.get(getRandomNormal(sizeHash[size]),0);
-	m.set(tile,"s");
+	m.setStart(tile);
+	
 	//Set first main branch
 	makeBranch(m, tile, 0);
-	//Will keep trying to make random branches untill map is full or 100 branches have been tried
+	//Will keep trying to make random branches untill map is full or 500 branches have been tried
 	var branchTryCount = 0;
 	var maxBranchTry = 500;
 	while(!m.mapFull() && branchTryCount < maxBranchTry){
@@ -138,9 +285,7 @@ function generateMap(size){
 		makeBranch(m, m.getRandomActive(), getRandomDirection());
 		branchTryCount++;
 	}	
-	//$scope.stringifyMap(m.getTiles());
 	return m;
-	//drawMap(m.getTiles());
 	
 }
 
