@@ -4,15 +4,74 @@ var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
 
 //Map object, has methods for interfacing with map of tiles
 
-app.controller("TrapShowController", ['$scope', "$controller", function($scope, $controller){
+app.controller("TrapController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	
+	$scope.getParsedMap = function(){return JSON.parse($scope.dungeon.map);}
+	$scope.stringifyMap = function(map){$scope.dungeon.map = JSON.stringify(map);}
+	
+	$scope.trapById = function(id){
+		if($scope.trapOptions){			
+			for(var i=0; i<$scope.trapOptions.length; i++){
+				if($scope.trapOptions[i].id == id){return $scope.trapOptions[i];}
+			}
+		}
+	}
+	
+	$scope.generateMap = function(){
+		$scope.map = generateMap($scope.dungeon.size);
+		$scope.stringifyMap($scope.map.getTiles());
+		$scope.traps = [];
+		$scope.trapNumber = 0;
+		
+	}
+	
+	//Will loop through list of traps and and add values to any that are missing
+	$scope.setRandomTraps = function(){
+		for(var i=0; i< $scope.traps.length; i++){
+			//If no trap id is selected
+			if(!$scope.traps[i].id){
+				$scope.traps[i].id = randomFromArray($scope.trapOptions).id;
+			}
+			//If there is no row or column
+			if(!$scope.traps[i].column && !$scope.traps[i].row){
+				//Get a random row
+				var rows = $scope.map.activeRows();
+				var row  = randomKeyFromHash(rows);
+				$scope.traps[i].row = row;
+				//Get ranodm column from vaild rows
+				var columns = $scope.map.activeColumns(row);
+				var column = randomKeyFromHash(columns);
+				$scope.traps[i].column = column;
+			}
+			//If there is a row without a column
+			else if(!$scope.traps[i].column && $scope.traps[i].row){
+				//Find a vaild column with the given row
+				var row = $scope.traps[i].row;
+				var columns = $scope.map.activeColumns(row);
+				var column = randomKeyFromHash(columns);
+				$scope.traps[i].column = column;
+			}
+			//If there a column and no row
+			else if($scope.traps[i].column && !$scope.traps[i].row){
+				//Find a vaild column with the given row
+				var column = $scope.traps[i].column
+				var rows = $scope.map.activeRows(column);
+				var row  = randomKeyFromHash(rows);
+				$scope.traps[i].row = row;
+			}
+		}
+	}
 	
 	$scope.getTrapDisplay = function(t){
 		var hash = {}; var name, location, description;
 		if(t.id){
 			var trap = $scope.trapById(t.id);
-			name = trap.name+" ";
-			description = trap.description;
+			if(trap){
+				name = trap.name+" ";
+				description = trap.description;
+				
+			}
 		}
 		else{
 			name = "Unknown ";
@@ -44,6 +103,10 @@ var map = function(t){
 					t.x = x;
 					t.y = y;
 					activeTiles.push(t);
+					if(row[x] =='s'){
+						start.x = x;
+						start.y = y;
+					}
 				}
 			}
 		}
@@ -336,16 +399,18 @@ function getBlankMap(size){
 }
 
 function stringToTraps(trapString){
-	var t = JSON.parse(trapString);
-	var traps = [];
-	for(var i=0; i<t.length; i++){
-		var trap = {};
-		trap.id = t[i][0];
-		trap.column = t[i][1];
-		trap.row = t[i][2];
-		traps.push(trap);
+	if(trapString != ''){
+		var t = JSON.parse(trapString);
+		var traps = [];
+		for(var i=0; i<t.length; i++){
+			var trap = {};
+			trap.id = t[i][0];
+			trap.column = t[i][1];
+			trap.row = t[i][2];
+			traps.push(trap);
+		}
+		return traps;		
 	}
-	return traps;
 }
 
 function getRandomDirection(){

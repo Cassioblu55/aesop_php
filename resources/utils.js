@@ -22,6 +22,10 @@ function isNumeric(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function randomRange(min, max){
+	return Math.floor(Math.random() * max) + min;
+}
+
 function cutString(string, n){
 	return string.substring(0, (string.length-n));
 }
@@ -74,6 +78,17 @@ function isEdit(){
 	return getID() != null;
 }
 
+function getTrapSting(traps){
+	var trapStrings = [];
+	for(var i=0; i< traps.length; i++){
+		var trapString = []; var trap = traps[i];
+		trapString.push(trap.id);
+		trapString.push(trap.column);
+		trapString.push(trap.row);
+		trapStrings.push(trapString);
+	}
+	return JSON.stringify(trapStrings);
+}
 
 app.controller("UtilsController", ['$scope', "$http", "$window", function($scope, $http, $window){	
 	

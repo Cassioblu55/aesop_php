@@ -26,36 +26,26 @@ include_once $serverPath.'resources/templates/head.php';
 </div>
 
 <script>
-app.controller("DungeonIndexController", ['$scope', "$http" , function($scope, $http){
+app.controller("DungeonIndexController", ['$scope', "$controller" , function($scope, $controller){
 
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	
+	
 	$scope.gridModel = {enableFiltering: true, enableColumnResizing: true, showColumnFooter: true , enableSorting: false, showGridFooter: true, enableRowHeaderSelection: false, rowHeight: 42};
 	$scope.gridModel.columnDefs = [	{field: 'show', enableColumnMenu: false, enableFiltering: false, width: 65, cellTemplate: '<a class="btn btn-info" role="button" ng-href="show.php?id={{row.entity.id}}">Show</a>'},
 	                           		{field: 'edit', enableColumnMenu: false, enableFiltering: false, width: 53, cellTemplate: '<a class="btn btn-primary" role="button" ng-href="edit.php?id={{row.entity.id}}">Edit</a>'},
 	                               	{field: 'name',  enableColumnMenu: false}, {field: 'purpose', enableColumnMenu: false}, {field: 'location', enableColumnMenu: false}, {field: 'creator', enableColumnMenu: false},
-	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67, cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteTrait(row.entity.id,row.entity.name);">Delete</button>'}
-	                               ];
+	                           		{field: 'delete', enableColumnMenu: false, enableFiltering: false, width: 67,  cellTemplate: '<button class="btn btn-danger" ng-click="grid.appScope.deleteById(row.entity.id,row.entity.title, grid.appScope.updateGrid);">Delete</button>'}
+	                           	];
 
 	
-	$scope.reloadGrid = function(){
-		$http.get('data.php?column=index').
-			then(function(response){
-				$scope.gridModel.data = response.data;
-				
-			});
+	$scope.setGridData = function(data){$scope.gridModel.data = data;}
+
+	$scope.updateGrid = function(){
+		$scope.setFromGet("data.php?column=index", $scope.setGridData);
 	}
 
-	$scope.deleteTrait =function(id,name){
-		if(window.confirm("Are you sure you want to delete "+name+"?")){
-			$http.post('delete.php?id='+id).
-				then(function(response){
-					$scope.reloadGrid();
-					}).then(function(response){
-						console.log(response);
-					});
-		}
-	}
-	
-	$scope.reloadGrid();
+	$scope.updateGrid();
 	
 }]);
 </script>

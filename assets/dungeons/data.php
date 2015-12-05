@@ -7,7 +7,7 @@ $traps_table = "traps";
 		echo json_encode(findById($table, $_GET['id']));	
 	}
 	else{
-		if($_GET['column']){
+		if(!empty($_GET['column'])){
 			$column = $_GET['column'];
 			if($column =="index"){
 				$columns = ['name','purpose','location', 'creator'];

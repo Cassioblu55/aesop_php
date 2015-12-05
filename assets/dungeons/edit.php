@@ -129,71 +129,15 @@ include_once $serverPath.'resources/templates/head.php'; ?>
 <script src="<?php echo $baseURL;?>resources/mapGenerator.js"></script>
 <script type="text/javascript">
 app.controller("DungeonAddEditController", ['$scope', "$controller", function($scope, $controller){
-	angular.extend(this, $controller('TrapShowController', {$scope: $scope}));
+	angular.extend(this, $controller('TrapController', {$scope: $scope}));
 	//Load in traps
+	
 	function loadTraps(traps){$scope.trapOptions = traps;}
 	$scope.setFromGet("data.php?column=traps",loadTraps);
+	
 	$scope.letters = letters;
-	$scope.getParsedMap = function(){return JSON.parse($scope.dungeon.map);}
-	$scope.stringifyMap = function(map){$scope.dungeon.map = JSON.stringify(map);}
 	$scope.saveOrUpdate = "Add";
 	$scope.addOrEdit = "Save"; 
-
-	$scope.trapById = function(id){
-		for(var i=0; i<$scope.trapOptions.length; i++){
-			if($scope.trapOptions[i].id == id){return $scope.trapOptions[i];}
-		}
-	}
-
-	
-	//Will loop through list of traps and and add values to any that are missing
-	$scope.setRandomTraps = function(){
-		for(var i=0; i< $scope.traps.length; i++){
-			//If no trap id is selected
-			if(!$scope.traps[i].id){
-				$scope.traps[i].id = randomFromArray($scope.trapOptions).id;
-			}
-			//If there is no row or column
-			if(!$scope.traps[i].column && !$scope.traps[i].row){
-				//Get a random row
-				var rows = $scope.map.activeRows();
-				var row  = randomKeyFromHash(rows);
-				$scope.traps[i].row = row;
-				//Get ranodm column from vaild rows
-				var columns = $scope.map.activeColumns(row);
-				var column = randomKeyFromHash(columns);
-				$scope.traps[i].column = column;
-			}
-			//If there is a row without a column
-			else if(!$scope.traps[i].column && $scope.traps[i].row){
-				//Find a vaild column with the given row
-				var row = $scope.traps[i].row;
-				var columns = $scope.map.activeColumns(row);
-				var column = randomKeyFromHash(columns);
-				$scope.traps[i].column = column;
-			}
-			//If there a column and no row
-			else if($scope.traps[i].column && !$scope.traps[i].row){
-				//Find a vaild column with the given row
-				var column = $scope.traps[i].column
-				var rows = $scope.map.activeRows(column);
-				var row  = randomKeyFromHash(rows);
-				$scope.traps[i].row = row;
-			}
-		}
-	}
-
-	function getTrapSting(traps){
-		var trapStrings = [];
-		for(var i=0; i< traps.length; i++){
-			var trapString = []; var trap = traps[i];
-			trapString.push(trap.id);
-			trapString.push(trap.column);
-			trapString.push(trap.row);
-			trapStrings.push(trapString);
-		}
-		return JSON.stringify(trapStrings);
-	}
 	
 	$scope.$watch('dungeon.size', function(val, oldVal){
 		//If map size is being changed generate a new map
@@ -204,6 +148,7 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 	
 	$scope.traps = [];
 	$scope.$watch('trapNumber', function(newVal,oldVal){
+		if(!$scope.traps){$scope.traps=[];}
 		if(newVal != $scope.traps.length){
 			while($scope.traps.length < newVal){
 				var trap = {};
@@ -233,14 +178,6 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 			$scope.dungeon.traps = getTrapSting(val);		
 		}
 	}, true);	
-	
-	$scope.generateMap = function(){
-		$scope.map = generateMap($scope.dungeon.size);
-		$scope.stringifyMap($scope.map.getTiles());
-		$scope.traps = [];
-		$scope.trapNumber = 0;
-		
-	}
 
 	$scope.$watch('dungeon.map', function(val){
 		if(val){
@@ -253,7 +190,7 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 		$scope.map = map(JSON.parse(dungeon.map));
 		$scope.map.setActiveTiles();
 		$scope.traps = stringToTraps(dungeon.traps);
-		$scope.trapNumber = $scope.traps.length;
+		$scope.trapNumber = ($scope.traps) ? $scope.traps.length : 0;
 		
 	}
 
