@@ -25,6 +25,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/traps/">Traps</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/">Villains</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/">Riddles</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/">Urban Encounters</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest Encounters</a></li>
 					</ul></li>
@@ -46,6 +47,7 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Enounters<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/getRandom.php">Riddles</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/getRandom.php">Urban</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/getRandom.php">Forest</a></li>
 					</ul></li>
@@ -65,6 +67,7 @@
 						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/traps/edit.php">Traps</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/edit.php">Riddles</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/edit.php">Urban Encounters</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/edit.php">Forest Encounters</a></li>
 					</ul></li>

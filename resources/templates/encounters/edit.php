@@ -16,7 +16,7 @@
 ?>
 
 <div ng-controller="encounterEditController">
-	<form method="post">
+	<form action="edit.php<?php if(!empty($_GET['id'])){ echo "?id=".$_GET['id'];}?>" method="post">
 		<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
