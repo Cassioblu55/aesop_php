@@ -18,6 +18,14 @@ function keyFromValue(hash, value){
 	}
 }
 
+function convertValuesToNumbers(hash, list){
+	for(var i=0; i<list.length; i++){
+		var value = list[i];
+		hash[value] = Number(hash[value]);
+	}
+	return hash;
+}
+
 function isNumeric(n) {
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -28,6 +36,10 @@ function randomRange(min, max){
 
 function cutString(string, n){
 	return string.substring(0, (string.length-n));
+}
+
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 //Will run function if one is passed
@@ -119,6 +131,10 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 		}, function errorCallback(response){
 			run(runOnFailed);
 		});
+	}
+	
+	$scope.capitalizeFirstLetter = function(s){
+		return s.capitalizeFirstLetter();
 	}
 	
 	$scope.setById = function(setFunct){

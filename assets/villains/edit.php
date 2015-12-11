@@ -159,10 +159,10 @@
 app.controller("VillianEditController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 
+	var valueToNumberList = ['age','weight'];
+	
 	$scope.setVillain = function(villain){
-		$scope.villian = villain;
-		$scope.villian.age = Number($scope.villian.age);
-		$scope.villian.weight = Number($scope.villian.weight);
+		$scope.villian = convertValuesToNumbers(villain, valueToNumberList);
 		$scope.villian.feet = getFeet(Number($scope.villian.height));
 		$scope.villian.inches = getInches(Number($scope.villian.height));
 		$scope.addOrEdit = "Edit";
