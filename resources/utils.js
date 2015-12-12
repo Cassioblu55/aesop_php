@@ -10,6 +10,20 @@ function getID(){
 	return (id && isNumeric(id)) ? id : null;
 }
 
+function clone(h){
+	console.log("ping");
+	var hash = {};
+	if(h){
+		var keys= Object.keys(h);
+		for(var i=0; i<keys.length; i++){
+			var key = keys[i];
+			hash[key] = h[key];
+		}
+		console.log(h==hash);
+		}
+	return hash;
+	
+}
 function keyFromValue(hash, value){
 	for ( key in hash){
 		if(hash[key] == value){
@@ -24,6 +38,13 @@ function convertValuesToNumbers(hash, list){
 		hash[value] = Number(hash[value]);
 	}
 	return hash;
+}
+
+function convertListHashValuesToNumbers(array, list){
+	for(var i=0; i<array.length; i++){
+		array[i] = convertValuesToNumbers(array[i], list);
+	}
+	return array;
 }
 
 function isNumeric(n) {

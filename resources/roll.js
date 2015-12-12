@@ -44,15 +44,19 @@ function getDiceValues(r){
 }
 
 function getDiceDisplay(dice){
-		return (dice.amount || 0)+"d"+(dice.kind || 0)+"+"+(dice.modifer || 0);
+		return (dice) ? (dice.amount || 0)+"d"+(dice.kind || 0)+"+"+(dice.modifer || 0) : '';
 }
 
 function getDiceMin(dice){
-	return (dice.amount || 0) + (dice.modifer || 0);
+	return (dice) ? (dice.amount || 0) + (dice.modifer || 0)  : '';
 }
 
 function getDiceMax(dice){
-	return ((dice.amount || 0)*(dice.kind || 0)) + (dice.modifer || 0);
+	return (dice) ? ((dice.amount || 0)*(dice.kind || 0)) + (dice.modifer || 0)  : '';
+}
+
+function getDiceAverage(dice){
+	return (dice) ? Math.floor((dice.amount || 0)*(((dice.kind || 0)+1)/2))+(dice.modifer || 0)  : '';
 }
 
 //takes a dice object and will return the number value of the roll
@@ -88,6 +92,22 @@ app.controller("rollDisplayController", ['$scope', "$controller", function($scop
 				 $scope.rollValues.splice(i, 1);
 				}
 		}
+	}
+	
+	$scope.getDiceMin = function(dice){
+		return getDiceMin(dice);
+	}
+	
+	$scope.getDiceMax = function(dice){
+		return getDiceMax(dice);
+	}
+	
+	$scope.getDiceDisplay = function(dice){
+		return getDiceDisplay(dice);
+	}
+	
+	$scope.getDiceAverage = function(dice){
+		return getDiceAverage(dice);
 	}
 	
 }]);

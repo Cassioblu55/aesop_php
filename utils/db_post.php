@@ -30,6 +30,7 @@ function makeBaseUpdate($table, $data){
 
 function insertAndReturnId($table, $data){
 	$insert = getInsertStatement($table,$data);
+	echo $insert;
 	return runInsertWithIdReturn($insert);
 }
 
@@ -45,7 +46,7 @@ function getInsertStatement($table,$data){
 	$values = " (";
 	foreach ( $data as $columnName => $value ) {
 		$columns .= $columnName . ", ";
-		$values .= "" . getValueString($value) . ", ";
+		$values .= "" . getValueString(str_replace("'","\'",$value)) . ", ";
 	}
 	$columns = cutString($columns, 2).")";
 	$values = cutString($values, 2).")";
@@ -61,7 +62,7 @@ function insert($table, $data) {
 function runInsert($insert) {
 	$db = connect ();
 	try {
-		$db->query ( $insert );
+		$db->query ($insert );
 	} catch ( Execption $e ) {
 		echo "Could not complete request: " . $insert;
 		echo $e;
@@ -78,7 +79,7 @@ function createDataFromPost($table){
 	$columns = getColumnNames($table);
 	$data = [];
 	foreach ($columns as $column){
-		$data[$column] = $_POST[$column];
+		$data[$column] =$_POST[$column];
 	}
 	return $data;
 }
@@ -99,8 +100,8 @@ function deleteFrom($table, $id){
 
 function runInsertWithDBReturn($insert){
 	$db = connect();
-	try {
-		$db->query ( $insert );
+	try {		
+		$db->query ($insert );
 		return $db;
 	} catch ( Execption $e ) {
 		echo "Could not complete request: ".$insert;
