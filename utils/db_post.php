@@ -23,14 +23,14 @@ function updateWithConstratints($table, $data, $constraints){
 function makeBaseUpdate($table, $data){
 	$update = "UPDATE " . getTableQuote($table)." SET ";
 	foreach ( $data as $columnName => $value ) {
-		$update .= $columnName."='".$value."', ";
+		$update .= $columnName."=".getValueString(str_replace("'","\'",$value)) . ", ";
 	}
 	return cutString($update, 2);
 }
 
 function insertAndReturnId($table, $data){
 	$insert = getInsertStatement($table,$data);
-	echo $insert;
+	//echo $insert;
 	return runInsertWithIdReturn($insert);
 }
 
@@ -60,6 +60,7 @@ function insert($table, $data) {
 }
 
 function runInsert($insert) {
+	echo $insert;
 	$db = connect ();
 	try {
 		$db->query ($insert );
@@ -99,6 +100,7 @@ function deleteFrom($table, $id){
 }
 
 function runInsertWithDBReturn($insert){
+	//echo $insert;
 	$db = connect();
 	try {		
 		$db->query ($insert );
