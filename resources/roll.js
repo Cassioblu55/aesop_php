@@ -63,9 +63,9 @@ function getDiceAverage(dice){
 function rollDice(dice){
 	var total = 0;
 	for(var i=0; i<dice.amount; i++){
-		total += Math.floor((Math.random() * dice.kind) + (dice.modifer+1));
+		total += Math.floor((Math.random() * dice.kind)) +1; 
 	}
-	return total;
+	return total+ (dice.modifer);
 }
 
 app.controller("rollDisplayController", ['$scope', "$controller", function($scope, $controller){
@@ -92,6 +92,10 @@ app.controller("rollDisplayController", ['$scope', "$controller", function($scop
 				 $scope.rollValues.splice(i, 1);
 				}
 		}
+	}
+	
+	$scope.getRoll = function(dice){
+		return (dice) ? rollDice(dice) : null;
 	}
 	
 	$scope.getDiceMin = function(dice){

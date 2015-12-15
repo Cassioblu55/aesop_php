@@ -11,7 +11,6 @@ function getID(){
 }
 
 function clone(h){
-	console.log("ping");
 	var hash = {};
 	if(h){
 		var keys= Object.keys(h);
@@ -24,6 +23,12 @@ function clone(h){
 	return hash;
 	
 }
+
+function getFractionString(float){
+	var f = new Fraction(Number(float));
+	return f.numerator + '/' + f.denominator;
+}
+
 function keyFromValue(hash, value){
 	for ( key in hash){
 		if(hash[key] == value){
@@ -145,6 +150,12 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 		$window.location.href ="index.php";
 	}
 	
+	$scope.getModifer = function(stat){
+		if(!stat){return "";}
+		var modifer = (stat) ? Math.floor((stat-10)/2): 0;
+		return (modifer >0) ? "+"+modifer : modifer;
+	}
+	
 	$scope.setFromGet = function(get, setFunct, runOnFailed){
 		runOnFailed = runOnFailed || failedHTTPLog;
 		$http.get(get).then(function(response){
@@ -164,6 +175,41 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 			var get = 'data.php?id='+id;
 			$scope.setFromGet(get, setFunct);
 		}
+	}
+	
+	$scope.arrayToString = function(array){
+		var string = "";
+		if(array){
+			for(var i=0; i<array.length; i++){
+				string += array[i]+", ";
+			}
+			return cutString(string, 2);
+		}
+		return string;
+	}
+	
+	$scope.hashArrayValueToString = function(hashList, value){
+		var string = "";
+		if(hashList && value){
+			for(var i=0; i<hashList.length; i++){
+				var hash = hashList[i];
+				string += hash[value]+", ";
+			}
+			return cutString(string, 2);
+		}
+		return string;
+	}
+	
+	$scope.columnSizeByHash = function(hash, size, max){
+		var length = Object.keys(hash).length;
+		var c = "col-"+size+"-";
+		return (length <= 12 && length >0 && length <=max) ? 'col-'+size+'-'+(Math.floor(12/length)) : '';
+	}
+	
+	$scope.columnSizeByArray = function(array, size, max){
+		var length = array.length;
+		var c = "col-"+size+"-";
+		return (length <= 12 && length >0 && length <=max) ? 'col-'+size+'-'+(Math.floor(12/length)) : '';
 	}
 	
 }]);

@@ -414,12 +414,6 @@ app.controller("MonsterEditController", ['$scope', "$controller", function($scop
 	$scope.setById($scope.setMonster);
 	$scope.saveOrUpdate = "Save";
 	$scope.addOrEdit = "Add";
-
-	$scope.getModifer = function(stat){
-		if(!stat){return "";}
-		var modifer = (stat) ? Math.floor((stat-10)/2): 0;
-		return (modifer >0) ? "+"+modifer : modifer;
-	}
 	
 	$scope.$watch("monster.stats", function(val){
 		$scope.stats_text = JSON.stringify(val);
