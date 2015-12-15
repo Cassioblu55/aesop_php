@@ -17,7 +17,7 @@
 	
 	}
 	include_once $serverPath.'resources/templates/head.php';
-	?>
+?>
 	
 <div ng-controller="MonsterEditController">
 	<form action="edit.php<?php if(!empty($_GET['id'])){ echo "?id=".$_GET['id'];}?>" method="post">
