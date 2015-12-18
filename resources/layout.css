@@ -27,6 +27,11 @@ body {
 	height: 192px;
 }
 
+.showDisplay{
+	white-space: pre; 
+	word-break:break-word;
+}
+
 .dungeon_map .medium{
 	/* outline: 1px solid black; */
 	width: 256px;

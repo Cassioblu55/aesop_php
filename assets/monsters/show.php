@@ -106,7 +106,7 @@ include_once $serverPath.'resources/templates/head.php';
 						<div class="panel-body">
 							<div ng-repeat="ability in abilities">
 								<div><b>{{ability.name}}</b></div>
-								<div>{{ability.description}}</div>
+								<div class="showDisplay">{{ability.description}}</div>
 							</div>
 						</div>
 					</div>
@@ -120,7 +120,7 @@ include_once $serverPath.'resources/templates/head.php';
 						<div class="panel-body">
 							<div ng-repeat="action in actions">
 								<div><b>{{action.name}}</b></div>
-								<div>{{action.description}}</div>
+								<div  class="showDisplay">{{action.description}}</div>
 							</div>
 						</div>
 					</div>
@@ -136,9 +136,7 @@ include_once $serverPath.'resources/templates/head.php';
 					<h3 class="panel-title">Description</h3>
 				</div>
 				<div class="panel-body">
-					<div>
-					 	{{monster.description}}
-					</div>
+					<div class="showDisplay">{{monster.description}}</div>
 				</div>
 				
 			</div>
@@ -163,18 +161,18 @@ app.controller('MonsterShow', ['$scope', "$controller", function($scope, $contro
 	$scope.setMonster = function(monster){
 		$scope.monster = monster;
 		$scope.monster.stats = (monster.stats) ? JSON.parse(convertValuesToNumbers($scope.monster.stats, Object.keys($scope.monster.stats))) : {};
-		$scope.skills = (monster.skills) ? convertListHashValuesToNumbers(JSON.parse($scope.monster.skills), ['modifer']) : [];
+		$scope.skills = (monster.skills) ? convertListHashValuesToNumbers($scope.monster.skills.parseEscape(), ['modifer']) : [];
 		var statsKeys = Object.keys($scope.monster.stats);
 		for(var i=0; i<statsKeys.length; i++){
 			var modifer = $scope.getModifer($scope.monster.stats[statsKeys[i]]);
 			$scope.monster.stats[statsKeys[i]] = $scope.monster.stats[statsKeys[i]]+ " ("+ modifer+")";
 		}
-		$scope.languages = (monster.languages) ? JSON.parse($scope.monster.languages) : [];
-		$scope.senses = (monster.senses) ? JSON.parse($scope.monster.senses) : [];
-		$scope.abilities = (monster.abilities) ? JSON.parse($scope.monster.abilities) : [];
-		$scope.actions = (monster.actions) ? JSON.parse($scope.monster.actions) : [];
+		$scope.languages = (monster.languages) ? $scope.monster.languages.parseEscape() : [];
+		$scope.senses = (monster.senses) ? $scope.monster.senses.parseEscape() : [];
+		$scope.abilities = (monster.abilities) ? $scope.monster.abilities.parseEscape() : [];
+		$scope.actions = (monster.actions) ? $scope.monster.actions.parseEscape() : [];
 		$scope.challenge = getFractionString(monster.challenge);
-		$scope.found_places = (monster.found) ? JSON.parse($scope.monster.found) : [];
+		$scope.found_places = (monster.found) ? $scope.monster.found.parseEscape() : [];
 		$scope.monster.hit_points = (monster.hit_points) ? getDiceValue(monster.hit_points) : {};
 		$scope.hit_points = rollDice($scope.monster.hit_points);
 		$scope.edit = "edit.php?id="+getID();

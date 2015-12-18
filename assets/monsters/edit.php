@@ -273,7 +273,7 @@
 					</div>
 					<!-- description -->
 					<label for='description'>Description</label>
-					<textarea id='description' class="form-control" name='description'>{{monster.description}}</textarea>
+					<textarea id='description' class="form-control" placeholder="Description" name='description'>{{monster.description}}</textarea>
 					
 					
 				</div>
@@ -295,9 +295,9 @@
 		      </div>
 		      <div class="modal-body">
 		        <label for="ability_name">Name</label>
-		        <input id="ability_name" type="text" class="form-control" ng-model="ability_modal.name">
+		        <input id="ability_name" type="text" class="form-control" placeholder="Name" ng-model="ability_modal.name">
 		        <label for="ability_description">Description</label>
-		        <textarea id="ability_description" class="form-control" ng-model="ability_modal.description"></textarea>
+		        <textarea id="ability_description" rows="10" placeholder="Description" class="form-control" ng-model="ability_modal.description"></textarea>
 		        
 		      </div>
 		      <div class="modal-footer">
@@ -319,9 +319,9 @@
 		      </div>
 		      <div class="modal-body">
 		        <label for="action_name">Name</label>
-		        <input id="action_name" type="text" class="form-control" ng-model="action_modal.name">
+		        <input id="action_name" type="text" class="form-control" placeholder="Name" ng-model="action_modal.name">
 		        <label for="action_description">Description</label>
-		        <textarea id="action_description" class="form-control" ng-model="action_modal.description"></textarea>
+		        <textarea id="action_description" rows="10" placeholder="Description" class="form-control" ng-model="action_modal.description"></textarea>
 		        
 		      </div>
 		      <div class="modal-footer">
@@ -399,12 +399,12 @@ app.controller("MonsterEditController", ['$scope', "$controller", function($scop
 	$scope.setMonster = function(monster){
 		$scope.monster = convertValuesToNumbers(monster, valueToNumberList);
 		$scope.monster.stats = (monster.stats) ? JSON.parse(convertValuesToNumbers($scope.monster.stats, $scope.statsValues)) : {};
-		$scope.skills = (monster.skills) ? convertListHashValuesToNumbers(JSON.parse($scope.monster.skills), ['modifer']) : [];
-		$scope.languages = (monster.languages) ? JSON.parse($scope.monster.languages) : [];
-		$scope.senses = (monster.senses) ? JSON.parse($scope.monster.senses) : [];
-		$scope.abilities = (monster.abilities) ? JSON.parse($scope.monster.abilities) : [];
-		$scope.actions = (monster.actions) ? JSON.parse($scope.monster.actions) : [];
-		$scope.found_places = (monster.found) ? JSON.parse($scope.monster.found) : [];
+		$scope.skills = (monster.skills) ? convertListHashValuesToNumbers($scope.monster.skills.parseEscape(), ['modifer']) : [];
+		$scope.languages = (monster.languages) ? $scope.monster.languages.parseEscape() : [];
+		$scope.senses = (monster.senses) ? $scope.monster.senses.parseEscape() : [];
+		$scope.abilities = (monster.abilities) ? $scope.monster.abilities.parseEscape() : [];
+		$scope.actions = (monster.actions) ? $scope.monster.actions.parseEscape() : [];
+		$scope.found_places = (monster.found) ? $scope.monster.found.parseEscape() : [];
 		$scope.monster.hit_points = (monster.hit_points) ? getDiceValue(monster.hit_points) : {};
 		
 		$scope.addOrEdit = "Edit";

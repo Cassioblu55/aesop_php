@@ -10,6 +10,25 @@ function getID(){
 	return (id && isNumeric(id)) ? id : null;
 }
 
+String.prototype.escapeSpecialChars = function() {
+    return this.replace(new RegExp( "\n", "g" ), "\\n")
+    		   .replace(new RegExp("\'", "g"), "\\'")
+    		   .replace(new RegExp("\&", "g"), "\\&")
+    		   .replace(new RegExp("\r", "g"), "\\r")
+    		   .replace(new RegExp("\t", "g"), "\\t")
+    		   .replace(new RegExp("\b", "g"), "\\b")
+    		   .replace(new RegExp("\f", "g"), "\\f");
+};
+
+
+String.prototype.parseEscape = function(){
+	return JSON.parse(this.escapeSpecialChars());
+}
+
+String.prototype.display = function(){
+	 return this.replace(new RegExp( "\n", "g" ), "<br />")
+}
+
 function clone(h){
 	var hash = {};
 	if(h){
@@ -18,15 +37,14 @@ function clone(h){
 			var key = keys[i];
 			hash[key] = h[key];
 		}
-		console.log(h==hash);
-		}
+	}
 	return hash;
 	
 }
 
 function getFractionString(float){
 	var f = new Fraction(Number(float));
-	return f.numerator + '/' + f.denominator;
+	return (f.denominator > 1) ? f.numerator + '/' + f.denominator : f.numerator;
 }
 
 function keyFromValue(hash, value){

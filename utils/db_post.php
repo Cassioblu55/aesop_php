@@ -23,7 +23,7 @@ function updateWithConstratints($table, $data, $constraints){
 function makeBaseUpdate($table, $data){
 	$update = "UPDATE " . getTableQuote($table)." SET ";
 	foreach ( $data as $columnName => $value ) {
-		$update .= $columnName."=".getValueString(str_replace("'","\'",$value)) . ", ";
+		$update .= $columnName."=".getCleanValue($value) . ", ";
 	}
 	return cutString($update, 2);
 }
@@ -46,7 +46,7 @@ function getInsertStatement($table,$data){
 	$values = " (";
 	foreach ( $data as $columnName => $value ) {
 		$columns .= $columnName . ", ";
-		$values .= "" . getValueString(str_replace("'","\'",$value)) . ", ";
+		$values .= "".getCleanValue($value) . ", ";
 	}
 	$columns = cutString($columns, 2).")";
 	$values = cutString($values, 2).")";

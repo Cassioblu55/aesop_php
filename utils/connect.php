@@ -20,6 +20,12 @@ function connectSpecific($dbHost, $dbUser, $dbPassword, $dbName) {
 
 function cutString($string, $n){return substr ( $string, 0, strlen ( $string ) - $n );}
 
+function getCleanValue($value){
+	$cleanValue = getValueString(str_replace("'","\'",$value));
+	return $cleanValue;
+	
+}
+
 //will take array of string and return comma seperated string of all values
 function arrayToString($array){
 	$string = "";
