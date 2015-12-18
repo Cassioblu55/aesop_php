@@ -12,6 +12,7 @@ function getID(){
 
 String.prototype.escapeSpecialChars = function() {
     return this.replace(new RegExp( "\n", "g" ), "\\n")
+    			replace(new RegExp( "'", "g" ), "\\'")
     		   .replace(new RegExp("\'", "g"), "\\'")
     		   .replace(new RegExp("\&", "g"), "\\&")
     		   .replace(new RegExp("\r", "g"), "\\r")
