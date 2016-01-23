@@ -1,6 +1,6 @@
 <?php
 include_once '../../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath . 'utils/connect.php';
 
 $added = false;
 if (! empty ( $_POST )) {
@@ -54,7 +54,7 @@ if (! empty ( $_POST )) {
 		$db->close ();
 	}
 }
-include_once $serverPath.'resources/templates/head.php'; 
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 
 <form

@@ -1,10 +1,8 @@
 <?php
-
 include_once '../../config/config.php';
-include_once $serverPath.'utils/db_get.php';
-require_once $serverPath.'utils/generator/utils.php';
-require_once $serverPath.'utils/generator/character.php';
-
+include_once $serverPath . 'utils/db_get.php';
+require_once $serverPath . 'utils/generator/utils.php';
+require_once $serverPath . 'utils/generator/character.php';
 function createSettelment() {
 	$trait_table = "settlement_traits";
 	$table = "settlement";

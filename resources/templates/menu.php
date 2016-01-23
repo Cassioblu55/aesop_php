@@ -27,8 +27,11 @@
 						<li><a href="<?php echo $baseURL;?>assets/monsters/">Monsters</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/villains/">Villains</a></li>
 						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/">Riddles</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/">Urban Encounters</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest Encounters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/">Urban
+								Encounters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest
+								Encounters</a></li>
+						<li><a href="<?php echo $baseURL;?>assets/spells/">Spells</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav">
@@ -49,45 +52,55 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Enounters<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/getRandom.php">Riddles</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/getRandom.php">Urban</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/getRandom.php">Forest</a></li>
+						<li><a
+							href="<?php echo $baseURL;?>assets/encounters/riddles/getRandom.php">Riddles</a></li>
+						<li><a
+							href="<?php echo $baseURL;?>assets/encounters/urban/getRandom.php">Urban</a></li>
+						<li><a
+							href="<?php echo $baseURL;?>assets/encounters/forest/getRandom.php">Forest</a></li>
 					</ul></li>
 			</ul>
-			
+
 			<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">Custom Create<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo $baseURL;?>assets/characters/edit.php">Characters</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traps/edit.php">Traps</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/monsters/edit.php">Monsters</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/edit.php">Riddles</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/urban/edit.php">Urban Encounters</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/encounters/forest/edit.php">Forest Encounters</a></li>
-					</ul></li>
-			</ul>
-			
-			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">Traits<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo $baseURL;?>assets/traits/characters/">Characters</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traits/settlements/">Settlements</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traits/taverns/">Taverns</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traits/dungeons/">Dungeon</a></li>
-						<li><a href="<?php echo $baseURL;?>assets/traits/villains/">Villains</a></li>
-					</ul></li>
-			</ul>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Custom Create<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo $baseURL;?>assets/characters/edit.php">Characters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traps/edit.php">Traps</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/monsters/edit.php">Monsters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/villains/edit.php">Villains</a></li>
+							<li><a
+								href="<?php echo $baseURL;?>assets/encounters/riddles/edit.php">Riddles</a></li>
+							<li><a
+								href="<?php echo $baseURL;?>assets/encounters/urban/edit.php">Urban
+									Encounters</a></li>
+							<li><a
+								href="<?php echo $baseURL;?>assets/encounters/forest/edit.php">Forest
+									Encounters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/spells/edit.php">Spells</a></li>
+						</ul></li>
+				</ul>
+
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Traits<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo $baseURL;?>assets/traits/characters/">Characters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traits/settlements/">Settlements</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traits/taverns/">Taverns</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traits/dungeons/">Dungeon</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traits/villains/">Villains</a></li>
+						</ul></li>
+				</ul>
+			</div>
 		</div>
-	</div>
+
 </nav>

@@ -5,5 +5,5 @@ require_once $serverPath . 'utils/generator/settlement.php';
 
 createSettelment ();
 $table = "settlement";
-header ( "Location: ".$baseURL."assets/settlements/show.php?id=" . insertFromPostWithIdReturn( $table ) );
+header ( "Location: " . $baseURL . "assets/settlements/show.php?id=" . insertFromPostWithIdReturn ( $table ) );
 ?>

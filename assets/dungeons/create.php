@@ -1,17 +1,16 @@
-<?php 
+<?php
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_post.php';
 require_once $serverPath . 'utils/generator/dungeon.php';
-if(!empty($_GET['map']) && !empty($_GET['size']) && !empty($_GET['traps'])){
-		createDungeon();
-		$_POST['map'] = $_GET['map'];
-		$_POST['size'] = $_GET['size'];
-		$_POST['traps'] = $_GET['traps'];
-		$table = "dungeon";
-		header("Location: ".$baseURL."assets/dungeons/show.php?id=".insertFromPostWithIdReturn($table));
-		
-	}
-	
+if (! empty ( $_GET ['map'] ) && ! empty ( $_GET ['size'] ) && ! empty ( $_GET ['traps'] )) {
+	createDungeon ();
+	$_POST ['map'] = $_GET ['map'];
+	$_POST ['size'] = $_GET ['size'];
+	$_POST ['traps'] = $_GET ['traps'];
+	$table = "dungeon";
+	header ( "Location: " . $baseURL . "assets/dungeons/show.php?id=" . insertFromPostWithIdReturn ( $table ) );
+}
+
 ?>
 <!-- Super weird and aweful but create works-->
 

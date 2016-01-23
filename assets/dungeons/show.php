@@ -25,19 +25,19 @@ include_once $serverPath . 'resources/templates/head.php';
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-6">
-					<h4>Purpose</h4>
-					<div>{{dungeon.purpose}}</div>
-					<h4>History</h4>
-					<div>{{dungeon.history}}</div>
-					<h4>Location</h4>
-					<div>{{dungeon.location}}</div>
-					<h4>Creator</h4>
-					<div>{{dungeon.creator}}</div>
-					<h4 ng-show='traps.length >0'>Traps</h4>
-					<div ng-repeat="trap in traps">
-						<label>{{getTrapDisplay(trap).title}}</label>
-						<p>{{getTrapDisplay(trap).description}}</p>
-					</div>
+						<h4>Purpose</h4>
+						<div>{{dungeon.purpose}}</div>
+						<h4>History</h4>
+						<div>{{dungeon.history}}</div>
+						<h4>Location</h4>
+						<div>{{dungeon.location}}</div>
+						<h4>Creator</h4>
+						<div>{{dungeon.creator}}</div>
+						<h4 ng-show='traps.length >0'>Traps</h4>
+						<div ng-repeat="trap in traps">
+							<label>{{getTrapDisplay(trap).title}}</label>
+							<p>{{getTrapDisplay(trap).description}}</p>
+						</div>
 					</div>
 					<div class="col-md-6">
 						<h4>Map</h4>
@@ -52,10 +52,12 @@ include_once $serverPath . 'resources/templates/head.php';
 				</div>
 			</div>
 			<div class="panel-footer">
-				<a ng-href="index.php" class="btn btn-info">Show All</a> 
-				<a ng-href="edit.php?id={{dungeon.id}}" class="btn btn-primary">Edit</a>
-				<button ng-click="deleteById(dungeon.id,dungeon.name, redirectToIndex)" class="btn btn-danger">Delete</button>
-						</div>
+				<a ng-href="index.php" class="btn btn-info">Show All</a> <a
+					ng-href="edit.php?id={{dungeon.id}}" class="btn btn-primary">Edit</a>
+				<button
+					ng-click="deleteById(dungeon.id,dungeon.name, redirectToIndex)"
+					class="btn btn-danger">Delete</button>
+			</div>
 		</div>
 	</div>
 	<div id="dungeon" style="display: none;"><?php echo $dungeon?></div>

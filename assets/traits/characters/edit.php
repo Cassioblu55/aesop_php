@@ -1,28 +1,25 @@
 <?php
 include_once '../../../config/config.php';
-include_once $serverPath.'utils/connect.php';
+include_once $serverPath . 'utils/connect.php';
 
 $table = "character_traits";
 $added = false;
 if (! empty ( $_POST )) {
 	
-	validateRequired($table);
+	validateRequired ( $table );
 	
 	if (empty ( $_GET ['id'] )) {
-		insert($table);
-	} 
-	else {
-		update($table);
-		//header ( "Location: index.php" );
-		//die ( "Redirecting to index.php" );
+		insert ( $table );
+	} else {
+		update ( $table );
+		// header ( "Location: index.php" );
+		// die ( "Redirecting to index.php" );
 	}
-
 } else {
 	if (empty ( $_GET ['id'] )) {
 		$trait = '';
 		$type = '';
-	} 
-	else {
+	} else {
 		$db = connect ();
 		$query = "SELECT * FROM character_traits WHERE id='" . $_GET ['id'] . "';";
 		try {
@@ -39,7 +36,7 @@ if (! empty ( $_POST )) {
 		$db->close ();
 	}
 }
-include_once $serverPath.'resources/templates/head.php'; 
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 
 <form

@@ -10,6 +10,21 @@ function getID(){
 	return (id && isNumeric(id)) ? id : null;
 }
 
+function listByProperty(array, property, distinct){
+	var list = [];
+	angular.forEach(array, function(row){
+		if(distinct){
+			if(list.indexOf(row[property]) == -1){list.push(row[property]);}
+		}
+		else{
+			list.push(row[property]);
+		}
+		
+	});
+	return list;
+	
+}
+
 String.prototype.escapeSpecialChars = function() {
     return this.replace(new RegExp( "\n", "g" ), "\\n")
     			replace(new RegExp( "'", "g" ), "\\'")

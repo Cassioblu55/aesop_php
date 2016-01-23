@@ -7,4 +7,3 @@
 <script> 	
 var baseURL = "<?php echo $baseURL;?>";
 </script>
-

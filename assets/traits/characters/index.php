@@ -1,7 +1,7 @@
 
-<?php 
+<?php
 include_once '../../../config/config.php';
-include_once $serverPath.'resources/templates/head.php'; 
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="CharacterTraitIndexController">
 

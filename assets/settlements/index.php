@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'resources/templates/head.php'; 
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="SettelmentIndexController">
 	<div class="container-fluid">
@@ -9,15 +9,13 @@ include_once $serverPath.'resources/templates/head.php';
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
 						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Settelments</h4>
-						<a href="edit.php" class ="btn btn-primary pull-right">Add</a>
+						<a href="edit.php" class="btn btn-primary pull-right">Add</a>
 					</div>
 					<div class="panel-body">
 						<div ui-grid="gridModel" external-scopes="$scope"
 							style="height: 400px;"></div>
 					</div>
-					<div class="panel-footer">
-						
-					</div>
+					<div class="panel-footer"></div>
 				</div>
 			</div>
 		</div>

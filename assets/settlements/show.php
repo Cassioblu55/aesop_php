@@ -3,10 +3,11 @@ include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
-	$table = "settlement"; $ruler_table = "character";
-	$s = findById ( $table, $_GET ['id']);
+	$table = "settlement";
+	$ruler_table = "character";
+	$s = findById ( $table, $_GET ['id'] );
 	$settlement = json_encode ( $s );
-	$ruler = json_encode( findById($ruler_table,$s['ruler_id']));
+	$ruler = json_encode ( findById ( $ruler_table, $s ['ruler_id'] ) );
 } else {
 	header ( "Location: index.php" );
 	
@@ -15,7 +16,7 @@ if (! empty ( $_GET ['id'] )) {
 	die ( "Redirecting to index" );
 }
 
-include_once $serverPath.'resources/templates/head.php';
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="SettlementController">
 	<div class="container-fluid">
@@ -48,7 +49,11 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Ruler Status</h4>
-							<div><a ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{ruler.id}}">{{ruler.name}}</a>: {{settlement.ruler_status}}</div>
+							<div>
+								<a
+									ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{ruler.id}}">{{ruler.name}}</a>:
+								{{settlement.ruler_status}}
+							</div>
 						</div>
 						<div class="col-md-12">
 							<h4>Race Relations</h4>
@@ -56,9 +61,11 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 					</div>
 					<div class="panel-footer">
-						<a ng-href="index.php" class="btn btn-info">Show All</a>
-						<a ng-href="edit.php?id={{settlement.id}}" class="btn btn-primary">Edit</a>
-						<button ng-click="deleteSettlement(settlement.id, settlement.name)" class="btn btn-danger">Delete</button>
+						<a ng-href="index.php" class="btn btn-info">Show All</a> <a
+							ng-href="edit.php?id={{settlement.id}}" class="btn btn-primary">Edit</a>
+						<button
+							ng-click="deleteSettlement(settlement.id, settlement.name)"
+							class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>

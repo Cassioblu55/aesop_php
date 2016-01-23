@@ -1,8 +1,8 @@
 <?php
-include_once $serverPath.'resources/templates/head.php';
+include_once $serverPath . 'resources/templates/head.php';
 ?>
-	<div ng-controller="encounterShowController">
-		<div class="container-fluid">
+<div ng-controller="encounterShowController">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
@@ -14,18 +14,20 @@ include_once $serverPath.'resources/templates/head.php';
 							<h4>Description</h4>
 							<div>{{encounter.description}}</div>
 						</div>
-						
+
 					</div>
 					<div class="panel-footer">
-						<a ng-href="index.php" class="btn btn-info">Show All</a>
-						<a ng-href="edit.php?id={{encounter.id}}" class="btn btn-primary">Edit</a>
-						<button ng-click="deleteWithRedirect(encounter.id, encounter.title)" class="btn btn-danger">Delete</button>
+						<a ng-href="index.php" class="btn btn-info">Show All</a> <a
+							ng-href="edit.php?id={{encounter.id}}" class="btn btn-primary">Edit</a>
+						<button
+							ng-click="deleteWithRedirect(encounter.id, encounter.title)"
+							class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 
 <script src="<?php echo $baseURL;?>resources/roll.js"></script>
 <script>

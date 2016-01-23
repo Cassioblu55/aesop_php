@@ -1,12 +1,13 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath.'utils/db_get.php';
+include_once $serverPath . 'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
-	$table = "tavern"; $owner_table = "character";
-	$s = findById ( $table, $_GET ['id']);
+	$table = "tavern";
+	$owner_table = "character";
+	$s = findById ( $table, $_GET ['id'] );
 	$tavern = json_encode ( $s );
-	$owner = json_encode( findById($owner_table,$s['owner_id']));
+	$owner = json_encode ( findById ( $owner_table, $s ['owner_id'] ) );
 } else {
 	header ( "Location: index.php" );
 	
@@ -15,7 +16,7 @@ if (! empty ( $_GET ['id'] )) {
 	die ( "Redirecting to index" );
 }
 
-include_once $serverPath.'resources/templates/head.php';
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="tavernController">
 	<div class="container-fluid">
@@ -32,13 +33,18 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="col-md-12">
 							<h4>Owner</h4>
-							<div><a ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{owner.id}}">{{owner.name}}</div>
+							<div>
+								<a
+									ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{owner.id}}">{{owner.name}}
+							
+							</div>
 						</div>
 					</div>
 					<div class="panel-footer">
-						<a ng-href="index.php" class="btn btn-info">Show All</a>
-						<a ng-href="edit.php?id={{tavern.id}}" class="btn btn-primary">Edit</a>
-						<button ng-click="deletetavern(tavern.id, tavern.name)" class="btn btn-danger">Delete</button>
+						<a ng-href="index.php" class="btn btn-info">Show All</a> <a
+							ng-href="edit.php?id={{tavern.id}}" class="btn btn-primary">Edit</a>
+						<button ng-click="deletetavern(tavern.id, tavern.name)"
+							class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 			</div>

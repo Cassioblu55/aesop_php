@@ -1,6 +1,6 @@
-<?php 
+<?php
 include_once '../../config/config.php';
-include_once $serverPath.'resources/templates/head.php';
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 
 <div ng-controller="MonsterShow">
@@ -14,16 +14,26 @@ include_once $serverPath.'resources/templates/head.php';
 				<div class="panel-body">
 					<!-- Hit points -->
 					<div class="col-md-4">
-						<div><b>Hit Points:</b> {{hit_points}} ({{monster.hit_points.stringValue}})</div>
-						<div><b>Average:</b> {{(monster.hit_points != null) ? getDiceAverage(monster.hit_points) : ''}}</div>
+						<div>
+							<b>Hit Points:</b> {{hit_points}}
+							({{monster.hit_points.stringValue}})
+						</div>
+						<div>
+							<b>Average:</b> {{(monster.hit_points != null) ?
+							getDiceAverage(monster.hit_points) : ''}}
+						</div>
 					</div>
 					<!-- armor -->
 					<div class="col-md-4">
-						<div><b>Armor:</b> {{monster.armor}}</div>
+						<div>
+							<b>Armor:</b> {{monster.armor}}
+						</div>
 					</div>
 					<!-- speed -->
 					<div class="col-md-4">
-						<div><b>Speed:</b> {{monster.speed}}ft</div>
+						<div>
+							<b>Speed:</b> {{monster.speed}}ft
+						</div>
 					</div>
 				</div>
 			</div>
@@ -32,33 +42,37 @@ include_once $serverPath.'resources/templates/head.php';
 				<div class="panel-body">
 					<!-- found -->
 					<div class="col-md-6">
-						<div><b>Found:</b> {{hashArrayValueToString(found_places, 'found')}}</div>
+						<div>
+							<b>Found:</b> {{hashArrayValueToString(found_places, 'found')}}
+						</div>
 					</div>
 					<!-- found ends -->
 					<!-- Challenge -->
 					<div class="col-md-6">
-						<div><b>Challenge:</b> {{challenge}} ({{monster.xp}} XP)</div>
-						
+						<div>
+							<b>Challenge:</b> {{challenge}} ({{monster.xp}} XP)
+						</div>
+
 					</div>
 					<!-- Challenge ends -->
 				</div>
 			</div>
 			<!-- Challenge, found end-->
-			
+
 			<!-- Hit points, armor, speed ends -->
 			<!-- Stats -->
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div ng-repeat="(key, value) in monster.stats">
-						<div ng-class="columnSizeByHash(monster.stats, 'md', 6)"
+						<div ng-class="columnSizeByHash(monster.stats, 'md', 6)">
 							<label><b>{{capitalizeFirstLetter(key)}}</b></label>
 							<p>{{value}}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		<!-- Stats ends -->
-		<!-- Skills, Senses, Languages -->
+			<!-- Stats ends -->
+			<!-- Skills, Senses, Languages -->
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<!-- skills -->
@@ -66,7 +80,8 @@ include_once $serverPath.'resources/templates/head.php';
 						<b>Skills:</b>
 						<div ng-repeat="skill in skills track by $index">
 							<div ng-class="columnSizeByArray(skills, 'md', 2)">
-								{{skill.skill}}: <b> {{(skill.modifier >=0) ? '+' : ''}}{{skill.modifier}}</b>
+								{{skill.skill}}: <b> {{(skill.modifier >=0) ? '+' :
+									''}}{{skill.modifier}}</b>
 							</div>
 						</div>
 					</div>
@@ -76,8 +91,7 @@ include_once $serverPath.'resources/templates/head.php';
 						<b>Senses:</b>
 						<div ng-repeat="sense in senses track by $index">
 							<div ng-class="columnSizeByArray(senses, 'md', 2)">
-								{{sense.sense}}
-							</div>
+								{{sense.sense}}</div>
 						</div>
 					</div>
 					<!-- Senses end -->
@@ -86,15 +100,14 @@ include_once $serverPath.'resources/templates/head.php';
 						<b>Languages:</b>
 						<div ng-repeat="language in languages track by $index">
 							<div ng-class="columnSizeByArray(languages, 'md', 3)">
-								{{language.language}}
-							</div>
+								{{language.language}}</div>
 						</div>
 					</div>
 					<!-- Senses end -->
 				</div>
 			</div>
 			<!-- Skills, Senses, Languages end-->
-			
+
 			<!-- Abilites, actions -->
 			<div class="row">
 				<!-- Abilties -->
@@ -105,7 +118,9 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="panel-body">
 							<div ng-repeat="ability in abilities">
-								<div><b>{{ability.name}}</b></div>
+								<div>
+									<b>{{ability.name}}</b>
+								</div>
 								<div class="showDisplay">{{ability.description}}</div>
 							</div>
 						</div>
@@ -119,15 +134,17 @@ include_once $serverPath.'resources/templates/head.php';
 						</div>
 						<div class="panel-body">
 							<div ng-repeat="action in actions">
-								<div><b>{{action.name}}</b></div>
-								<div  class="showDisplay">{{action.description}}</div>
+								<div>
+									<b>{{action.name}}</b>
+								</div>
+								<div class="showDisplay">{{action.description}}</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- actions ends -->
-							
-			
+
+
 			</div>
 			<!-- Abilites, actions end-->
 			<!-- description -->
@@ -138,22 +155,23 @@ include_once $serverPath.'resources/templates/head.php';
 				<div class="panel-body">
 					<div class="showDisplay">{{monster.description}}</div>
 				</div>
-				
+
 			</div>
-			
-	</div>
-	<!-- Panel body ends -->
-	<!-- panel footer -->
-	<div class="panel-footer">
-		<a href="index.php" class="btn btn-info">Show All</a>
-		<a href="{{edit}}" class="btn btn-primary">Edit</a>
-		<button ng-click="deleteWithRedirect(monster.id, monster.name)" class="btn btn-danger">Delete</button>
+
+		</div>
+		<!-- Panel body ends -->
+		<!-- panel footer -->
+		<div class="panel-footer">
+			<a href="index.php" class="btn btn-info">Show All</a> <a
+				href="{{edit}}" class="btn btn-primary">Edit</a>
+			<button ng-click="deleteWithRedirect(monster.id, monster.name)"
+				class="btn btn-danger">Delete</button>
+		</div>
+
 	</div>
 
-</div>
-
-<script src="<?php echo $baseURL;?>resources/roll.js"></script>
-<script>
+	<script src="<?php echo $baseURL;?>resources/roll.js"></script>
+	<script>
 app.controller('MonsterShow', ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 	angular.extend(this, $controller('rollDisplayController', {$scope: $scope}));
