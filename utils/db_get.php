@@ -8,7 +8,7 @@ function getAllData($table) {
 function findById($table, $id) {
 	$query = "SELECT * FROM " . getTableQuote ( $table ) . " WHERE id=" . $id;
 	$result = runQuery ( $query );
-	if ($result [0]) {
+	if (!empty($result [0])) {
 		return $result [0];
 	} else {
 		return null;

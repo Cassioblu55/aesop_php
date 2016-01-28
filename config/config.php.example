@@ -6,6 +6,8 @@
 	$adminEmail = "adminEmail";
 	$baseURL = "baseUrl";
 	
+	$adminMail = 'example@example.com';
+	$webmasterMail = 'example@example.com';
 	$baseURL = "webPath";
 	$serverURL = "serverPath";
 	

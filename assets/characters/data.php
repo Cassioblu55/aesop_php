@@ -21,10 +21,6 @@ if (! empty ( $_GET ['column'] )) {
 		];
 		print json_encode ( getSpecificData ( $table, $columns ) );
 	} else if ($column == "grid") {
-		$villians = getSingleColumnData ( "villain", 'character_id' );
-		$bartenders = getSingleColumnData ( "tavern", "owner_id" );
-		$mayors = getSingleColumnData ( "settlement", "ruler_id" );
-		$restrict = arrayToString ( array_merge ( $villians, $bartenders, $mayors ) );
 		$columns = [ 
 				"id, first_name",
 				"last_name",
@@ -33,7 +29,7 @@ if (! empty ( $_GET ['column'] )) {
 				"height",
 				"weight" 
 		];
-		$query = "SELECT " . arrayToString ( $columns ) . " FROM " . getTableQuote ( $table ) . " WHERE id NOT IN (" . $restrict . ");";
+		$query = "SELECT " . arrayToString ( $columns ) . " FROM " . getTableQuote ( $table ) .";";
 		echo json_encode ( runQuery ( $query ) );
 	} else {
 		$columns = getColumnNames ( $table );

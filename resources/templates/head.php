@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html ng-app="app">
 <script type="text/javascript">var baseURL = "<?php echo $baseURL;?>";</script>
