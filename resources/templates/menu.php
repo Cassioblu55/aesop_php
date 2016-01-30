@@ -69,6 +69,7 @@
 			          	<li><a href="<?php echo $baseURL;?>profile/">My Profile</a></li>
 			          	<li><a href="<?php echo $baseURL;?>profile/myCharacters.php">My Characters</a></li>
 			          	<li><a href="<?php echo $baseURL;?>profile/myCampaigns.php">My Campaigns</a></li>
+			          	<li><a href="<?php echo $baseURL;?>profile/edit.php">Edit Profile</a></li>
 			          	<li ng-show="me.admin==1"><a href="<?php echo $baseURL;?>admin/">Admin</a></li>
 				        <li><a href="<?php echo $baseURL;?>login/logout.php">Sign out</a></li>
 			          </ul>
@@ -124,8 +125,8 @@ app.controller("MenuController", ['$scope', "$controller", function($scope, $con
 
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 	if($('#myId').val()){
-		$scope.setFromGet("<?php echo $baseURL;?>login/myData.php", function(data){
-			$scope.me = data[0];
+		$scope.setFromGet("<?php echo $baseURL;?>profile/myData.php", function(data){
+			$scope.me = data;
 			
 			$scope.loggedIn = true;	
 		});
