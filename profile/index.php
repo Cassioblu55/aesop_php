@@ -3,15 +3,12 @@
      include_once $serverPath.'resources/templates/head.php';
 ?>
 
-<div ng-controller="YOURController">
+<div ng-controller="MyTimelineController">
      <form action="YOURPAGE.php" method="post">
           <div class="container-fluid">
-                    <div class="col-md-6">
+                <div class="col-md-8">
 
-               <div class="panel panel-default">
-                    <div class="panel-heading">
-                         <h3 class="panel-title">Title Here</h3>
-                    </div>
+               <div class="panel panel-default">                  
                <div class="panel-body">
                     Body Here
 
@@ -29,9 +26,13 @@
 
 <script>
 
-app.controller("YOURController", ['$scope', "$controller", function($scope, $controller){
+app.controller("MyTimelineController", ['$scope', "$controller", function($scope, $controller){
 
 angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	$scope.maxShownTimelineEvents = 20;
+
+	
+
 
 }]);
 

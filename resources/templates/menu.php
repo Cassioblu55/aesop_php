@@ -20,7 +20,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">View Assets <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<?php echo $baseURL;?>assets/characters/">Characters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/ncps/">NCPs</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/settlements/">Settlements</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/taverns/">Taverns</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/dungeons/">Dungeons</a></li>
@@ -40,7 +40,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Quick Create <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<?php echo $baseURL;?>assets/characters/create.php">Characters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/ncps/create.php">NCPs</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/settlements/create.php">Settlements</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/taverns/create.php">Taverns</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/dungeons/create.php">Dungeon</a></li>

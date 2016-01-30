@@ -6,7 +6,7 @@ if (! empty ( $_GET ['id'] )) {
 	
 	$db = connect ();
 	
-	$delete = "DELETE FROM character_traits WHERE id=" . $_GET ['id'] . ";";
+	$delete = "DELETE FROM ncp_traits WHERE id=" . $_GET ['id'] . ";";
 	echo $delete;
 	
 	try {

@@ -2,7 +2,7 @@
 include_once '../../../config/config.php';
 include_once $serverPath . 'utils/connect.php';
 
-$table = "character_traits";
+$table = "ncp_traits";
 $added = false;
 if (! empty ( $_POST )) {
 	

@@ -65,9 +65,12 @@ function createInsertFromPost($table) {
 }
 function createDataFromPost($table) {
 	$columns = getColumnNames ( $table );
+	$restrictedColumns = ['approved', 'date_created','owner_id'];
 	$data = [ ];
 	foreach ( $columns as $column ) {
-		$data [$column] = $_POST [$column];
+		if(!in_array($column, $restrictedColumns)){
+			$data [$column] = $_POST [$column];
+		}
 	}
 	return $data;
 }

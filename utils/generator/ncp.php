@@ -3,10 +3,10 @@ include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
 require_once $serverPath . 'utils/generator/utils.php';
 function createCharacter() {
-	$trait_table = "character_traits";
-	$table = "character";
+	$trait_table = "ncp_traits";
+	$table = "ncp";
 	
-	$columns = getColumnNames ( $table );
+	$columns = getColumnNames ($table );
 	
 	if (empty ( $_POST ["sex"] )) {
 		$_POST ["sex"] = getGender ();
@@ -39,9 +39,9 @@ function createCharacter() {
 }
 function getName() {
 	if ($_POST ['sex'] == 'F') {
-		return getTrait ( "character_traits", "female_name" );
+		return getTrait ( "ncp_traits", "female_name" );
 	}
-	return getTrait ( 'character_traits', "male_name" );
+	return getTrait ( "ncp_traits", "male_name" );
 }
 function getAge() {
 	return purebell ( 16, 50, 5 );

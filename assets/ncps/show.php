@@ -2,15 +2,6 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
 
-if (! empty ( $_GET ['id'] )) {
-	$table = "character";
-	
-	$character = json_encode ( findById ( $table, $_GET ['id'] ) );
-} else {
-	header ( "Location: index.php" );
-	die ( "Redirecting to index" );
-}
-
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 

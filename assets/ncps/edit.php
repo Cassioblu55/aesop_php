@@ -2,11 +2,10 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
 include_once $serverPath . 'utils/db_post.php';
-require_once $serverPath . 'utils/generator/character.php';
+require_once $serverPath . 'utils/generator/ncp.php';
 
-$table = "character";
-if (! empty ( $_POST )) {
-	
+$table = "ncp";
+if (! empty ( $_POST )) {	
 	if (empty ( $_GET ['id'] )) {
 		createCharacter ();
 		$id = insertFromPostWithIdReturn ( $table );

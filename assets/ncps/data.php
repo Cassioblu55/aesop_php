@@ -1,7 +1,7 @@
 <?php
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
-$table = "character";
+$table = "ncp";
 if (! empty ( $_GET ['column'] )) {
 	$column = $_GET ['column'];
 	if ($column == "name") {
