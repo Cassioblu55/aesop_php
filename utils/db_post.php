@@ -10,12 +10,11 @@ function updateFromPost($table) {
 }
 function updateWithConstratints($table, $data, $constraints) {
 	$update = makeBaseUpdate ( $table, $data ) . " ";
-	foreach ( $constraints as $columnName => $value ) {
-		$update .= "WHERE " . $columnName . "='" . $value . "' AND ";
-	}
-	$update = cutString ( $update, 4 ) . ";";
+	
+	$update .= getConstraints($constraints). ";";	
 	runInsert ( $update );
 }
+
 function makeBaseUpdate($table, $data) {
 	$update = "UPDATE " . getTableQuote ( $table ) . " SET ";
 	foreach ( $data as $columnName => $value ) {

@@ -62,10 +62,14 @@
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown" >
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if(!empty($_SESSION['user'])){echo "Hello ".$_SESSION['user']['username'];}else{echo "Login";}?> <span class="caret"></span></a>
+					<li ng-hide="loggedIn"><a href="<?php echo $baseURL;?>login/">Login</a> 
+					<li ng-show="loggedIn" class="dropdown" >
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{me.first_name || me.username}}<span class="caret"></span></a>
 			          <ul class="dropdown-menu" style="background-color:foralwhite;">
-				        <li><a ng-href="<?php echo $baseURL;?>login/{{editOrLoginPhp}}">{{editOrLogin}}</a></li>
+			          	<li><a href="<?php echo $baseURL;?>profile/">My Profile</a></li>
+			          	<li><a href="<?php echo $baseURL;?>profile/myCharacters.php">My Characters</a></li>
+			          	<li><a href="<?php echo $baseURL;?>profile/myCampaigns.php">My Campaigns</a></li>
+			          	<li ng-show="me.admin==1"><a href="<?php echo $baseURL;?>admin/">Admin</a></li>
 				        <li><a href="<?php echo $baseURL;?>login/logout.php">Sign out</a></li>
 			          </ul>
 			        </li>
@@ -119,15 +123,14 @@
 app.controller("MenuController", ['$scope', "$controller", function($scope, $controller){
 
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
-		
 	if($('#myId').val()){
-		
 		$scope.setFromGet("<?php echo $baseURL;?>login/mydata.php?id="+$('#myId').val(), function(data){
-			console.log(data);
+			$scope.me = data[0];
+			
+			$scope.loggedIn = true;	
 		});
 	}else{
-		$scope.editOrLoginPhp = "index.php";
-		$scope.editOrLogin = "Login";
+		$scope.loggedIn = false;
 	}
 
 

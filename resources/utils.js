@@ -234,6 +234,16 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 		return string;
 	}
 	
+	$scope.runPost = function(post, data,  runOnSuccess, runOnFailed, log){
+		$http.post(post, data)
+		.then(function(response){
+			if(log==true){console.log(response);}
+			run(runOnSuccess(response));
+		}, function errorCallback(response){
+			run(runOnFailed);
+		});
+	}
+	
 	$scope.columnSizeByHash = function(hash, size, max){
 		var length = Object.keys(hash).length;
 		var c = "col-"+size+"-";

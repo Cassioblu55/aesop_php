@@ -139,7 +139,7 @@ function getConstraints($constraints) {
 function getConstraintBody($constraints) {
 	$constraint = "";
 	foreach ( $constraints as $columnName => $value ) {
-		$constraint .= $columnName . "=" . getValueString ( $value ) . " AND ";
+		$constraint .= getTableQuote($columnName) . "=" . getValueString ( $value ) . " AND ";
 	}
 	return (strlen ( $constraint ) == 0) ? "" : cutString ( $constraint, 5 );
 }
