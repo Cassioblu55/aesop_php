@@ -62,6 +62,11 @@ include_once $serverPath . 'resources/templates/head.php';
 							<h4>Ability</h4>
 							<div>{{npc.ability}}</div>
 						</div>
+						
+						<div class="col-md-12" ng-show="npc.other_information">
+							<h4>Other Information</h4>
+							<div>{{npc.other_information}}</div>
+						</div>
 					</div>
 					<div class="panel-footer">
 						<a ng-href="index.php" class="btn btn-info">Show All</a> <a

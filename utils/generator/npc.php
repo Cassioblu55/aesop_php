@@ -2,7 +2,7 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db/db_get.php';
 require_once $serverPath . 'utils/generator/utils.php';
-function createCharacter() {
+function createNpc() {
 	$trait_table = "npc_traits";
 	$table = "npc";
 	
