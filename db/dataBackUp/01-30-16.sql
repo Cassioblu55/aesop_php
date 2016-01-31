@@ -4202,7 +4202,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 -- Dumping data for table `villain`
 --
 
-INSERT INTO `villain` (`id`, `character_id`, `method_type`, `method_description`, `scheme_type`, `scheme_description`, `weakness_type`, `weakness_description`) VALUES
+INSERT INTO `villain` (`id`, `npc_id`, `method_type`, `method_description`, `scheme_type`, `scheme_description`, `weakness_type`, `weakness_description`) VALUES
 (1, 97, 'Theft or Property Crime', 'Mugging', 'Mayhem', 'Fulfill an apoca lyptic prophecy', 'Weakness', 'The villains power is broken if the death of its true love is avenged.'),
 (2, 99, 'Politics', 'Betrayal or treason', 'Magic', 'Open a gate to another world', 'Artifact', 'The villain is weakened in the presence of a particular artifact.'),
 (3, 100, 'Religion', 'Heresy or cults', 'Power', 'Seize control of an army', 'Special Weapon', 'A special weapon deals extra damage when used against the villain.'),
