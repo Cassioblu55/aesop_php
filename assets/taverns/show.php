@@ -4,15 +4,12 @@ include_once $serverPath . 'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "tavern";
-	$owner_table = "character";
+	$owner_table = "npc";
 	$s = findById ( $table, $_GET ['id'] );
 	$tavern = json_encode ( $s );
-	$owner = json_encode ( findById ( $owner_table, $s ['owner_id'] ) );
+	$tavern_owner = json_encode ( findById ( $owner_table, $s ['tavern_owner_id'] ) );
 } else {
 	header ( "Location: index.php" );
-	
-	// Remember that this die statement is absolutely critical. Without it,
-	// people can view your members-only content without logging in.
 	die ( "Redirecting to index" );
 }
 
@@ -34,8 +31,7 @@ include_once $serverPath . 'resources/templates/head.php';
 						<div class="col-md-12">
 							<h4>Owner</h4>
 							<div>
-								<a
-									ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{owner.id}}">{{owner.name}}
+								<a ng-href="<?php echo $baseURL;?>assets/npcs/show.php?id={{tavern_owner.id}}">{{tavern_owner.name}}</a>
 							
 							</div>
 						</div>
@@ -51,16 +47,16 @@ include_once $serverPath . 'resources/templates/head.php';
 		</div>
 	</div>
 	<div id="tavern" style="display: none;"><?php echo $tavern?></div>
-	<div id="owner" style="display: none;"><?php echo $owner?></div>
+	<div id="tavern_owner" style="display: none;"><?php echo $tavern_owner?></div>
 </div>
 
 <script type="text/javascript">
 var tavern = JSON.parse(document.getElementById("tavern").textContent);
-var owner = JSON.parse(document.getElementById("owner").textContent);
+var tavern_owner = JSON.parse(document.getElementById("tavern_owner").textContent);
 app.controller("tavernController", ['$scope', "$http", "$window" , function($scope, $http, $window){
 	$scope.tavern = tavern;
-	$scope.owner = owner;
-	$scope.owner.name = $scope.owner.first_name +" "+$scope.owner.last_name; 
+	$scope.tavern_owner = tavern_owner;
+	$scope.tavern_owner.name = $scope.tavern_owner.first_name +" "+$scope.tavern_owner.last_name; 
 	
 	$scope.deletetavern =function(id,name){
 		if(window.confirm("Are you sure you want to delete "+name+"?")){

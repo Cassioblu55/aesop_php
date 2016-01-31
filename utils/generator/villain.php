@@ -2,17 +2,17 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_post.php';
 require_once $serverPath . 'utils/generator/utils.php';
-require_once $serverPath . 'utils/generator/character.php';
+require_once $serverPath . 'utils/generator/npc.php';
 function createVillain() {
 	$trait_table = "villain_trait";
 	$table = "villain";
 	
 	$columns = getColumnNames ( $table );
 	
-	if (empty ( $_POST ['character_id'] )) {
+	if (empty ( $_POST ['npc_id'] )) {
 		createCharacter ();
-		$c_table = "character";
-		$_POST ['character_id'] = insertFromPostWithIdReturn ( $c_table );
+		$c_table = "npc";
+		$_POST ['npc_id'] = insertFromPostWithIdReturn ( $c_table );
 	}
 	
 	foreach ( $columns as $column ) {

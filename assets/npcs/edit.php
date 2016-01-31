@@ -2,7 +2,7 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_get.php';
 include_once $serverPath . 'utils/db_post.php';
-require_once $serverPath . 'utils/generator/ncp.php';
+require_once $serverPath . 'utils/generator/npc.php';
 
 $table = "ncp";
 if (! empty ( $_POST )) {	

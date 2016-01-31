@@ -69,8 +69,8 @@ function getColumnNamesWithTable($table) {
 	$t = getTableQuote ( $table );
 	$columns = [ ];
 	foreach ( $c as $row ) {
-		$r = $t . "." . $row;
-		array_push ( $columns, $r );
+		$r = $t . "." . getTableQuote($row);
+		array_push ( $columns, $r);
 	}
 	return $columns;
 }
@@ -148,7 +148,9 @@ function getJoinOn($table1, $table2, $joinOn) {
 	$t_2 = getTableQuote ( $table2 );
 	$s = "";
 	foreach ( $joinOn as $t1Value => $t2Value ) {
-		$s .= $t_1 . "." . $t1Value . "=" . $t_2 . "." . $t2Value . ", ";
+		$v1 = getTableQuote($t1Value);
+		$v2 = getTableQuote($t2Value);
+		$s .= "$t_1.$v1 = $t_2.$v2, ";
 	}
 	return cutString ( $s, 2 );
 }
@@ -162,12 +164,13 @@ function getConstraintsWithTables($tables) {
 	return cutString ( $con, 5 );
 }
 function getConstraintsWithTable($table, $constraints) {
-	$q_table = getTableQuote ( $table );
+	$q_table = getTableQuote($table);
+	$constraint = "";
 	foreach ( $constraints as $columnName => $value ) {
-		$constraints [$q_table . "." . $columnName] = $value;
-		unset ( $constraints [$columnName] );
+		$c = getTableQuote($columnName);
+		$constraint .= "$q_table.$c = $value AND ";
 	}
-	return getConstraintBody ( $constraints );
+	return cutString ($constraint, 5);;
 }
 
 ?>

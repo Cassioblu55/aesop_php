@@ -42,7 +42,7 @@ include_once $serverPath . 'resources/templates/head.php';
 							placeholder="Type" />
 					</div>
 					<div class="form-group">
-						<label for="owner_id">Owner</label> <select class="form-control"
+						<label for="tavern_owner_id">Owner</label> <select class="form-control"
 							name="owner_id">
 							<option value="">Any</option>
 							<option ng-repeat="character in characters"
@@ -70,13 +70,13 @@ if(tavernData){var tavern =JSON.parse(tavernData)};
 app.controller("TavernAddEditController", ['$scope', "$http" , function($scope, $http){
 	if(tavern){
 		$scope.tavern = tavern;
-		$scope.tavern.owner_id = Number($scope.tavern.owner_id);
+		$scope.tavern.tavern_owner_id = Number($scope.tavern.tavern_owner_id);
 	}
 		$scope.addOrEdit = (!tavern) ? "Add" : "Edit";
 		$scope.saveOrUpdate = (!tavern) ? "Save" : "Update"
 
 			$scope.getCharacters = function(){
-			$http.get('<?php echo $baseURL;?>assets/characters/data.php?column=name').
+			$http.get('<?php echo $baseURL;?>assets/ncps/data.php?column=name').
 			then(function(response){
 				var characters = response.data
 				for(var i=0; i<characters.length; i++){

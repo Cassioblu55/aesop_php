@@ -2,7 +2,7 @@
 include_once '../../config/config.php';
 include_once $serverPath . 'utils/db_post.php';
 require_once $serverPath . 'utils/generator/utils.php';
-require_once $serverPath . 'utils/generator/character.php';
+require_once $serverPath . 'utils/generator/npc.php';
 function createTavern() {
 	$table = "tavern";
 	$trait_table = "tavern_traits";
@@ -18,10 +18,10 @@ function createTavern() {
 	}
 	
 	// create owner
-	if (empty ( $_POST ['owner_id'] )) {
+	if (empty ( $_POST ['tavern_owner_id'] )) {
 		createCharacter ();
-		$table = "character";
-		$_POST ['owner_id'] = insertFromPostWithIdReturn ( $table );
+		$table = "npc";
+		$_POST ['tavern_owner_id'] = insertFromPostWithIdReturn ( $table );
 	}
 }
 

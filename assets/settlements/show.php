@@ -4,10 +4,10 @@ include_once $serverPath . 'utils/db_get.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "settlement";
-	$ruler_table = "character";
+	$ruler_table = "npc";
 	$s = findById ( $table, $_GET ['id'] );
 	$settlement = json_encode ( $s );
-	$ruler = json_encode ( findById ( $ruler_table, $s ['ruler_id'] ) );
+	$ruler = json_encode ( findById ( $ruler_table, $s['ruler_id'] ) );
 } else {
 	header ( "Location: index.php" );
 	
@@ -51,7 +51,7 @@ include_once $serverPath . 'resources/templates/head.php';
 							<h4>Ruler Status</h4>
 							<div>
 								<a
-									ng-href="<?php echo $baseURL;?>assets/characters/show.php?id={{ruler.id}}">{{ruler.name}}</a>:
+									ng-href="<?php echo $baseURL;?>assets/npcs/show.php?id={{ruler.id}}">{{ruler.name}}</a>:
 								{{settlement.ruler_status}}
 							</div>
 						</div>

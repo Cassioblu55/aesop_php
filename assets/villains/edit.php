@@ -169,8 +169,8 @@ include_once $serverPath . 'resources/templates/head.php';
 								placeholder="Ability" />
 						</div>
 					</div>
-					<input style="display: none;" name="character_id"
-						ng-model="villian.character_id"></input>
+					<input style="display: none;" name="npc_id"
+						ng-model="villian.npc_id"></input>
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>

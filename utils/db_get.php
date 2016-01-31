@@ -43,7 +43,7 @@ function getJoin($table1, $table2, $joinOn, $t1_constraints, $t2_constraints) {
 	
 	$con = getConstraintsWithTables ( $tables );
 	$t2_columns = arrayToString ( getColumnNamesWithTable ( $table2 ) );
-	$query = "SELECT " . $t1_q . ".*, " . $t2_columns . " FROM " . $t1_q . " INNER JOIN " . $t2_q . " ON " . $jo . " " . $con . ";";
+	$query = "SELECT $t1_q.*, $t2_columns FROM $t1_q INNER JOIN $t2_q ON $jo $con;";
 	return $query;
 }
 
