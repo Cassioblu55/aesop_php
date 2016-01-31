@@ -112,7 +112,7 @@ INSERT INTO `npc` (`id`, `first_name`, `last_name`, `age`, `sex`, `height`, `wei
 (121, 'Rachel', 'Hale', 36, 'F', 62, 147, 'Overpowering greed', 'Irritable', 'makes constant jokes or puns', 'Protective of close family members', 'a Pronounced scar', 'can draw beautifully', 'Self-sacrifice', 'looks very graceful');
 
 --
--- Dumping data for table `character_traits`
+-- Dumping data for table `npc_traits`
 --
 
 INSERT INTO `npc_traits` (`id`, `trait`, `type`) VALUES
@@ -1775,7 +1775,7 @@ INSERT INTO `npc_traits` (`id`, `trait`, `type`) VALUES
 (1657, 'Linwood', 'male_name'),
 (1658, 'Lionel', 'male_name'),
 (1659, 'Lloyd', 'male_name');
-INSERT INTO `character_traits` (`id`, `trait`, `type`) VALUES
+INSERT INTO `npc_traits` (`id`, `trait`, `type`) VALUES
 (1660, 'Logan', 'male_name'),
 (1661, 'Lonnie', 'male_name'),
 (1662, 'Loren', 'male_name'),
