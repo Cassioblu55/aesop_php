@@ -84,7 +84,7 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Custom Create<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo $baseURL;?>assets/characters/edit.php">Characters</a></li>
+								<li><a href="<?php echo $baseURL;?>assets/npcs/edit.php">NPCs</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/settlements/edit.php">Settlements</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/taverns/edit.php">Taverns</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/dungeons/edit.php">Dungeons</a></li>
@@ -107,7 +107,7 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Traits<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo $baseURL;?>assets/traits/characters/">Characters</a></li>
+								<li><a href="<?php echo $baseURL;?>assets/traits/npcs/">NPCs</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/traits/settlements/">Settlements</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/traits/taverns/">Taverns</a></li>
 								<li><a href="<?php echo $baseURL;?>assets/traits/dungeons/">Dungeon</a></li>

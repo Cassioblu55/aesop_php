@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db_post.php';
+include_once $serverPath . 'utils/db/db_post.php';
 require_once $serverPath . 'utils/generator/dungeon.php';
 if (! empty ( $_GET ['map'] ) && ! empty ( $_GET ['size'] ) && ! empty ( $_GET ['traps'] )) {
 	createDungeon ();

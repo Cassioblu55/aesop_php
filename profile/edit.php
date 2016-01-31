@@ -1,7 +1,7 @@
 <?php
 	include_once '../config/config.php';
-	include_once $serverPath.'login/requireLogin.php';
-	include_once $serverPath.'utils/db_post.php';
+	include_once $serverPath.'utils/security/requireLogin.php';
+	include_once $serverPath.'utils/db/db_post.php';
 
 	$table = "users";
 	if (! empty ( $_POST )) {

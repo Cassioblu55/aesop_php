@@ -1,8 +1,8 @@
 <?php
 include_once '../config/config.php';
-include_once $serverPath.'login/requireAdmin.php';
+include_once $serverPath.'utils/security/requireAdmin.php';
 
-include_once $serverPath.'utils/db_get.php';
+include_once $serverPath.'utils/db/db_get.php';
 
 if(!empty($_GET['get'])){
 	$get = $_GET['get'];

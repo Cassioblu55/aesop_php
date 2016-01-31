@@ -1,6 +1,6 @@
 <?php
 include_once '../config/config.php';
-include_once $serverPath.'login/requireAdmin.php';
+include_once $serverPath.'utils/security/requireAdmin.php';
 
 include_once $serverPath.'resources/templates/head.php';
 ?>

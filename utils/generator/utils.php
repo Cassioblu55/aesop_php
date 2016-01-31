@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . '/utils/connect.php';
+include_once $serverPath . 'utils/db/connect.php';
 function getTrait($table, $type) {
 	return getFullTrait ( $table, $type ) ['trait'];
 }

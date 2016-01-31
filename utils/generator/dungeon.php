@@ -1,6 +1,6 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db_get.php';
+include_once $serverPath . 'utils/db/db_get.php';
 require_once $serverPath . 'utils/generator/utils.php';
 function createDungeon() {
 	$trait_table = "dungeon_traits";

@@ -1,7 +1,9 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db_get.php';
+include_once $serverPath . 'utils/db/db_get.php';
+
 $table = "npc";
+
 if (! empty ( $_GET ['column'] )) {
 	$column = $_GET ['column'];
 	if ($column == "name") {
@@ -36,6 +38,7 @@ if (! empty ( $_GET ['column'] )) {
 		print json_encode ( getSpecificData ( $table, $columns ) );
 	}
 } else if (! empty ( $_GET ['id'] )) {
+	include_once $serverPath.'utils/security/canSee.php';
 	$id = $_GET ['id'];
 	echo json_encode ( findById ( $table, $id ) );
 }

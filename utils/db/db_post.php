@@ -1,5 +1,5 @@
 <?php
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath . 'utils/db/connect.php';
 function update($table, $data) {
 	$update = makeBaseUpdate ( $table, $data ) . " WHERE id=" . $_GET ['id'] . ";";
 	// echo $update;
@@ -65,7 +65,10 @@ function createInsertFromPost($table) {
 }
 function createDataFromPost($table) {
 	$columns = getColumnNames ( $table );
-	$restrictedColumns = ['approved', 'date_created','owner_id'];
+	$restrictedColumns = ['approved', 'date_created'];
+	if(empty($_POST['owner_id'])){
+		array_push($restrictedColumns, "owner_id");
+	}
 	$data = [ ];
 	foreach ( $columns as $column ) {
 		if(!in_array($column, $restrictedColumns)){

@@ -1,12 +1,15 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db_get.php';
-include_once $serverPath . 'utils/db_post.php';
+include_once $serverPath.'utils/security/requireLogin.php';
+include_once $serverPath . 'utils/db/db_post.php';
 require_once $serverPath . 'utils/generator/npc.php';
 
-$table = "ncp";
+$table = "npc";
+include_once $serverPath.'utils/security/canSee.php';
+
 if (! empty ( $_POST )) {	
 	if (empty ( $_GET ['id'] )) {
+		$_POST['owner_id'] = $_SESSION['user']['id'];
 		createCharacter ();
 		$id = insertFromPostWithIdReturn ( $table );
 	} 

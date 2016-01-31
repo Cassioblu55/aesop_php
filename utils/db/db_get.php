@@ -1,5 +1,5 @@
 <?php
-include_once $serverPath . 'utils/connect.php';
+include_once $serverPath . 'utils/db/connect.php';
 // Will run query and return results as array
 function getAllData($table) {
 	$query = "SELECT * FROM " . getTableQuote ( $table ) . ";";

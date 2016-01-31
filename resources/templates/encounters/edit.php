@@ -1,5 +1,5 @@
 <?php
-include_once $serverPath . 'utils/db_post.php';
+include_once $serverPath . 'utils/db/db_post.php';
 if (! empty ( $_POST )) {
 	if (! empty ( $_GET ['id'] )) {
 		$id = $_GET ['id'];
