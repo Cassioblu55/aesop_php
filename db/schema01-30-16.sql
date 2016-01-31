@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `dungeon` (
   `other_information` text COLLATE utf8_unicode_ci,
   `owner_id` int(11) NOT NULL,
   `public` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `approved` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `monster` (
   `owner_id` int(11) NOT NULL,
   `public` int(11) NOT NULL DEFAULT '0',
   `approved` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `npc` (
   `ideal` text COLLATE utf8_unicode_ci,
   `ability` text COLLATE utf8_unicode_ci,
   `owner_id` int(11) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `other_information` text COLLATE utf8_unicode_ci,
   `public` int(11) NOT NULL DEFAULT '0',
   `approved` int(11) NOT NULL DEFAULT '0'
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `settlement` (
   `public` int(11) NOT NULL DEFAULT '0',
   `approved` int(11) NOT NULL DEFAULT '0',
   `owner_id` int(11) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `tavern` (
   `owner_id` int(11) NOT NULL,
   `public` int(11) NOT NULL DEFAULT '0',
   `approved` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `traps` (
   `approved` int(11) NOT NULL DEFAULT '0',
   `owner_id` int(11) NOT NULL,
   `public` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
