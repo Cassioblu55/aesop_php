@@ -1,8 +1,9 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'resources/templates/head.php';
 $table = "npc";
 include_once $serverPath.'utils/security/canSee.php';
+
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 
 <div ng-controller="NCPShowController">
