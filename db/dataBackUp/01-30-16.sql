@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- Dumping data for table `character`
 --
 
-INSERT INTO `ncp` (`id`, `first_name`, `last_name`, `age`, `sex`, `height`, `weight`, `flaw`, `interaction`, `mannerism`, `bond`, `appearance`, `talent`, `ideal`, `ability`) VALUES
+INSERT INTO `npc` (`id`, `first_name`, `last_name`, `age`, `sex`, `height`, `weight`, `flaw`, `interaction`, `mannerism`, `bond`, `appearance`, `talent`, `ideal`, `ability`) VALUES
 (1, 'Maxwell', 'Logan', 24, 'M', 64, 173, 'Arrogance', 'Quiet', 'Prone to predictions of doom', 'Out for revenge', 'Unusual hair color', 'Can sing beautifully', 'Independence', 'Looks scrawny'),
 (20, 'Sherry', 'Tanner', 26, 'F', 71, 186, 'Possession of forbidden lore', 'quiet', 'paces', 'Protective of a valuable possession', 'a nervous eye twitch', 'is great at impersonations', 'Glory', 'looks quite studious'),
 (19, 'Ollie', 'Best', 28, 'F', 65, 160, 'Envies another creatures possessions or station', 'Blustering', 'paces', 'Out for revenge', 'Ragged dirty clothes', 'is an expert carpenter', 'Neutrality', 'seems very hardy'),
@@ -115,7 +115,7 @@ INSERT INTO `ncp` (`id`, `first_name`, `last_name`, `age`, `sex`, `height`, `wei
 -- Dumping data for table `character_traits`
 --
 
-INSERT INTO `ncp_traits` (`id`, `trait`, `type`) VALUES
+INSERT INTO `npc_traits` (`id`, `trait`, `type`) VALUES
 (1, 'many Piercings', 'appearance'),
 (2, 'flamboyant or outlandish clothes', 'appearance'),
 (3, 'formal clean clothes', 'appearance'),
@@ -3457,15 +3457,15 @@ INSERT INTO `dungeon_traits` (`id`, `type`, `trait`, `description`, `weight`) VA
 (318, 'name', 'The Hungry Grotto', '', '1'),
 (319, 'name', 'The Cursed Tombs', '', '1'),
 (320, 'name', 'The Yawning Burrows', '', '1'),
-(321, 'ncp_alignment', 'Lawful good', '', '2'),
-(322, 'ncp_alignment', 'Neutral good', '', '2'),
-(323, 'ncp_alignment', 'Chaotic good', '', '2'),
-(324, 'ncp_alignment', 'Lawful neutral', '', '3'),
-(325, 'ncp_alignment', 'Chaotic evil', '', '2'),
-(326, 'ncp_alignment', 'Neutral', '', '2'),
-(327, 'ncp_alignment', 'Chaotic neutral', '', '1'),
-(328, 'ncp_alignment', 'Neutral evil', '', '3'),
-(329, 'ncp_alignment', 'Lawful evil', '', '3'),
+(321, 'npc_alignment', 'Lawful good', '', '2'),
+(322, 'npc_alignment', 'Neutral good', '', '2'),
+(323, 'npc_alignment', 'Chaotic good', '', '2'),
+(324, 'npc_alignment', 'Lawful neutral', '', '3'),
+(325, 'npc_alignment', 'Chaotic evil', '', '2'),
+(326, 'npc_alignment', 'Neutral', '', '2'),
+(327, 'npc_alignment', 'Chaotic neutral', '', '1'),
+(328, 'npc_alignment', 'Neutral evil', '', '3'),
+(329, 'npc_alignment', 'Lawful evil', '', '3'),
 (330, 'location', 'A building in a city', '', '1'),
 (331, 'location', 'Catacombs or sewers beneath a city', '', '1'),
 (332, 'location', 'Beneath a farmhouse', '', '1'),
@@ -3518,18 +3518,18 @@ INSERT INTO `dungeon_traits` (`id`, `type`, `trait`, `description`, `weight`) VA
 (379, 'purpose', 'Temple or shrine', 'This dungeon is consecrated to a deity or other planar entity. The entitys worshipers control the dungeon and conduct their rites there.', '3'),
 (380, 'purpose', 'Tomb', 'Tombs are magnets for treasure hunters as well as monsters that hunger for the bones of the dead.', '2'),
 (381, 'purpose', 'Treasure vault', 'Built to protect powerful magic items and great material wealth treasure vault dungeons are heavily guarded by monsters and traps.', '1'),
-(382, 'ncp_class', 'Barbarian', '', '1'),
-(383, 'ncp_class', 'Bard', '', '1'),
-(384, 'ncp_class', 'Cleric', '', '2'),
-(385, 'ncp_class', 'Druid', '', '1'),
-(386, 'ncp_class', 'Fighter', '', '2'),
-(387, 'ncp_class', 'Monk', '', '1'),
-(388, 'ncp_class', 'Paladin', '', '1'),
-(389, 'ncp_class', 'Ranger', '', '1'),
-(390, 'ncp_class', 'Rogue', '', '4'),
-(391, 'ncp_class', 'Sorcerer', '', '1'),
-(392, 'ncp_class', 'Warlock', '', '1'),
-(393, 'ncp_class', 'Wizard', '', '4'),
+(382, 'npc_class', 'Barbarian', '', '1'),
+(383, 'npc_class', 'Bard', '', '1'),
+(384, 'npc_class', 'Cleric', '', '2'),
+(385, 'npc_class', 'Druid', '', '1'),
+(386, 'npc_class', 'Fighter', '', '2'),
+(387, 'npc_class', 'Monk', '', '1'),
+(388, 'npc_class', 'Paladin', '', '1'),
+(389, 'npc_class', 'Ranger', '', '1'),
+(390, 'npc_class', 'Rogue', '', '4'),
+(391, 'npc_class', 'Sorcerer', '', '1'),
+(392, 'npc_class', 'Warlock', '', '1'),
+(393, 'npc_class', 'Wizard', '', '4'),
 (394, 'creator', 'Beholder', '', '1'),
 (395, 'creator', 'Cult or religious group', '', '3'),
 (396, 'creator', 'Dwarves', '', '4'),
