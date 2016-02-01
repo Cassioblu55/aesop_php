@@ -14,7 +14,7 @@ include_once $serverPath . 'resources/templates/head.php';
 				<h4>{{riddle.riddle}}</h4>
 
 				<div class="row">
-					<div class="col-md-6">
+					<div ng-show="riddle.hint" class="col-md-6">
 						<div class="panel panel-default">
 							<div class="panel-heading clearfix">
 								<div class="panel-title pull-left">Hint</div>
@@ -38,6 +38,11 @@ include_once $serverPath . 'resources/templates/head.php';
 					</div>
 
 				</div>
+				<div class="col-md-12" ng-show="riddle.other_information">
+							<h4>Other Information</h4>
+							<div class="showDisplay">{{riddle.other_information}}</div>
+				</div>
+				
 			</div>
 			<div class="panel-footer">
 				<a ng-href="index.php" class="btn btn-info">Show All</a> <a

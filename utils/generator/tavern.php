@@ -19,7 +19,7 @@ function createTavern() {
 	
 	// create owner
 	if (empty ( $_POST ['tavern_owner_id'] )) {
-		createCharacter ();
+		createNpc ();
 		$table = "npc";
 		$_POST ['tavern_owner_id'] = insertFromPostWithIdReturn ( $table );
 	}

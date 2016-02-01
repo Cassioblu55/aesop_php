@@ -35,7 +35,7 @@ function createSettelment() {
 	
 	// Pick a mayor
 	if (empty ( $_POST ['ruler_id'] )) {
-		createCharacter ();
+		createNpc();
 		$table = "npc";
 		$_POST ['ruler_id'] = insertFromPostWithIdReturn ( $table );
 	}

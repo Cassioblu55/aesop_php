@@ -59,6 +59,12 @@ include_once $serverPath . 'resources/templates/head.php';
 							<h4>Race Relations</h4>
 							<div>{{settlement.race_relations}}</div>
 						</div>
+						
+						<div class="col-md-12" ng-show="settlement.other_information">
+							<h4>Other Information</h4>
+							<div class="showDisplay">{{settlement.other_information}}</div>
+						</div>
+						
 					</div>
 					<div class="panel-footer">
 						<a ng-href="index.php" class="btn btn-info">Show All</a> <a

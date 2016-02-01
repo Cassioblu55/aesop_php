@@ -87,13 +87,16 @@ include_once $serverPath . 'resources/templates/head.php';
 							<option ng-selected={{settlement.size== "L"}} value="L">Large</option>
 						</select>
 					</div>
+					
+					<div class="form-group">
+						<label for="other_information">Other Information</label>
+						<textarea name="other_information" class="form-control" rows="4">{{settlement.other_information}}</textarea>
+					</div>
 
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
 					</div>
-					<div style='<?php if($added){echo "color:#5cb85c";}else{echo "display:none";}?>'>Added
-						Settlement</div>
 				</div>
 			</div>
 		</div>

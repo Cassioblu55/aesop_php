@@ -8,15 +8,16 @@ $table = "tavern";
 if (! empty ( $_POST )) {
 	createTavern ();
 	if (empty ( $_GET ['id'] )) {
-		insertFromPost ( $table );
+		$id = insertFromPostWithIdReturn( $table );
 		$added = true;
 	} 
 
 	else {
+		$id = $_GET ['id'];
 		updateFromPost ( $table );
-		header ( "Location: show.php?id=" . $_GET ['id'] );
-		die ( "Redirecting to show.php" );
 	}
+		header ( "Location: show.php?id=" . $id );
+		die ( "Redirecting to show.php" );
 }
 include_once $serverPath . 'resources/templates/head.php';
 ?>
@@ -34,7 +35,7 @@ include_once $serverPath . 'resources/templates/head.php';
 					<div class="form-group">
 						<label for="name">Tavern Name</label> <input type="text"
 							class="form-control" name="name" ng-model="tavern.name"
-							placeholder="tavern Name" />
+							placeholder="Tavern Name" />
 					</div>
 					<div class="form-group">
 						<label for="type">Type</label> <input type="text"
@@ -45,17 +46,21 @@ include_once $serverPath . 'resources/templates/head.php';
 						<label for="tavern_owner_id">Owner</label> <select class="form-control"
 							name="owner_id">
 							<option value="">Any</option>
-							<option ng-repeat="character in characters"
-								value={{character.id}}
-								ng-selected="tavern.owner_id == character.id">{{character.name}}</option>
+							<option ng-repeat="npc in npcs"
+								value={{npc.id}}
+								ng-selected="tavern.owner_id == npc.id">{{npc.name}}</option>
 						</select>
 					</div>
+					
+					<div class="form-group">
+						<label for="other_information">Other Information</label>
+						<textarea name="other_information" class="form-control" rows="4">{{tavern.other_information}}</textarea>
+					</div>
+					
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
 					</div>
-					<div style='<?php if($added){echo "color:#5cb85c";}else{echo "display:none";}?>'>Added
-						tavern</div>
 				</div>
 			</div>
 		</div>
@@ -75,19 +80,16 @@ app.controller("TavernAddEditController", ['$scope', "$http" , function($scope, 
 		$scope.addOrEdit = (!tavern) ? "Add" : "Edit";
 		$scope.saveOrUpdate = (!tavern) ? "Save" : "Update"
 
-			$scope.getCharacters = function(){
-			$http.get('<?php echo $baseURL;?>assets/ncps/data.php?column=name').
-			then(function(response){
-				var characters = response.data
-				for(var i=0; i<characters.length; i++){
-					var character = characters[i]
-					character.name = character.first_name+" "+character.last_name
-					character.id = Number(character.id);
-				}
-				$scope.characters = characters;
-			});
-		}
-		$scope.getCharacters();
+		$http.get('<?php echo $baseURL;?>assets/npcs/data.php?column=name').
+		then(function(response){
+			var npcs = response.data
+			for(var i=0; i<npcs.length; i++){
+				var character = npcs[i]
+				character.name = character.first_name+" "+character.last_name
+				character.id = Number(character.id);
+			}
+			$scope.npcs = npcs;
+		});
 	
 }]);
 

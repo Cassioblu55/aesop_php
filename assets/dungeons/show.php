@@ -38,6 +38,10 @@ include_once $serverPath . 'resources/templates/head.php';
 							<label>{{getTrapDisplay(trap).title}}</label>
 							<p>{{getTrapDisplay(trap).description}}</p>
 						</div>
+						<div ng-show="dungeon.other_information">
+							<h4>Other Information</h4>
+							<div class="showDisplay">{{dungeon.other_information}}</div>
+						</div>
 					</div>
 					<div class="col-md-6">
 						<h4>Map</h4>

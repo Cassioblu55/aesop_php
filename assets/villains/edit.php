@@ -168,6 +168,12 @@ include_once $serverPath . 'resources/templates/head.php';
 								class="form-control" name="ability" ng-model="villian.ability"
 								placeholder="Ability" />
 						</div>
+						
+						
+					</div>
+					<div class="form-group">
+						<label for="other_information">Other Information</label>
+						<textarea name="other_information" class="form-control" rows="4">{{villian.other_information}}</textarea>
 					</div>
 					<input style="display: none;" name="npc_id"
 						ng-model="villian.npc_id"></input>

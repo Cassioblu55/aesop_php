@@ -10,7 +10,7 @@ function createVillain() {
 	$columns = getColumnNames ( $table );
 	
 	if (empty ( $_POST ['npc_id'] )) {
-		createCharacter ();
+		createNpc();
 		$c_table = "npc";
 		$_POST ['npc_id'] = insertFromPostWithIdReturn ( $c_table );
 	}

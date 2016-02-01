@@ -62,9 +62,9 @@ include_once $serverPath . 'resources/templates/head.php';
 							<label for="size">Size</label> <select class="form-control"
 								ng-model="dungeon.size" name="size">
 								<option value="">Any</option>
-								<option ng-selected={{dungeon.size== "S"}} value="S">Smalll</option>
-								<option ng-selected={{dungeon.size== "M"}} value="M">Medium</option>
-								<option ng-selected={{dungeon.size== "L"}} value="L">Large</option>
+								<option ng-selected="dungeon.size== 'S'" value="S">Smalll</option>
+								<option ng-selected="dungeon.size== 'M'" value="M">Medium</option>
+								<option ng-selected="dungeon.size== 'L'" value="L">Large</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -108,6 +108,11 @@ include_once $serverPath . 'resources/templates/head.php';
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+						<label for="other_information">Other Information</label>
+						<textarea name="other_information" class="form-control" rows="4">{{dungeon.other_information}}</textarea>
+					</div>
+						
 						<div class="form-group">
 							<button class="btn btn-primary" ng-click="submit" type="submit">{{saveOrUpdate}}</button>
 							<a class="btn btn-danger" href="index.php">Cancel</a>
@@ -153,7 +158,7 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 	
 	$scope.letters = letters;
 	$scope.saveOrUpdate = "Add";
-	$scope.addOrEdit = "Save"; 
+	$scope.addOrEdit = "Create"; 
 	
 	$scope.$watch('dungeon.size', function(val, oldVal){
 		//If map size is being changed generate a new map
@@ -219,7 +224,6 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 	//If no id then it will set up to create a new dungeon
 	else{
 		$scope.dungeon = {};
-		$scope.dungeon.name = "Test";
 		$scope.dungeon.size = getRandomSize();
 	}
 

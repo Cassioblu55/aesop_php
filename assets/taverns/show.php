@@ -32,9 +32,14 @@ include_once $serverPath . 'resources/templates/head.php';
 							<h4>Owner</h4>
 							<div>
 								<a ng-href="<?php echo $baseURL;?>assets/npcs/show.php?id={{tavern_owner.id}}">{{tavern_owner.name}}</a>
-							
 							</div>
 						</div>
+						
+						<div class="col-md-12" ng-show="tavern.other_information">
+							<h4>Other Information</h4>
+							<div class="showDisplay">{{tavern.other_information}}</div>
+						</div>
+						
 					</div>
 					<div class="panel-footer">
 						<a ng-href="index.php" class="btn btn-info">Show All</a> <a

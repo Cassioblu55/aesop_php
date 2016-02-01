@@ -49,11 +49,17 @@ include_once $serverPath . 'resources/templates/head.php';
 						<textarea type="text" class="form-control" rows="4" name="hint"
 							ng-model="riddle.hint" placeholder="Hint"></textarea>
 					</div>
+					
 					<div class="form-group">
-						<label for="weight">Weight</label> <input type="number"
-							class="form-control" name="weight" ng-model="riddle.weight"
-							placeholder="Weight" />
+						<label for="other_information">Other Information</label>
+						<textarea name="other_information" class="form-control" rows="4">{{riddle.other_information}}</textarea>
 					</div>
+					
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="weight">Weight</label> <input type="number" -->
+<!-- 							class="form-control" name="weight" ng-model="riddle.weight" -->
+<!-- 							placeholder="Weight" /> -->
+<!-- 					</div> -->
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
