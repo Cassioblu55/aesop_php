@@ -112,6 +112,14 @@ include_once $serverPath . 'resources/templates/head.php';
 						<label for="other_information">Other Information</label>
 						<textarea name="other_information" class="form-control" rows="4">{{dungeon.other_information}}</textarea>
 					</div>
+						<div class="form-group">
+							<label for="public">Public or Private</label>
+							<select class="form-control" id="public" name="public" ng-model="dungeon.public">
+								<option ng-selected="dungeon.public=='1'" value="1">Public</option>
+								<option  ng-selected="dungeon.public=='0'" value="0">Private</option>
+							</select>
+						</div>
+					
 						
 						<div class="form-group">
 							<button class="btn btn-primary" ng-click="submit" type="submit">{{saveOrUpdate}}</button>
@@ -224,6 +232,7 @@ app.controller("DungeonAddEditController", ['$scope', "$controller", function($s
 	//If no id then it will set up to create a new dungeon
 	else{
 		$scope.dungeon = {};
+		$scope.getDefaultAccess(function(n){$scope.dungeon['public'] = n;});
 		$scope.dungeon.size = getRandomSize();
 	}
 

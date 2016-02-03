@@ -1,6 +1,6 @@
 <?php
      include_once '../../../config/config.php';
-     $table = "dungeon_traits"; $route = "index.php";
+     $table = "villain_trait"; $route = "index.php";
      include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
      include_once $serverPath.'resources/templates/head.php';
 ?>
@@ -12,16 +12,21 @@
 
                <div class="panel panel-default">
                     <div class="panel-heading">
-                         <h3 class="panel-title">{{addOrEdit}} {{assestName}} {{trait.trait || 'Trait'}}</h3>
+                         <h3 class="panel-title">{{addOrEdit}} {{assestName}} {{trait.type || 'Type'}}</h3>
                     </div>
                <div class="panel-body">
 	                 <div class="form-group">
 						 <label for="trait">Trait</label>
-						 <input type="text" class="form-control" required="required" name="trait" ng-model="trait.trait" placeholder="Trait" />
+						 <input type="text" class="form-control" required="required" name="type" ng-model="trait.type" placeholder="Type" />
 					</div>
 					<div class="form-group">
 						<label for="type">Type</label>
-						 <input type="text"class="form-control" required="required" name="type" ng-model="trait.type" placeholder="Type" />
+						 <input type="text"class="form-control" required="required" name="kind" ng-model="trait.kind" placeholder="Kind" />
+					</div>
+					
+					<div class="form-group">
+						<label for="description">Description</label>
+						 <textarea rows="4" type="text"class="form-control" name="description" ng-model="trait.description" placeholder="Description"></textarea>
 					</div>
 					
 					<div class="form-group">
@@ -50,7 +55,7 @@ app.controller("TraitController", ['$scope', "$controller", function($scope, $co
 
 angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 
-	$scope.assestName = "Dungeon";
+	$scope.assestName = "Villain";
 	$scope.trait = {};
 
 	$scope.setById(function(data){

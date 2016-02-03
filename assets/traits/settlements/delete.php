@@ -1,19 +1,9 @@
 <?php
 include_once '../../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
+$table = "settlement_traits";
 
-if (! empty ( $_GET ['id'] )) {
-	
-	$db = connect ();
-	
-	$delete = "DELETE FROM settlement_traits WHERE id=" . $_GET ['id'] . ";";
-	echo $delete;
-	
-	try {
-		$db->query ( $delete );
-	} catch ( Execption $e ) {
-		echo $e;
-		die ( "Count not delete trait." );
-	}
-}
+include_once $serverPath.'utils/db/fullTemplates/secureDelete.php';
+
+
+
 ?>

@@ -124,15 +124,7 @@
 app.controller("MenuController", ['$scope', "$controller", function($scope, $controller){
 
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
-	if($('#myId').val()){
-		$scope.setFromGet("<?php echo $baseURL;?>profile/myData.php", function(data){
-			$scope.me = data;
-			
-			$scope.loggedIn = true;	
-		});
-	}else{
-		$scope.loggedIn = false;
-	}
+	
 
 
 }]);	

@@ -3,20 +3,21 @@ include_once '../../config/config.php';
 include_once $serverPath . 'utils/db/db_get.php';
 
 $table = "settlement";
-if (empty ( $_GET ['column'] )) {
-	print json_encode ( getAllData ( $table ) );
-} else {
-	if ($_GET ['column'] == "index") {
+include_once $serverPath.'utils/db/findById.php';
+
+if (!empty ( $_GET ['column'] )) {
+	$column = $_GET ['column'];
+	if ($column == "index") {
 		$columns = [ 
 				'name',
 				'population',
 				'known_for' 
 		];
+		print json_encode ( getSpecificData ( $table, $columns ) );
 	} else {
-		$columns = getColumnNames ( $table );
+		//$columns = getColumnNames ( $table );
 	}
 	
-	print json_encode ( getSpecificData ( $table, $columns ) );
 }
 
 ?>

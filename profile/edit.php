@@ -63,7 +63,7 @@
 app.controller("ProfileEditController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 
-	$scope.setFromGet("myData.php", function(data){
+	$scope.setFromGet("myData.php?get=myData", function(data){
 		$scope.user = data;
 	});
 	

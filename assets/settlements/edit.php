@@ -1,6 +1,5 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_get.php';
 include_once $serverPath . 'utils/db/db_post.php';
 require_once $serverPath . 'utils/generator/settlement.php';
 
@@ -8,19 +7,55 @@ $table = "settlement";
 if (! empty ( $_POST )) {
 	if (empty ( $_GET ['id'] )) {
 		createSettelment ();
-		insertFromPost ( $table );
+		$id = insertFromPostWithIdReturn( $table );
 		$added = true;
 	} 
 
 	else {
 		createSettelment ();
+		$id = $_GET ['id'];
 		updateFromPost ( $table );
-		header ( "Location: show.php?id=" . $_GET ['id'] );
-		die ( "Redirecting to show.php" );
 	}
+		header ( "Location: show.php?id=$id" );
+		die ( "Redirecting to show.php" );
 }
 include_once $serverPath . 'resources/templates/head.php';
 ?>
+
+<script type="text/javascript">
+app.controller("settlementAddEditController", ['$scope', "$controller" , function($scope, $controller){
+
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	$scope.settlement = {};
+	
+	$scope.setById(setSettlement, function(){
+		$scope.getDefaultAccess(function(n){$scope.settlement['public'] = n;});
+		$scope.addOrEdit =  "Add";
+		$scope.saveOrUpdate = "Save";
+	});
+
+	function setSettlement(data){
+		$scope.settlement = data;		
+		$scope.settlement.age = Number($scope.settlement.age);
+		$scope.settlement.population = Number($scope.settlement.population);
+		$scope.settlement.weight = Number($scope.settlement.weight);
+		$scope.settlement.feet = Math.floor(Number($scope.settlement.height)/12);
+		$scope.settlement.inches = Math.floor(Number($scope.settlement.height)%12);
+		$scope.addOrEdit = "Edit";
+		$scope.saveOrUpdate = "Update"
+	}
+
+	$scope.setFromGet('<?php echo $baseURL;?>assets/npcs/data.php?column=name', function(data){
+		$scope.npcs = data;
+		angular.forEach($scope.npcs, function(npc){
+			npc.name = npc.first_name+" "+npc.last_name
+		});
+		
+	});
+	
+}]);
+
+</script>
 
 <div ng-controller="settlementAddEditController">
 	<form
@@ -65,12 +100,10 @@ include_once $serverPath . 'resources/templates/head.php';
 							placeholder="Current Calamity" />
 					</div>
 					<div class="form-group">
-						<label for="ruler_id">Ruler</label> <select class="form-control"
-							name="ruler_id">
+						<label for="ruler_id">Ruler</label>
+						<select class="form-control" name="ruler_id" ng-model="settlement.ruler_id">
 							<option value="">Any</option>
-							<option ng-repeat="character in characters"
-								value={{character.id}}
-								ng-selected="settlement.ruler_id == character.id">{{character.name}}</option>
+							<option ng-repeat="npc in npcs" value="{{npc.id}}" ng-selected="settlement.ruler_id == npc.id">{{npc.name}}</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -82,9 +115,9 @@ include_once $serverPath . 'resources/templates/head.php';
 						<label for="size">Size</label> <select class="form-control"
 							name="sex">
 							<option value="">Any</option>
-							<option ng-selected={{settlement.size== "S"}} value="S">Smalll</option>
-							<option ng-selected={{settlement.size== "M"}} value="M">Medium</option>
-							<option ng-selected={{settlement.size== "L"}} value="L">Large</option>
+							<option ng-selected="settlement.size== 'S'" value="S">Smalll</option>
+							<option ng-selected="settlement.size== 'M'" value="M">Medium</option>
+							<option ng-selected="settlement.size== 'L'" value="L">Large</option>
 						</select>
 					</div>
 					
@@ -92,6 +125,16 @@ include_once $serverPath . 'resources/templates/head.php';
 						<label for="other_information">Other Information</label>
 						<textarea name="other_information" class="form-control" rows="4">{{settlement.other_information}}</textarea>
 					</div>
+					
+					<!-- public private -->
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="settlement.public">
+							<option ng-selected="settlement.public=='1'" value="1">Public</option>
+							<option  ng-selected="settlement.public=='0'" value="0">Private</option>
+						</select>
+					</div>
+					<!-- public private ends-->
 
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
@@ -100,44 +143,5 @@ include_once $serverPath . 'resources/templates/head.php';
 				</div>
 			</div>
 		</div>
-
 	</form>
-	<div id="settlement" style="display: none"><?php if(!empty($_GET['id'])){echo json_encode(findById($table, $_GET['id']));}?></div>
-
 </div>
-
-<script type="text/javascript">
-var settlementData =  document.getElementById("settlement").textContent
-if(settlementData){var settlement =JSON.parse(settlementData)};
-app.controller("settlementAddEditController", ['$scope', "$http" , function($scope, $http){
-	if(settlement){
-		$scope.settlement = settlement;
-		$scope.settlement.ruler_id = Number($scope.settlement.ruler_id);
-		$scope.settlement.age = Number($scope.settlement.age);
-		$scope.settlement.population = Number($scope.settlement.population);
-		$scope.settlement.weight = Number($scope.settlement.weight);
-		$scope.settlement.feet = Math.floor(Number($scope.settlement.height)/12);
-		$scope.settlement.inches = Math.floor(Number($scope.settlement.height)%12);
-	}
-		$scope.addOrEdit = (!settlement) ? "Add" : "Edit";
-		$scope.saveOrUpdate = (!settlement) ? "Save" : "Update"
-
-			$scope.getCharacters = function(){
-			$http.get('<?php echo $baseURL;?>assets/characters/data.php?column=name').
-			then(function(response){
-				var characters = response.data
-				for(var i=0; i<characters.length; i++){
-					var character = characters[i]
-					character.name = character.first_name+" "+character.last_name
-					character.id = Number(character.id);
-				}
-				$scope.characters = characters;
-			});
-		}
-		$scope.getCharacters();
-	
-}]);
-
-</script>
-
-

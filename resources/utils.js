@@ -42,7 +42,7 @@ String.prototype.parseEscape = function(){
 }
 
 String.prototype.display = function(){
-	 return this.replace(new RegExp( "\n", "g" ), "<br />")
+	 return this.replace(new RegExp( "\n", "g" ), "<br />");
 }
 
 function clone(h){
@@ -163,6 +163,7 @@ function getTrapSting(traps){
 }
 
 app.controller("UtilsController", ['$scope', "$http", "$window", function($scope, $http, $window){	
+	$scope.me = {};
 	
 	$scope.deleteById = function(id, name, runOnSuccess, runOnFailed){
 		runOnFailed = runOnFailed || failedHTTPLog;
@@ -203,13 +204,20 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 		return s.capitalizeFirstLetter();
 	}
 	
-	$scope.setById = function(setFunct){
+	$scope.setById = function(setFunct, runWhenNoId){
 		var id = getID();
 		if(id){
 			var get = 'data.php?id='+id;
 			$scope.setFromGet(get, setFunct);
+		}else{
+			runWhenNoId();
 		}
 	}
+	
+	$scope.editAction = function(){
+		return (getID() === null) ?  "edit.php" : "edit.php?id="+getID();
+	}
+	
 	
 	$scope.arrayToString = function(array){
 		var string = "";
@@ -255,5 +263,22 @@ app.controller("UtilsController", ['$scope', "$http", "$window", function($scope
 		var c = "col-"+size+"-";
 		return (length <= 12 && length >0 && length <=max) ? 'col-'+size+'-'+(Math.floor(12/length)) : '';
 	}
+	
+	$scope.getDefaultAccess = function(runOnSuccess){
+		$scope.setFromGet(baseURL+"profile/myData.php?get=defaultAccess", function(data){
+			runOnSuccess(data.assestDefaultAccess);
+		});
+	}
+		
+	if($('#myId').val()){
+		$scope.setFromGet(baseURL+"profile/myData.php?get=myData", function(data){
+			$scope.me = data;
+			
+			$scope.loggedIn = true;	
+		});
+	}else{
+		$scope.loggedIn = false;
+	}
+	
 	
 }]);

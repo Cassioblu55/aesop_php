@@ -52,10 +52,19 @@ include_once $serverPath . 'resources/templates/head.php';
 					<div class="form-group">
 						<label>Weight</label> <input type="number"
 							form-control" class="form-control" name="weight"
-							ng-model="trap.weight" placeholder="weight" />
+							ng-model="trap.weight" placeholder="Weight" />
 						<p class="help-block">Will determine how often trap will appear
 							randomly when making dungons</p>
 					</div>
+					
+					<div class="form-group">
+							<label for="public">Public or Private</label>
+							<select class="form-control" id="public" name="public" ng-model="trap.public">
+								<option ng-selected="trap.public=='1'" value="1">Public</option>
+								<option  ng-selected="trap.public=='0'" value="0">Private</option>
+							</select>
+						</div>
+					
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
@@ -72,7 +81,9 @@ include_once $serverPath . 'resources/templates/head.php';
 app.controller("TrapEditController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
 	angular.extend(this, $controller('rollDisplayController', {$scope: $scope}));
-		
+
+	$scope.trap = {};
+	
 	$scope.setTrap = function(trap){
 		$scope.trap = trap;
 		$scope.trap.weight = Number($scope.trap.weight);
@@ -91,9 +102,12 @@ app.controller("TrapEditController", ['$scope', "$controller", function($scope, 
 			}
 		},true);
 
-	$scope.setById($scope.setTrap);
-	$scope.saveOrUpdate = "Save";
-	$scope.addOrEdit = "Add";
+	$scope.setById($scope.setTrap, function(){
+		$scope.saveOrUpdate = "Save";
+		$scope.addOrEdit = "Add";
+
+		$scope.getDefaultAccess(function(n){$scope.trap['public'] = n;});
+	});
 	
 }]);
 </script>

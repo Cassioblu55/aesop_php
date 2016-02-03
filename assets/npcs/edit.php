@@ -30,7 +30,7 @@ include_once $serverPath . 'resources/templates/head.php';
 		<div class="col-md-6">
 			<div class="panel panel-default ?>">
 				<div class="panel-heading">
-					<div class="panel-title">{{addOrEdit}} npc</div>
+					<div class="panel-title">{{addOrEdit}} Non-player Character</div>
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
@@ -123,6 +123,13 @@ include_once $serverPath . 'resources/templates/head.php';
 						<textarea name="other_information" class="form-control" rows="4">{{npc.other_information}}</textarea>
 					</div>
 					
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="npc.public">
+							<option ng-selected="npc.public=='1'" value="1">Public</option>
+							<option  ng-selected="npc.public=='0'" value="0">Private</option>
+						</select>
+					</div>
 
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
@@ -136,27 +143,27 @@ include_once $serverPath . 'resources/templates/head.php';
 </div>
 
 <script type="text/javascript">
-app.controller("npcAddEditController", ['$scope', "$http" , function($scope, $http){
-	var id = getID();
+app.controller("npcAddEditController", ['$scope', "$controller" , function($scope, $controller){
+
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+	
+	$scope.npc = {};
+	$scope.addOrEdit = "Add";
+	$scope.saveOrUpdate = "Save";
 	$scope.action = "edit.php"
-	if(id){
-		$scope.action += "?id="+id;
+	$scope.setById(setNPC, function(){
+		$scope.getDefaultAccess(function(n){$scope.npc['public'] = n;});
+	});
+
+	function setNPC(data){
+		$scope.action += "?id="+data.id;
 		$scope.addOrEdit = "Edit";
 		$scope.saveOrUpdate = "Update";
-		$http.get('data.php?id='+id).
-			then(function(response){
-				$scope.npc = response.data;
-				$scope.npc.age = Number($scope.npc.age);
-				$scope.npc.weight = Number($scope.npc.weight);
-				$scope.npc.feet = Math.floor(Number($scope.npc.height)/12);
-				$scope.npc.inches = Math.floor(Number($scope.npc.height)%12);
-				
-			});
-	}else{
-		$scope.addOrEdit = "Add";
-		$scope.saveOrUpdate = "Save";
-			
-		
+		$scope.npc = data;
+		$scope.npc.age = Number($scope.npc.age);
+		$scope.npc.weight = Number($scope.npc.weight);
+		$scope.npc.feet = Math.floor(Number($scope.npc.height)/12);
+		$scope.npc.inches = Math.floor(Number($scope.npc.height)%12);	
 	}
 
 }]);

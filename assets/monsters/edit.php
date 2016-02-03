@@ -29,7 +29,7 @@ include_once $serverPath . 'resources/templates/head.php';
 			<div class="panel-body">
 				<div class="col-md-12">
 					<!-- Name -->
-					<div class="row form-group">
+					<div class="form-group">
 						<label for="name">Name</label> <input type="text" id="name"
 							class="form-control" required="required" name="name"
 							ng-model="monster.name" placeholder="Name" />
@@ -321,11 +321,19 @@ include_once $serverPath . 'resources/templates/head.php';
 						</div>
 					</div>
 					<!-- description -->
-					<label for='description'>Description</label>
-					<textarea id='description' class="form-control"
-						placeholder="Description" name='description'>{{monster.description}}</textarea>
+					<div class="form-group">
+						<label for='description'>Description</label>
+						<textarea id='description' class="form-control"
+							placeholder="Description" name='description'>{{monster.description}}</textarea>
+					</div>
 
-
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="monster.public">
+							<option ng-selected="monster.public=='1'" value="1">Public</option>
+							<option  ng-selected="monster.public=='0'" value="0">Private</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			<!-- Sumbit buttons -->
@@ -476,7 +484,9 @@ app.controller("MonsterEditController", ['$scope', "$controller", function($scop
 		$scope.saveOrUpdate = "Update";
 	}
 	
-	$scope.setById($scope.setMonster);
+	$scope.setById($scope.setMonster, function(){
+		$scope.getDefaultAccess(function(n){$scope.monster['public'] = n;});
+	});
 	$scope.saveOrUpdate = "Save";
 	$scope.addOrEdit = "Add";
 	

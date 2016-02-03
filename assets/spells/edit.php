@@ -106,6 +106,17 @@ include_once $serverPath.'resources/templates/head.php';
 					
 					<!-- description ends  -->
 					
+					<!-- public private -->
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="spell.public">
+							<option ng-selected="spell.public=='1'" value="1">Public</option>
+							<option  ng-selected="spell.public=='0'" value="0">Private</option>
+						</select>
+					</div>
+					<!-- public private ends-->
+					
+					
 					
 				</div>
 				<div class="panel-footer">
@@ -124,12 +135,11 @@ include_once $serverPath.'resources/templates/head.php';
 app.controller("SpellEditController", ['$scope', "$controller", function($scope, $controller){
 
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
-	$scope.saveOrUpdate = "Save";
-	$scope.addOrEdit = "Add";
 
 	$scope.classes = ['Fighter', 'Rouge', 'Ranger', 'Paladin', 'Bard', 'Monk', 'Warlock', 'Sorcerer', 'Cleric', 'Druid', 'Barbarian','Wizard'];
 	$scope.levels = ["Cantrip (0th)", "1st", '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th'];
 
+	$scope.spell = {};
 	
 	$scope.setById(function(data){
 		$scope.spell = data;
@@ -137,6 +147,13 @@ app.controller("SpellEditController", ['$scope', "$controller", function($scope,
 		
 		$scope.addOrEdit = "Edit";
 		$scope.saveOrUpdate = "Update";
+	}, function(){
+		$scope.getDefaultAccess(function(n){$scope.spell['public'] = n;});
+
+		$scope.saveOrUpdate = "Save";
+		$scope.addOrEdit = "Add";
+		
+
 	});
 
 	

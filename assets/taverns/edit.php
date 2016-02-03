@@ -1,6 +1,5 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_get.php';
 include_once $serverPath . 'utils/db/db_post.php';
 require_once $serverPath . 'utils/generator/tavern.php';
 
@@ -43,12 +42,12 @@ include_once $serverPath . 'resources/templates/head.php';
 							placeholder="Type" />
 					</div>
 					<div class="form-group">
-						<label for="tavern_owner_id">Owner</label> <select class="form-control"
-							name="owner_id">
+						<label for="tavern_owner_id">Owner</label> <select class="form-control" ng-model="tavern.tavern_owner_id"
+							name="tavern_owner_id">
 							<option value="">Any</option>
 							<option ng-repeat="npc in npcs"
-								value={{npc.id}}
-								ng-selected="tavern.owner_id == npc.id">{{npc.name}}</option>
+								value="{{npc.id}}"
+								ng-selected="tavern.tavern_owner_id == npc.id">{{npc.name}}</option>
 						</select>
 					</div>
 					
@@ -58,39 +57,50 @@ include_once $serverPath . 'resources/templates/head.php';
 					</div>
 					
 					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="tavern.public">
+							<option ng-selected="tavern.public=='1'" value="1">Public</option>
+							<option  ng-selected="tavern.public=='0'" value="0">Private</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</form>
-	<div id="tavern" style="display: none"><?php if(!empty($_GET['id'])){echo json_encode(findById($table, $_GET['id']));}?></div>
 </div>
 
 <script type="text/javascript">
-var tavernData =  document.getElementById("tavern").textContent
-if(tavernData){var tavern =JSON.parse(tavernData)};
-app.controller("TavernAddEditController", ['$scope', "$http" , function($scope, $http){
-	if(tavern){
-		$scope.tavern = tavern;
-		$scope.tavern.tavern_owner_id = Number($scope.tavern.tavern_owner_id);
-	}
-		$scope.addOrEdit = (!tavern) ? "Add" : "Edit";
-		$scope.saveOrUpdate = (!tavern) ? "Save" : "Update"
+app.controller("TavernAddEditController", ['$scope', "$controller" , function($scope, $controller){
 
-		$http.get('<?php echo $baseURL;?>assets/npcs/data.php?column=name').
-		then(function(response){
-			var npcs = response.data
-			for(var i=0; i<npcs.length; i++){
-				var character = npcs[i]
-				character.name = character.first_name+" "+character.last_name
-				character.id = Number(character.id);
-			}
-			$scope.npcs = npcs;
-		});
+	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+
+	$scope.tavern = {};
 	
+	$scope.setById(function(data){
+		$scope.addOrEdit = "Edit";
+		$scope.saveOrUpdate = "Update"
+		$scope.tavern = data;
+		
+	},function(){
+		$scope.addOrEdit = "Add";
+		$scope.saveOrUpdate = "Save";
+
+		$scope.getDefaultAccess(function(n){$scope.tavern['public'] = n;});
+	});
+
+
+	$scope.setFromGet('<?php echo $baseURL;?>assets/npcs/data.php?column=name', function(data){
+			$scope.npcs = data;
+			angular.forEach($scope.npcs, function(npc){
+				npc.name = npc.first_name+" "+npc.last_name
+			});
+	});
+
 }]);
 
 </script>

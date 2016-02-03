@@ -1,74 +1,73 @@
 <?php
-include_once '../../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
-
-$table = "ncp_traits";
-$added = false;
-if (! empty ( $_POST )) {
-	
-	validateRequired ( $table );
-	
-	if (empty ( $_GET ['id'] )) {
-		insert ( $table );
-	} else {
-		update ( $table );
-		// header ( "Location: index.php" );
-		// die ( "Redirecting to index.php" );
-	}
-} else {
-	if (empty ( $_GET ['id'] )) {
-		$trait = '';
-		$type = '';
-	} else {
-		$db = connect ();
-		$query = "SELECT * FROM character_traits WHERE id='" . $_GET ['id'] . "';";
-		try {
-			$result = $db->query ( $query );
-			if ($result->num_rows > 0) {
-				$row = $result->fetch_assoc ();
-				$trait = $row ['trait'];
-				$type = $row ['type'];
-			}
-		} catch ( Execption $e ) {
-			echo $e;
-			die ( "Something went wrong." );
-		}
-		$db->close ();
-	}
-}
-include_once $serverPath . 'resources/templates/head.php';
+     include_once '../../../config/config.php';
+     $table = "npc_traits"; $route = "index.php";
+     include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
+     include_once $serverPath.'resources/templates/head.php';
 ?>
 
-<form
-	action="edit.php<?php if(!empty($_GET['id'])){ echo "?id=".$_GET['id'];}?>"
-	method="post">
-	<div class="col-sm-4">
-		<div
-			class="panel <?php if($added){echo "panel-success";} else{echo "panel-default";} ?>">
-			<div class="panel-heading">
-				<div class="panel-title">Edit Character Trait</div>
-			</div>
-			<div class="panel-body">
-				<div class="form-group">
-					<label for="trait">Trait</label> <input type="text"
-						class="form-control" required="required" name="trait"
-						value="<?php echo $trait;?>" placeholder="Trait" />
-				</div>
-				<div class="form-group">
-					<label for="type">Type</label> <input type="text"
-						class="form-control" required="required" name="type"
-						value="<?php echo $type;?>" placeholder="Type" />
-				</div>
-				<div class="form-group">
-					<button class="btn btn-primary" type="submit">Save</button>
-					<a class="btn btn-danger" href="index.php">Cancel</a>
-				</div>
-				<div style='<?php if($added){echo "color:#5cb85c";}else{echo "display:none";}?>'>Recorded
-					Updated</div>
-			</div>
-		</div>
-	</div>
+<div ng-controller="TraitController">
+     <form action="{{editAction()}}" method="post">
+          <div class="container-fluid">
+                    <div class="col-md-6">
 
-</form>
+               <div class="panel panel-default">
+                    <div class="panel-heading">
+                         <h3 class="panel-title">{{addOrEdit}} {{assestName}} {{trait.trait || 'Trait'}}</h3>
+                    </div>
+               <div class="panel-body">
+	                 <div class="form-group">
+						 <label for="trait">Trait</label>
+						 <input type="text" class="form-control" required="required" name="trait" ng-model="trait.trait" placeholder="Trait" />
+					</div>
+					<div class="form-group">
+						<label for="type">Type</label>
+						 <input type="text"class="form-control" required="required" name="type" ng-model="trait.type" placeholder="Type" />
+					</div>
+					
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="trait.public">
+							<option ng-selected="trait.public=='1'" value="1">Public</option>
+							<option  ng-selected="trait.public=='0'" value="0">Private</option>
+						</select>
+					</div>
 
-<?php include_once '../../resources/templates/footer.php';?>
+                </div>
+                    <div class="panel-footer">
+                         <button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
+
+                         <a class="btn btn-danger" href="index.php">Cancel</a>
+                    </div>
+              </div>
+          </div>
+          </div>
+     </form>
+</div>
+
+<script>
+
+app.controller("TraitController", ['$scope', "$controller", function($scope, $controller){
+
+angular.extend(this, $controller('UtilsController', {$scope: $scope}));
+
+	$scope.assestName = "Non-player Charctaer";
+	$scope.trait = {};
+
+	$scope.setById(function(data){
+		$scope.addOrEdit = "Edit";
+		$scope.saveOrUpdate = "Update"
+		$scope.trait = data;
+		
+	},function(){
+		$scope.addOrEdit = "Add";
+		$scope.saveOrUpdate = "Save";
+
+		$scope.getDefaultAccess(function(n){$scope.trait['public'] = n;});
+	});
+
+}]);
+
+</script>
+
+
+

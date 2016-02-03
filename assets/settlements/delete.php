@@ -4,6 +4,6 @@ include_once $serverPath . 'utils/db/db_post.php';
 
 if (! empty ( $_GET ['id'] )) {
 	$table = "settlement";
-	deletFrom ( $table, $_GET ['id'] );
+	deleteFrom ( $table, $_GET ['id'] );
 }
 ?>

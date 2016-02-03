@@ -2,7 +2,9 @@
 include_once '../../../config/config.php';
 include_once $serverPath . 'utils/db/db_get.php';
 
-$query = "SELECT * FROM ncp_traits;";
-$result = runQuery ( $query );
-print json_encode ( $result );
+$table ="npc_traits";
+
+include_once $serverPath.'utils/db/findById.php';
+include_once $serverPath.'utils/db/getGrid.php';
+
 ?>

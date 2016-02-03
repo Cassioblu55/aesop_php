@@ -54,6 +54,13 @@ include_once $serverPath . 'resources/templates/head.php';
 						<label for="other_information">Other Information</label>
 						<textarea name="other_information" class="form-control" rows="4">{{riddle.other_information}}</textarea>
 					</div>
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="riddle.public">
+							<option ng-selected="riddle.public=='1'" value="1">Public</option>
+							<option  ng-selected="riddle.public=='0'" value="0">Private</option>
+						</select>
+					</div>
 					
 <!-- 					<div class="form-group"> -->
 <!-- 						<label for="weight">Weight</label> <input type="number" -->
@@ -74,7 +81,8 @@ include_once $serverPath . 'resources/templates/head.php';
 <script>
 app.controller("RiddleEditController", ['$scope', "$controller", function($scope, $controller){
 	angular.extend(this, $controller('UtilsController', {$scope: $scope}));
-
+	$scope.riddle = {};
+	
 	$scope.setRiddle = function(riddle){
 		$scope.riddle = riddle;
 		$scope.riddle.weight = Number($scope.riddle.weight);
@@ -82,7 +90,9 @@ app.controller("RiddleEditController", ['$scope', "$controller", function($scope
 		$scope.saveOrUpdate = "Update";
 		}
 
-	$scope.setById($scope.setRiddle);
+	$scope.setById($scope.setRiddle, function(){
+		$scope.getDefaultAccess(function(n){$scope.riddle['public'] = n;});
+	});
 	$scope.saveOrUpdate = "Save";
 	$scope.addOrEdit = "Add";
 	

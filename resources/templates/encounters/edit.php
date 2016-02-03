@@ -35,9 +35,18 @@ include_once $serverPath . 'resources/templates/head.php';
 							name="description" ng-model="encounter.description"
 							placeholder="Description"></textArea>
 					</div>
-				<?php include_once $serverPath.'resources/templates/rolls/roll_display_panel.php';?>
-				<input type="text" style="display: none;" name="roll"
-						ng-model="encounter.roll" />
+					
+					<?php include_once $serverPath.'resources/templates/rolls/roll_display_panel.php';?>
+					<input type="text" style="display: none;" name="roll" ng-model="encounter.roll" />
+					
+					<div class="form-group">
+						<label for="public">Public or Private</label>
+						<select class="form-control" id="public" name="public" ng-model="encounter.public">
+							<option ng-selected="encounter.public=='1'" value="1">Public</option>
+							<option  ng-selected="encounter.public=='0'" value="0">Private</option>
+						</select>
+					</div>
+					
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit">{{saveOrUpdate}}</button>
 						<a class="btn btn-danger" href="index.php">Cancel</a>
@@ -55,7 +64,8 @@ app.controller("encounterEditController", ['$scope', "$controller", function($sc
 	angular.extend(this, $controller('rollDisplayController', {$scope: $scope}));
 
 	$scope.name = (name || '');
-	
+	$scope.encounter = {};
+		
 	$scope.setEncounter = function(encounter){
 		$scope.encounter = encounter;
 		$scope.addOrEdit = "Edit";
@@ -73,7 +83,10 @@ app.controller("encounterEditController", ['$scope', "$controller", function($sc
 			}
 		},true);
 	
-	$scope.setById($scope.setEncounter);
+	$scope.setById($scope.setEncounter, function(){
+		$scope.getDefaultAccess(function(n){$scope.encounter['public'] = n;});
+	});
+	
 	$scope.saveOrUpdate = "Save";
 	$scope.addOrEdit = "Add";
 	

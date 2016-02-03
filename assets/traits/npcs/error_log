@@ -1,7 +1,0 @@
-[26-Sep-2015 11:07:55 America/Chicago] PHP Catchable fatal error:  Object of class mysqli_result could not be converted to string in /home4/cassio/public_html/aesop/traits/characters/edit.php on line 39
-[26-Sep-2015 11:09:14 America/Chicago] PHP Fatal error:  Call to a member function count() on a non-object in /home4/cassio/public_html/aesop/traits/characters/edit.php on line 39
-[26-Sep-2015 11:13:46 America/Chicago] PHP Fatal error:  Cannot use object of type mysqli_result as array in /home4/cassio/public_html/aesop/traits/characters/edit.php on line 39
-[26-Sep-2015 12:51:01 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home4/cassio/public_html/aesop/src/utils/connect.php on line 85
-[26-Sep-2015 12:52:20 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home4/cassio/public_html/aesop/src/utils/connect.php on line 85
-[26-Sep-2015 12:53:35 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home4/cassio/public_html/aesop/src/utils/connect.php on line 85
-[26-Sep-2015 12:54:19 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home4/cassio/public_html/aesop/src/utils/connect.php on line 85

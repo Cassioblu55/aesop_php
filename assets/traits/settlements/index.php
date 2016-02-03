@@ -3,21 +3,13 @@ include_once '../../../config/config.php';
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="SettlementTraitsIndexController">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-1">
-				<div class="panel panel-default">
-					<a class="btn btn-primary" href="edit.php">Add</a>
-				</div>
-			</div>
-		</div>
-
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3>Settlement Traits</h3>
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title pull-left">Settlement Traits</h3>
+							<a class="btn btn-sm btn-primary pull-right" href="edit.php">Add</a>
 						</div>
 						<div class="panel-body">
 							<div ui-grid="gridModel" external-scopes="$scope"
@@ -39,7 +31,7 @@ app.controller("SettlementTraitsIndexController", ['$scope', "$http" , function(
 	                               ];
 
 	$scope.reloadGrid = function(){
-		$http.get('data.php').
+		$http.get('data.php?get=grid').
 			then(function(response){
 				$scope.gridModel.data = response.data;
 				
@@ -48,7 +40,7 @@ app.controller("SettlementTraitsIndexController", ['$scope', "$http" , function(
 
 	$scope.deleteTrait =function(id,trait){
 		if(window.confirm("Are you sure you want to delete "+trait+"?")){
-			$http.post('delete.php?id='+id).
+			$http.get('delete.php?id='+id).
 				then(function(response){
 					$scope.reloadGrid();
 					}).then(function(response){

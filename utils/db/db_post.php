@@ -27,7 +27,7 @@ function insertAndReturnId($table, $data) {
 	return runInsertWithIdReturn ( $insert );
 }
 function runInsertWithIdReturn($insert) {
-	//echo $insert;
+	echo $insert;
 	$db = runInsertWithDBReturn ( $insert );
 	$inserted = $db->insert_id;
 	$db->close ();

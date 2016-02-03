@@ -1,19 +1,6 @@
 <?php
-include_once '../../../config/config.php';
-include_once $serverPath . 'utils/connect.php';
-
-if (! empty ( $_GET ['id'] )) {
+	include_once '../../../config/config.php';
+	$table = "dungeon_traits";
 	
-	$db = connect ();
-	
-	$delete = "DELETE FROM dungeon_traits WHERE id=" . $_GET ['id'] . ";";
-	echo $delete;
-	
-	try {
-		$db->query ( $delete );
-	} catch ( Execption $e ) {
-		echo $e;
-		die ( "Count not delete trait." );
-	}
-}
+	include_once $serverPath.'utils/db/fullTemplates/secureDelete.php';
 ?>

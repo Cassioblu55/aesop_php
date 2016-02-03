@@ -34,7 +34,7 @@ app.controller("TavernIndexController", ['$scope', "$http" , function($scope, $h
 
 	
 	$scope.reloadGrid = function(){
-		$http.get('data.php').
+		$http.get('data.php?get=grid').
 			then(function(response){
 				$scope.gridModel.data = response.data;
 				
