@@ -47,7 +47,7 @@ if(!empty($_POST)){
 			</html>
 			";
 			
-			$subject = "Your account has been created for The Linger Martini Bar";
+			$subject = "Your account has been created for Aesop";
 			mail($email, $subject, $message, $headers);
 			
 			header("Location: ". $baseURL."login/index.php");

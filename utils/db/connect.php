@@ -16,6 +16,18 @@ function connectSpecific($dbHost, $dbUser, $dbPassword, $dbName) {
 	}
 	return $db;
 }
+
+function sendErrorMessage($message){
+	echo '<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 error-box ">
+					<div class="error-text text-center">'.$message.'</div>
+				</div>
+			</div>
+		 </div>
+	';
+}
+
 function cutString($string, $n) {
 	return substr ( $string, 0, strlen ( $string ) - $n );
 }

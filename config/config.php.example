@@ -1,15 +1,14 @@
 <?php
 	if (session_status() == PHP_SESSION_NONE){session_start();}
-	$dbUser = "database user";
-	$dbPassword = "database password";
-	$dbName = "dbName";
-	$dbHost = "host";
-	$adminEmail = "adminEmail";
-	$baseURL = "baseUrl";
+	$dbUser = "user";
+	$dbPassword = "password";
+	$dbName = "aesop";
+	$dbHost = "localhost";
+	$adminEmail = "email@gmail.com";
+	$baseURL = "/path/";
 	
-	$adminMail = 'example@example.com';
-	$webmasterMail = 'example@example.com';
-	$baseURL = "webPath";
-	$serverURL = "serverPath";
+	$adminMail = 'email@gmail.com';
+	$webmasterMail = 'email@gmail.com';
+	$serverPath = "/path/";
 	
 ?>
