@@ -30,9 +30,9 @@
 							<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/index.php?get=my">Riddles</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/encounters/urban/index.php?get=my">Urban
 									Encounters</a></li>
-							<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest
+							<li><a href="<?php echo $baseURL;?>assets/encounters/forest/index.php?get=my">Forest
 									Encounters</a></li>
-							<li><a href="<?php echo $baseURL;?>assets/spells/">Spells</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/spells/index.php?get=my">Spells</a></li>
 						</ul></li>
 				</ul>
 				
