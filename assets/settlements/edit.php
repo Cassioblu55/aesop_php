@@ -1,24 +1,11 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
-require_once $serverPath . 'utils/generator/settlement.php';
 
 $table = "settlement";
-if (! empty ( $_POST )) {
-	if (empty ( $_GET ['id'] )) {
-		createSettelment ();
-		$id = insertFromPostWithIdReturn( $table );
-		$added = true;
-	} 
+$runOnSave = "createSettelment";
+require_once $serverPath . 'utils/generator/settlement.php';
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
-	else {
-		createSettelment ();
-		$id = $_GET ['id'];
-		updateFromPost ( $table );
-	}
-		header ( "Location: show.php?id=$id" );
-		die ( "Redirecting to show.php" );
-}
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 

@@ -6,7 +6,11 @@ function getTrait($table, $type) {
 }
 function getFullTrait($table, $type) {
 	$query = "SELECT * FROM `" . $table . "` WHERE type='" . $type . "' ORDER BY RAND() LIMIT 1;";
-	return runQuery ( $query ) [0];
+	$result = runQuery ( $query );
+	if(!empty($result[0])){
+		return $result[0];
+		
+	}
 }
 function purebell($min, $max, $std_deviation, $step = 1) {
 	$rand1 = ( float ) mt_rand () / ( float ) mt_getrandmax ();

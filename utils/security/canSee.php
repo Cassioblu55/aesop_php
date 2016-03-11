@@ -12,7 +12,7 @@
 		}
 			
 		if($canSee == false){
-			header("Location: ".$baseURL."login/");
+			header("Location: ".$baseURL."index.php?error=You do not have access to that.");
 			die("redirecting to login");
 		}
 			

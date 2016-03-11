@@ -7,7 +7,7 @@ if (! empty ( $_GET ['id'] )) {
 	$owner_table = "npc";
 	$s = findById ( $table, $_GET ['id'] );
 	$tavern = json_encode ( $s );
-	$tavern_owner = json_encode ( findById ( $owner_table, $s ['tavern_owner_id'] ) );
+	$tavern_owner = json_encode ( findById ( $owner_table, $s['tavern_owner_id'] ) );
 } else {
 	header ( "Location: index.php" );
 	die ( "Redirecting to index" );

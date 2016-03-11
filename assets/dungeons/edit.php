@@ -1,23 +1,11 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_get.php';
-include_once $serverPath . 'utils/db/db_post.php';
-require_once $serverPath . 'utils/generator/dungeon.php';
 
 $table = "dungeon";
-if (! empty ( $_POST )) {
-	createDungeon ();
-	if (empty ( $_GET ['id'] )) {
-		$id = insertFromPostWithIdReturn ( $table );
-	} 
+$runOnSave = "createDungeon";
+require_once $serverPath . 'utils/generator/dungeon.php';
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
-	else {
-		updateFromPost ( $table );
-		$id = $_GET ['id'];
-	}
-	header ( "Location: show.php?id=" . $id );
-	die ( "Redirecting to show.php" );
-}
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 

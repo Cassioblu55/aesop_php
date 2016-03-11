@@ -1,20 +1,9 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
 
 $table = "monster";
-if (! empty ( $_POST )) {
-	if (empty ( $_GET ['id'] )) {
-		$id = insertFromPostWithIdReturn ( $table );
-	} 
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
-	else {
-		updateFromPost ( $table );
-		$id = $_GET ['id'];
-	}
-	header ( "Location: show.php?id=" . $id );
-	die ( "Redirecting to show.php" );
-}
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 

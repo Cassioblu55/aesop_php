@@ -1,32 +1,22 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
 include_once $serverPath . 'utils/generator/villain.php';
 
-if (! empty ( $_POST )) {
-	$table = "villain";
-	$c_table = 'npc';
+$table = "villain";
+function makeVillain(){
 	createVillain ();
-	
-	// If updating existing villain
+	$c_table = 'npc';
 	if (! empty ( $_GET ['id'] )) {
-		$id = $_GET ['id'];
 		$c_data = createDataFromPost ( $c_table );
-		$constraints = [ 
-				'id' => $_POST ['character_id'] 
+		$constraints = [
+				'id' => $_POST ['npc_id']
 		];
 		updateWithConstratints ( $c_table, $c_data, $constraints );
-		updateFromPost ( $table );
-	} 	// Create new villain
-	else {
-		// Will insert new villain and return the id of the one created
-		$id = insertFromPostWithIdReturn ( $table );
 	}
-	// Redirect to show.php
-	header ( "Location: show.php?id=" . $id );
-	die ( "Redirecting to show.php" );
+	
 }
-
+$runOnSave = "makeVillain";
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 

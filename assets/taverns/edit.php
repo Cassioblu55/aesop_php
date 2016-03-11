@@ -1,23 +1,11 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
-require_once $serverPath . 'utils/generator/tavern.php';
 
 $table = "tavern";
-if (! empty ( $_POST )) {
-	createTavern ();
-	if (empty ( $_GET ['id'] )) {
-		$id = insertFromPostWithIdReturn( $table );
-		$added = true;
-	} 
+$runOnSave = "createTavern";
+require_once $serverPath . 'utils/generator/tavern.php';
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
-	else {
-		$id = $_GET ['id'];
-		updateFromPost ( $table );
-	}
-		header ( "Location: show.php?id=" . $id );
-		die ( "Redirecting to show.php" );
-}
 include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div ng-controller="TavernAddEditController">

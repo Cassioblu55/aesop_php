@@ -14,7 +14,8 @@ body {
 	background: rgb(255, 0, 0); /* Fall-back for browsers that don't
                                     support rgba */
     background: rgba(255, 0, 0, .5);
-	margin-top: 5px 
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .footer {

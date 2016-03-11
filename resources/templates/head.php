@@ -7,3 +7,10 @@
 <script> 	
 var baseURL = "<?php echo $baseURL;?>";
 </script>
+<?php 
+include_once $serverPath . 'utils/db/connect.php';
+
+if(!empty($_GET['error'])){
+	sendErrorMessage($_GET['error']);
+};
+?>

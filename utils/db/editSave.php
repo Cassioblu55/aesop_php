@@ -6,6 +6,9 @@ if(!isset($table)){
 	echo "Table has not been set";
 }else{
 	if (! empty ( $_POST )) {
+		if($runOnSave){
+			$runOnSave();
+		}
 		if (! empty ( $_GET ['id'] )) {
 			$id = $_GET ['id'];
 			updateFromPost ( $table );

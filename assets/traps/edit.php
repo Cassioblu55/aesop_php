@@ -1,28 +1,8 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
 
-if (! empty ( $_POST )) {
-	$table = "traps";
-	$data = [ 
-			"name" => $_POST ['name'],
-			"description" => $_POST ['description'],
-			"weight" => $_POST ['weight'],
-			"rolls" => $_POST ['rolls'] 
-	];
-	// If updating existing trap
-	if (! empty ( $_GET ['id'] )) {
-		$id = $_GET ['id'];
-		update ( $table, $data );
-	} 	// Create new trap
-	else {
-		// Will insert new trap and return the id of the one created
-		$id = insertAndReturnId ( $table, $data );
-	}
-	// Redirect to show.php
-	header ( "Location: show.php?id=" . $id );
-	die ( "Redirecting to show.php" );
-}
+$table = "traps";
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
 include_once $serverPath . 'resources/templates/head.php';
 ?>

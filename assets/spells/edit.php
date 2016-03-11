@@ -1,22 +1,10 @@
 <?php
 include_once '../../config/config.php';
-include_once $serverPath . 'utils/db/db_post.php';
 
 $table = "spell";
-if (! empty ( $_POST )) {
-	if (empty ( $_GET ['id'] )) {
-		$id = insertFromPostWithIdReturn ( $table );
-	}
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
 
-	else {
-		updateFromPost ( $table );
-		$id = $_GET ['id'];
-	}
-	header ( "Location: edit.php");
-	die ( "Redirecting to edit.php" );
-}
-
-include_once $serverPath.'resources/templates/head.php';
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 <div class="container-fluid" ng-controller="SpellEditController">
 	<form action="edit.php<?php if(!empty($_GET['id'])){ echo "?id=".$_GET['id'];}?>" method="post">

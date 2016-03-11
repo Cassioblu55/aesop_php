@@ -1,8 +1,10 @@
 <?php
-     include_once '../../../config/config.php';
-     $table = "dungeon_traits"; $route = "index.php";
-     include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
-     include_once $serverPath.'resources/templates/head.php';
+include_once '../../config/config.php';
+
+$table = "dungeon_traits";
+include_once $serverPath.'utils/db/fullTemplates/secureEdit.php';
+
+include_once $serverPath . 'resources/templates/head.php';
 ?>
 
 <div ng-controller="TraitController">
