@@ -9,7 +9,7 @@ include_once $serverPath . 'resources/templates/head.php';
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
-						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Characters</h4>
+						<h4 class="panel-title pull-left" style="padding-top: 7.5px;">{{data | capitalize}} Characters</h4>
 						<a href="edit.php" class="btn btn-primary pull-right">Add</a>
 					</div>
 					<div class="panel-body">
@@ -37,9 +37,11 @@ app.controller("CharacterIndexController", ['$scope', "$controller", function($s
 	                               ];
 
 	$scope.setGrid = function(data){$scope.gridModel.data = data;}
+
+	$scope.data =  (getUrlParam("get")) ? getUrlParam("get") : 'public'; 
 	
 	$scope.reloadGrid = function(){
-		var get = 'data.php?column=grid';
+		var get = 'data.php?get='+$scope.data;
 		$scope.setFromGet(get, $scope.setGrid);
 	}
 	

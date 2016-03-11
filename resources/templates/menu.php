@@ -18,7 +18,29 @@
 				<ul class="nav navbar-nav">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">View Assets <span class="caret"></span></a>
+						aria-expanded="false">My Assets <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo $baseURL;?>assets/npcs/index.php?get=my">NPCs</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/settlements/index.php?get=my">Settlements</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/taverns/index.php?get=my">Taverns</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/dungeons/index.php?get=my">Dungeons</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/traps/index.php?get=my">Traps</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/monsters/index.php?get=my">Monsters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/villains/index.php?get=my">Villains</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/encounters/riddles/index.php?get=my">Riddles</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/encounters/urban/index.php?get=my">Urban
+									Encounters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/encounters/forest/">Forest
+									Encounters</a></li>
+							<li><a href="<?php echo $baseURL;?>assets/spells/">Spells</a></li>
+						</ul></li>
+				</ul>
+				
+				
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Public Assets <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<?php echo $baseURL;?>assets/npcs/">NPCs</a></li>
 							<li><a href="<?php echo $baseURL;?>assets/settlements/">Settlements</a></li>

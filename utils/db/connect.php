@@ -175,6 +175,17 @@ function getConstraintsWithTables($tables) {
 	}
 	return cutString ( $con, 5 );
 }
+
+function getSpecificDataBody($table, $columns){
+	if(!isset($columns) || sizeof($columns) == 0){
+		$columnsString = "*";
+	}else{
+		$columnsString = "id, " . arrayToString ( $columns ) . "";
+	}
+	$query = "SELECT " . $columnsString . " FROM " . getTableQuote ( $table );
+	return $query;
+}
+
 function getConstraintsWithTable($table, $constraints) {
 	$q_table = getTableQuote($table);
 	$constraint = "";

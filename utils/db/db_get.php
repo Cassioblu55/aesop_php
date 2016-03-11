@@ -14,10 +14,15 @@ function findById($table, $id) {
 		return null;
 	}
 }
+
+function getSpecificDataWithConstraints($table, $columns, $constraints){
+	$query = getSpecificDataBody($table, $columns);
+	$query .= " WHERE ".getConstraintsWithTable($table, $constraints).";";
+	return runQuery ($query);	
+}
+
 function getSpecificData($table, $columns) {
-	$columnsString = "id, " . arrayToString ( $columns ) . "";
-	$query = "SELECT " . $columnsString . " FROM " . getTableQuote ( $table ) . ";";
-	return runQuery ( $query );
+	return runQuery ( getSpecificDataBody($table, $columns) . ";");
 }
 function getRandomId($table) {
 	$query = "SELECT id FROM " . getTableQuote ( $table ) . " ORDER BY RAND() LIMIT 1;";
